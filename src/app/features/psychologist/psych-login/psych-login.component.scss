@@ -1,0 +1,39 @@
+@use '../../../styles/shared' as *;
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: $warm-white;
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #dde4ed;
+  box-shadow: $shadow-hover;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+
+  .lock-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: .25rem;
+    color: $charcoal;
+  }
+
+  .brand-tag { font-size: .8rem; color: $blue; font-weight: 500; margin-bottom: 1rem; }
+  .subtitle { color: $muted; font-size: .85rem; margin-bottom: 1.2rem; }
+}
+
+.login-hint {
+  font-size: .75rem;
+  color: #bbb;
+  margin-top: .6rem;
+}

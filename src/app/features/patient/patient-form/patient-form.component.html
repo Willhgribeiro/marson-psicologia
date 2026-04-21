@@ -1,0 +1,92 @@
+<!-- NAME STEP -->
+<div class="layout" *ngIf="!formStarted()">
+  <div class="page-header">
+    <button class="back-btn" (click)="goBack()">←</button>
+    <div class="page-title">
+      <span>Paciente</span>
+      Identificação
+    </div>
+    <div class="header-logo">Marson Psicologia</div>
+  </div>
+
+  <div class="intro-banner">
+    Antes de iniciar, informe seu nome completo.
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Qual é o seu nome completo?</div>
+    <input
+      type="text"
+      class="field-input"
+      placeholder="Digite seu nome..."
+      [ngModel]="patientName()"
+      (ngModelChange)="patientName.set($event)"
+      (keydown.enter)="startForm()"
+    />
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-primary" (click)="startForm()">Iniciar Anamnese →</button>
+  </div>
+</div>
+
+<!-- FORM STEP -->
+<div class="layout" *ngIf="formStarted()">
+  <div class="page-header">
+    <button class="back-btn" (click)="goBack()">←</button>
+    <div class="page-title">
+      <span>Anamnese</span>
+      {{ patientName() }}
+    </div>
+    <div class="header-logo">Marson Psicologia</div>
+  </div>
+
+  <div class="intro-banner">
+    Responda com calma. Não há respostas certas ou erradas.
+  </div>
+
+  <div
+    class="q-card"
+    *ngFor="let q of questions(); let i = index"
+  >
+    <div class="q-label">
+      Pergunta {{ i + 1 }}
+      <span class="badge" [class.badge-mc]="q.type === 'mc'" [class.badge-text]="q.type === 'text'">
+        {{ q.type === 'mc' ? (q.multiple ? 'Múltipla escolha' : 'Escolha única') : 'Texto livre' }}
+      </span>
+    </div>
+    <div class="q-text">{{ q.text }}</div>
+
+    <!-- Text answer -->
+    <textarea
+      *ngIf="q.type === 'text'"
+      class="field-input"
+      placeholder="Sua resposta..."
+      [value]="getTextAnswer(q.id)"
+      (input)="setTextAnswer(q.id, $any($event.target).value)"
+    ></textarea>
+
+    <!-- MC answer -->
+    <div class="mc-options" *ngIf="q.type === 'mc'">
+      <div
+        class="mc-option"
+        *ngFor="let opt of q.options"
+        [class.selected]="isOptionSelected(q.id, opt)"
+        (click)="toggleOption(q, opt)"
+      >
+        <input
+          [type]="q.multiple ? 'checkbox' : 'radio'"
+          [checked]="isOptionSelected(q.id, opt)"
+          (click)="$event.stopPropagation()"
+          readonly
+        />
+        <span>{{ opt }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-primary" (click)="submit()">✓ Enviar Respostas</button>
+    <button class="btn btn-ghost" (click)="router.navigate(['/'])">Cancelar</button>
+  </div>
+</div>

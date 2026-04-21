@@ -1,0 +1,140 @@
+@use 'app/styles/shared' as *;
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  background: $warm-white;
+  color: $charcoal;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+// ── Shared page header ──────────────────────────
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #dde4ed;
+}
+
+.back-btn {
+  background: $blue-pale; border: none; border-radius: 8px;
+  width: 38px; height: 38px; cursor: pointer;
+  font-size: 1.1rem; color: $blue; transition: all .2s; flex-shrink: 0;
+  &:hover { background: $blue; color: #fff; }
+}
+
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem; color: $charcoal; line-height: 1.2;
+  span {
+    display: block; font-family: 'DM Sans', sans-serif;
+    font-size: .78rem; font-weight: 400; color: $muted;
+    letter-spacing: .06em; text-transform: uppercase; margin-bottom: .2rem;
+  }
+}
+
+.header-logo {
+  margin-left: auto; font-family: 'DM Serif Display', serif;
+  font-size: .95rem; color: $blue; opacity: .7; white-space: nowrap;
+}
+
+// ── Shared intro banner ─────────────────────────
+.intro-banner {
+  background: $blue-pale;
+  border-left: 3px solid $blue;
+  border-radius: 0 $radius $radius 0;
+  padding: 1rem 1.4rem;
+  margin-bottom: 2rem;
+  font-size: .9rem; color: $blue; font-weight: 500;
+}
+
+// ── Shared form elements ────────────────────────
+.field-input {
+  width: 100%; border: 1px solid #cdd5e0; border-radius: 8px;
+  padding: .75rem 1rem; font-family: 'DM Sans', sans-serif;
+  font-size: .95rem; color: $charcoal; background: $warm-white;
+  transition: border .2s, box-shadow .2s; resize: vertical;
+  &:focus { outline: none; border-color: $blue; box-shadow: 0 0 0 3px rgba(26,58,92,.12); }
+}
+textarea.field-input { min-height: 80px; }
+
+// ── Shared q-card ───────────────────────────────
+.q-card {
+  background: #fff; border: 1px solid #dde4ed;
+  border-radius: $radius; padding: 1.5rem; margin-bottom: 1.2rem; transition: box-shadow .2s;
+  &:focus-within { box-shadow: $shadow; border-color: $blue-mid; }
+}
+
+.q-label {
+  font-size: .78rem; font-weight: 600; color: $muted;
+  text-transform: uppercase; letter-spacing: .07em;
+  margin-bottom: .5rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+}
+.q-text { font-size: 1rem; color: $charcoal; margin-bottom: 1rem; line-height: 1.5; }
+
+// ── Badges ──────────────────────────────────────
+.badge      { font-size: .68rem; padding: .15rem .5rem; border-radius: 20px; font-weight: 600; }
+.badge-text { background: $blue-pale; color: $blue; }
+.badge-mc   { background: #fef3e8; color: $accent; }
+
+// ── Buttons ─────────────────────────────────────
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .8rem 1.6rem; border: none; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 600;
+  cursor: pointer; transition: all .2s; letter-spacing: .01em;
+}
+.btn-primary {
+  background: $blue; color: #fff;
+  &:hover { background: $blue-light; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(26,58,92,.35); }
+}
+.btn-danger {
+  background: #fdf0f0; color: $danger; border: 1px solid #f0d5d5;
+  &:hover { background: $danger; color: #fff; }
+}
+.btn-accent {
+  background: $accent; color: #fff;
+  &:hover { background: #a86a38; }
+}
+.btn-ghost {
+  background: transparent; color: $muted; border: 1px solid #cdd5e0;
+  &:hover { border-color: $charcoal; color: $charcoal; }
+}
+.btn-pdf {
+  background: $blue; color: #fff;
+  &:hover { background: #0f2035; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(26,58,92,.4); }
+}
+.btn-sm { padding: .4rem .8rem !important; font-size: .78rem !important; }
+
+.form-actions { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+
+// ── Field label ─────────────────────────────────
+.field-label { font-size: .8rem; color: $muted; margin-bottom: .4rem; display: block; }
+
+// ── Tabs ────────────────────────────────────────
+.tabs {
+  display: flex; gap: .5rem; margin-bottom: 2rem;
+  background: $blue-pale; border-radius: 10px; padding: .35rem;
+}
+.tab {
+  flex: 1; text-align: center; padding: .6rem 1rem; border-radius: 8px;
+  cursor: pointer; font-size: .88rem; font-weight: 500; color: $muted;
+  transition: all .2s; border: none; background: transparent; font-family: 'DM Sans', sans-serif;
+  &.active { background: #fff; color: $blue; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+}
+
+// ── Empty state ──────────────────────────────────
+.empty-state {
+  text-align: center; padding: 3rem; color: $muted;
+  .empty-icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: .4; }
+}

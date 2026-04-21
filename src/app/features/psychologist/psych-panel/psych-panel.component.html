@@ -1,0 +1,124 @@
+<div class="layout">
+  <!-- Header -->
+  <div class="page-header">
+    <button class="back-btn" (click)="goHome()">←</button>
+    <div class="page-title">
+      <span>Psicólogo</span>
+      Painel de Controle
+    </div>
+    <div class="header-logo">Marson Psicologia</div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab" [class.active]="activeTab() === 'questions'" (click)="setTab('questions')">
+      📋 Perguntas
+    </button>
+    <button class="tab" [class.active]="activeTab() === 'patients'" (click)="setTab('patients')">
+      👥 Pacientes
+    </button>
+  </div>
+
+  <!-- ── TAB: QUESTIONS ── -->
+  <div *ngIf="activeTab() === 'questions'">
+
+    <div *ngIf="questions().length === 0" class="empty-state">
+      <div class="empty-icon">📋</div>
+      <p>Nenhuma pergunta cadastrada.</p>
+    </div>
+
+    <div class="question-item" *ngFor="let q of questions()">
+      <div class="q-num">{{ questions().indexOf(q) + 1 }}</div>
+      <div class="q-item-body">
+        <div class="q-item-text">
+          {{ q.text }}
+          <span class="badge" [class.badge-mc]="q.type === 'mc'" [class.badge-text]="q.type === 'text'">
+            {{ q.type === 'mc' ? (q.multiple ? 'Múltipla' : 'Única') : 'Texto' }}
+          </span>
+        </div>
+        <div class="q-item-opts" *ngIf="q.type === 'mc'">
+          <span *ngFor="let opt of q.options">{{ opt }}</span>
+        </div>
+      </div>
+      <button class="btn btn-danger btn-sm" (click)="deleteQuestion(q.id)">🗑</button>
+    </div>
+
+    <!-- Add question form -->
+    <div class="add-question-box">
+      <h4>+ Nova Pergunta</h4>
+
+      <label class="field-label">Tipo de pergunta:</label>
+      <div class="type-selector">
+        <button class="type-btn" [class.active]="newQType() === 'text'" (click)="setType('text')">
+          ✏️ Texto livre
+        </button>
+        <button class="type-btn" [class.active]="newQType() === 'mc'" (click)="setType('mc')">
+          ☑️ Múltipla escolha
+        </button>
+      </div>
+
+      <label class="field-label">Texto da pergunta:</label>
+      <textarea
+        class="field-input"
+        placeholder="Digite a pergunta aqui..."
+        rows="2"
+        [ngModel]="newQText()"
+        (ngModelChange)="newQText.set($event)"
+      ></textarea>
+
+      <!-- MC builder -->
+      <div class="mc-builder" *ngIf="newQType() === 'mc'">
+        <label class="field-label" style="margin-top:.8rem">Opções de resposta:</label>
+        <div class="mc-opt-row" *ngFor="let opt of newQOptions(); let i = index">
+          <input
+            type="text"
+            class="field-input"
+            [placeholder]="'Opção ' + (i + 1)"
+            [value]="opt"
+            (input)="updateOption(i, $any($event.target).value)"
+          />
+          <button class="btn btn-danger btn-sm" (click)="removeOption(i)">✕</button>
+        </div>
+        <button class="btn btn-ghost btn-sm" (click)="addOption()" style="margin-top:.4rem">
+          + Adicionar opção
+        </button>
+        <label class="mc-allow-multiple">
+          <input
+            type="checkbox"
+            [checked]="newQMultiple()"
+            (change)="newQMultiple.set($any($event.target).checked)"
+          />
+          Permitir selecionar mais de uma resposta
+        </label>
+      </div>
+
+      <div class="form-actions" style="margin-top:1rem">
+        <button class="btn btn-primary" (click)="addQuestion()">Adicionar Pergunta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB: PATIENTS ── -->
+  <div *ngIf="activeTab() === 'patients'">
+
+    <div *ngIf="patients().length === 0" class="empty-state">
+      <div class="empty-icon">👥</div>
+      <p>Nenhum paciente registrado ainda.</p>
+    </div>
+
+    <div class="patient-list" *ngIf="patients().length > 0">
+      <div
+        class="patient-card"
+        *ngFor="let p of patients()"
+        (click)="openPatient(p.id)"
+      >
+        <div class="patient-initial">{{ p.name[0].toUpperCase() }}</div>
+        <div class="patient-name">{{ p.name }}</div>
+        <div class="patient-date">{{ p.date }} às {{ p.time }}</div>
+        <div class="patient-badge">
+          {{ answeredCount(p.answers) }}/{{ p.answers.length }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

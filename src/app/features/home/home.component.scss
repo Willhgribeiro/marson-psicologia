@@ -1,0 +1,113 @@
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #0d1f35 0%, #122840 50%, #0f2035 100%);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 30% 40%, rgba(45, 95, 138, .22) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(193, 127, 74, .1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+}
+
+.brand-area {
+  text-align: center;
+  position: relative;
+  margin-bottom: 3.5rem;
+  z-index: 1;
+}
+
+.brand-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: .3rem;
+
+  em { color: #7eb8e8; font-style: italic; }
+}
+
+.brand-divider {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #7eb8e8, transparent);
+  margin: .8rem auto .9rem;
+}
+
+.brand-sub {
+  color: rgba(255, 255, 255, .4);
+  font-size: .82rem;
+  font-weight: 300;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.home-cards {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.access-card {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 18px;
+  padding: 2.4rem 2.8rem;
+  width: 240px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .3s ease;
+  backdrop-filter: blur(10px);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .07) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, .28);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, .35);
+    &::after { opacity: 1; }
+  }
+
+  &.patient {
+    border-color: rgba(126, 184, 232, .3);
+    &:hover { background: rgba(126, 184, 232, .12); border-color: rgba(126, 184, 232, .45); }
+  }
+
+  &.psych {
+    border-color: rgba(193, 127, 74, .3);
+    &:hover { background: rgba(193, 127, 74, .1); border-color: rgba(193, 127, 74, .45); }
+  }
+}
+
+.card-icon { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
+.card-title { font-family: 'DM Serif Display', serif; font-size: 1.35rem; margin-bottom: .4rem; }
+.card-desc  { font-size: .82rem; color: rgba(255, 255, 255, .45); font-weight: 300; }
+
+@media (max-width: 520px) {
+  .home-cards { flex-direction: column; align-items: center; }
+  .access-card { width: 100%; max-width: 300px; }
+}

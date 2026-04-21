@@ -1,0 +1,55 @@
+<div class="layout" *ngIf="patient() as p">
+  <!-- Header -->
+  <div class="page-header">
+    <button class="back-btn" (click)="router.navigate(['/psych/panel'])">←</button>
+    <div class="page-title">
+      <span>Respostas do paciente</span>
+      {{ p.name }}
+    </div>
+    <div class="header-logo">Marson Psicologia</div>
+  </div>
+
+  <!-- Patient meta banner -->
+  <div class="detail-meta">
+    <div class="clinic">Marson Psicologia · Anamnese Neuropsicológica</div>
+    <div class="pname">{{ p.name }}</div>
+    <div class="pdate">Respondido em {{ p.date }} às {{ p.time }}</div>
+  </div>
+
+  <!-- Actions -->
+  <div class="form-actions" style="margin-bottom:1.5rem">
+    <button class="btn btn-pdf" (click)="exportPdf()" [disabled]="exporting()">
+      {{ exporting() ? 'Gerando...' : '⬇ Baixar PDF' }}
+    </button>
+    <button class="btn btn-danger" (click)="deletePatient()">🗑 Excluir registro</button>
+  </div>
+
+  <!-- Answers -->
+  <div class="response-card" *ngFor="let a of p.answers; let i = index">
+    <div class="response-q-num">
+      Pergunta {{ i + 1 }}
+      <span class="badge" [class.badge-mc]="a.type === 'mc'" [class.badge-text]="a.type === 'text'">
+        {{ a.type === 'mc' ? 'Múltipla escolha' : 'Texto livre' }}
+      </span>
+    </div>
+    <div class="response-q-text">{{ a.question }}</div>
+
+    <!-- Array answer (MC) -->
+    <div *ngIf="isArray(a.answer) && a.answer.length > 0">
+      <span class="mc-answer-chip" *ngFor="let chip of a.answer">{{ chip }}</span>
+    </div>
+
+    <!-- Text answer -->
+    <div
+      *ngIf="!isArray(a.answer)"
+      class="response-a"
+      [class.empty]="!a.answer"
+    >{{ a.answer || 'Não respondida' }}</div>
+
+    <!-- Empty MC -->
+    <div
+      *ngIf="isArray(a.answer) && a.answer.length === 0"
+      class="response-a empty"
+    >Não respondida</div>
+  </div>
+</div>
