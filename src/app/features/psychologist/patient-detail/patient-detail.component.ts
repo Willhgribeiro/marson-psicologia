@@ -26,7 +26,7 @@ export class PatientDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = this.route.snapshot.paramMap.get('id') ?? '';
     const p = this.patientService.getById(id);
     if (!p) { this.router.navigate(['/psych/panel']); return; }
     this.patient.set(p);
@@ -55,11 +55,11 @@ export class PatientDetailComponent implements OnInit {
     }
   }
 
-  deletePatient(): void {
+  async deletePatient(): Promise<void> {
     const p = this.patient();
     if (!p) return;
     if (!confirm('Excluir este registro de paciente?')) return;
-    this.patientService.deleteRecord(p.id);
+    await this.patientService.deleteRecord(p.id);
     this.toastService.show('Registro excluído.');
     this.router.navigate(['/psych/panel']);
   }

@@ -11,12 +11,76 @@
 
   <!-- Tabs -->
   <div class="tabs">
-    <button class="tab" [class.active]="activeTab() === 'questions'" (click)="setTab('questions')">
-      📋 Perguntas
-    </button>
     <button class="tab" [class.active]="activeTab() === 'patients'" (click)="setTab('patients')">
       👥 Pacientes
     </button>
+    <button class="tab" [class.active]="activeTab() === 'questions'" (click)="setTab('questions')">
+      📋 Perguntas
+    </button>
+  </div>
+
+  <!-- ── TAB: PATIENTS ── -->
+  <div *ngIf="activeTab() === 'patients'">
+
+    <!-- New patient - name only -->
+    <div class="new-patient-box">
+      <h4>➕ Novo Paciente</h4>
+      <p class="new-patient-desc">Digite o nome para iniciar o cadastro.</p>
+      
+      <div class="new-patient-form">
+        <input
+          type="text"
+          class="field-input"
+          placeholder="Nome do paciente"
+          [ngModel]="newPatientName()"
+          (ngModelChange)="newPatientName.set($event)"
+          (keyup.enter)="goToRegister()"
+        />
+        <button class="btn btn-primary" (click)="goToRegister()">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- Patients who haven't responded yet -->
+    <div class="patients-section" *ngIf="fullPatients().length > 0">
+      <h5>Pacientes pendentes</h5>
+      <div class="patient-list">
+        <div class="patient-card" *ngFor="let p of fullPatients()">
+          <!-- <div class="patient-initial">{{ p.patientName[0].toUpperCase() }}</div> -->
+           <div class="patient-initial"> {{ p?.patientName ? p.patientName.charAt(0).toUpperCase() : '?' }} </div>
+          <div class="patient-name">{{ p.patientName }}</div>
+          <div class="patient-info">{{ p.reason | slice:0:50 }}...</div>
+          <div class="patient-code">Código: {{ p.code }}</div>
+          <div class="patient-status" [class.used]="p.used">
+            {{ p.used ? 'Usado em ' + p.usedAt : 'Pendente' }}
+          </div>
+          <button class="btn btn-danger btn-sm delete-btn" (click)="deleteFullPatient(p.code)">🗑</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patients who responded -->
+    <div class="patients-section" *ngIf="patients().length > 0">
+      <h5>Pacientes que responderam</h5>
+      <div class="patient-list">
+        <div
+          class="patient-card"
+          *ngFor="let p of patients()"
+          (click)="openPatient(p.id)"
+        >
+          <div class="patient-initial">{{ p.name[0].toUpperCase() }}</div>
+          <div class="patient-name">{{ p.name }}</div>
+          <div class="patient-date">{{ p.date }} às {{ p.time }}</div>
+          <div class="patient-badge">
+            {{ answeredCount(p.answers) }}/{{ p.answers.length }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="patients().length === 0 && fullPatients().length === 0" class="empty-state">
+      <div class="empty-icon">👥</div>
+      <p>Nenhum paciente ainda. Adicione um nome acima.</p>
+    </div>
   </div>
 
   <!-- ── TAB: QUESTIONS ── -->
@@ -94,30 +158,6 @@
 
       <div class="form-actions" style="margin-top:1rem">
         <button class="btn btn-primary" (click)="addQuestion()">Adicionar Pergunta</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── TAB: PATIENTS ── -->
-  <div *ngIf="activeTab() === 'patients'">
-
-    <div *ngIf="patients().length === 0" class="empty-state">
-      <div class="empty-icon">👥</div>
-      <p>Nenhum paciente registrado ainda.</p>
-    </div>
-
-    <div class="patient-list" *ngIf="patients().length > 0">
-      <div
-        class="patient-card"
-        *ngFor="let p of patients()"
-        (click)="openPatient(p.id)"
-      >
-        <div class="patient-initial">{{ p.name[0].toUpperCase() }}</div>
-        <div class="patient-name">{{ p.name }}</div>
-        <div class="patient-date">{{ p.date }} às {{ p.time }}</div>
-        <div class="patient-badge">
-          {{ answeredCount(p.answers) }}/{{ p.answers.length }}
-        </div>
       </div>
     </div>
   </div>

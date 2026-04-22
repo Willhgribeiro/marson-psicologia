@@ -16,6 +16,37 @@
     <div class="pdate">Respondido em {{ p.date }} às {{ p.time }}</div>
   </div>
 
+  <!-- Registration data -->
+  <div class="registration-data" *ngIf="p.rg || p.cpf || p.address || p.motherName || p.fatherName || p.reason">
+    <h4>Dados do Cadastro</h4>
+    <div class="data-grid">
+      <div class="data-item" *ngIf="p.rg">
+        <span class="data-label">RG</span>
+        <span class="data-value">{{ p.rg }}</span>
+      </div>
+      <div class="data-item" *ngIf="p.cpf">
+        <span class="data-label">CPF</span>
+        <span class="data-value">{{ p.cpf }}</span>
+      </div>
+      <div class="data-item full" *ngIf="p.address">
+        <span class="data-label">Endereço</span>
+        <span class="data-value">{{ p.address }}</span>
+      </div>
+      <div class="data-item" *ngIf="p.motherName">
+        <span class="data-label">Nome da mãe</span>
+        <span class="data-value">{{ p.motherName }}</span>
+      </div>
+      <div class="data-item" *ngIf="p.fatherName">
+        <span class="data-label">Nome do pai</span>
+        <span class="data-value">{{ p.fatherName }}</span>
+      </div>
+      <div class="data-item full" *ngIf="p.reason">
+        <span class="data-label">Motivo do atendimento</span>
+        <span class="data-value">{{ p.reason }}</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Actions -->
   <div class="form-actions" style="margin-bottom:1.5rem">
     <button class="btn btn-pdf" (click)="exportPdf()" [disabled]="exporting()">

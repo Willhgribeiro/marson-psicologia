@@ -15,7 +15,7 @@ import { Question, QuestionType } from '../../../core/models/models';
   styleUrls: ['./psych-panel.component.scss']
 })
 export class PsychPanelComponent {
-  activeTab = signal<'questions' | 'patients'>('questions');
+  activeTab = signal<'questions' | 'patients'>('patients');
 
   // new question form state
   newQType = signal<QuestionType>('text');
@@ -23,8 +23,12 @@ export class PsychPanelComponent {
   newQOptions = signal<string[]>(['', '']);
   newQMultiple = signal(false);
 
+  // new patient name (for registration)
+  newPatientName = signal('');
+
   readonly questions = this.questionService.questions;
   readonly patients  = this.patientService.patients;
+  readonly fullPatients = this.patientService.fullPatients;
 
   constructor(
     public router: Router,
@@ -35,6 +39,15 @@ export class PsychPanelComponent {
 
   setTab(tab: 'questions' | 'patients'): void {
     this.activeTab.set(tab);
+  }
+
+  goToRegister(): void {
+    const name = this.newPatientName().trim();
+    if (!name) {
+      this.toastService.show('Digite o nome do paciente.', 'error');
+      return;
+    }
+    this.router.navigate(['/psych/register'], { state: { name } });
   }
 
   setType(t: QuestionType): void {
@@ -64,16 +77,16 @@ export class PsychPanelComponent {
     this.newQOptions.update(opts => opts.filter((_, i) => i !== index));
   }
 
-  addQuestion(): void {
+  async addQuestion(): Promise<void> {
     const text = this.newQText().trim();
     if (!text) { this.toastService.show('Digite o texto da pergunta.', 'error'); return; }
 
     if (this.newQType() === 'mc') {
       const opts = this.newQOptions().map(o => o.trim()).filter(Boolean);
       if (opts.length < 2) { this.toastService.show('Adicione pelo menos 2 opções.', 'error'); return; }
-      this.questionService.addQuestion({ type: 'mc', text, options: opts, multiple: this.newQMultiple() });
+      await this.questionService.addQuestion({ type: 'mc', text, options: opts, multiple: this.newQMultiple() });
     } else {
-      this.questionService.addQuestion({ type: 'text', text });
+      await this.questionService.addQuestion({ type: 'text', text });
     }
 
     // reset form
@@ -84,13 +97,13 @@ export class PsychPanelComponent {
     this.toastService.show('Pergunta adicionada!', 'success');
   }
 
-  deleteQuestion(id: string): void {
+  async deleteQuestion(id: string): Promise<void> {
     if (!confirm('Excluir esta pergunta?')) return;
-    this.questionService.deleteQuestion(id);
+    await this.questionService.deleteQuestion(id);
     this.toastService.show('Pergunta removida.');
   }
 
-  openPatient(id: number): void {
+  openPatient(id: string): void {
     this.router.navigate(['/psych/patient', id]);
   }
 
@@ -99,4 +112,10 @@ export class PsychPanelComponent {
   }
 
   goHome(): void { this.router.navigate(['/']); }
+
+  async deleteFullPatient(code: string): Promise<void> {
+    if (!confirm('Excluir este paciente?')) return;
+    await this.patientService.deleteFullPatient(code);
+    this.toastService.show('Paciente removido.');
+  }
 }

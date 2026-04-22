@@ -16,6 +16,8 @@ import { Answer, Question } from '../../../core/models/models';
 })
 export class PatientFormComponent implements OnInit {
   patientName = signal('');
+  inviteCode = signal('');
+  codeValidated = signal(false);
   formStarted = signal(false);
   answers = signal<Record<string, string | string[]>>({});
 
@@ -29,6 +31,22 @@ export class PatientFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  validateCode(): void {
+    const code = this.inviteCode().trim().toUpperCase();
+    if (!code) {
+      this.toastService.show('Digite o código de acesso.', 'error');
+      return;
+    }
+    const patient = this.patientService.validateFullCode(code);
+    if (!patient) {
+      this.toastService.show('Código inválido ou já utilizado.', 'error');
+      return;
+    }
+    this.patientName.set(patient.name);
+    this.codeValidated.set(true);
+    this.toastService.show('Código válido! Agora preencha seus dados.', 'success');
+  }
 
   startForm(): void {
     if (!this.patientName().trim()) {
@@ -73,7 +91,7 @@ export class PatientFormComponent implements OnInit {
     });
   }
 
-  submit(): void {
+  async submit(): Promise<void> {
     const ansMap = this.answers();
     const finalAnswers: Answer[] = this.questions().map(q => ({
       questionId: q.id,
@@ -82,13 +100,35 @@ export class PatientFormComponent implements OnInit {
       answer: ansMap[q.id] ?? ''
     }));
 
-    this.patientService.addRecord(this.patientName().trim(), finalAnswers);
+    // Get full patient data if available
+    let fullData = {};
+    if (this.inviteCode()) {
+      const fullPatient = this.patientService.getFullPatientByCode(this.inviteCode().trim().toUpperCase());
+      if (fullPatient) {
+        fullData = {
+          rg: fullPatient.rg,
+          cpf: fullPatient.cpf,
+          address: fullPatient.address,
+          motherName: fullPatient.motherName,
+          fatherName: fullPatient.fatherName,
+          reason: fullPatient.reason
+        };
+        await this.patientService.markFullCodeAsUsed(this.inviteCode().trim().toUpperCase());
+      }
+    }
+
+    await this.patientService.addRecord(this.patientName().trim(), finalAnswers, fullData);
+    
     this.router.navigate(['/patient/success']);
   }
 
   goBack(): void {
     if (this.formStarted()) {
       this.formStarted.set(false);
+    } else if (this.codeValidated()) {
+      this.codeValidated.set(false);
+      this.patientName.set('');
+      this.inviteCode.set('');
     } else {
       this.router.navigate(['/']);
     }

@@ -19,6 +19,40 @@
   .pdate  { font-size: .85rem; opacity: .7; }
 }
 
+.registration-data {
+  background: $blue-pale;
+  border: 1px solid $blue-mid;
+  border-radius: $radius;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  h4 {
+    font-size: .85rem; font-weight: 600; color: $blue;
+    margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .05em;
+  }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .data-item {
+    &.full { grid-column: 1 / -1; }
+
+    .data-label {
+      display: block;
+      font-size: .7rem; color: $muted;
+      text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: .2rem;
+    }
+
+    .data-value {
+      font-size: .9rem; color: $charcoal;
+    }
+  }
+}
+
 .response-card {
   background: #fff;
   border: 1px solid #dde4ed;

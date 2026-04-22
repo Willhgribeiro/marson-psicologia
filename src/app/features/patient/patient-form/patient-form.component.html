@@ -1,5 +1,38 @@
-<!-- NAME STEP -->
-<div class="layout" *ngIf="!formStarted()">
+<!-- CODE VALIDATION STEP -->
+<div class="layout" *ngIf="!codeValidated()">
+  <div class="page-header">
+    <button class="back-btn" (click)="goBack()">←</button>
+    <div class="page-title">
+      <span>Paciente</span>
+      Acesso
+    </div>
+    <div class="header-logo">Marson Psicologia</div>
+  </div>
+
+  <div class="intro-banner">
+    Digite o código de acesso fornecido pelo seu psicólogo.
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Código de acesso</div>
+    <input
+      type="text"
+      class="field-input code-input"
+      placeholder="Ex: ABC123"
+      [ngModel]="inviteCode()"
+      (ngModelChange)="inviteCode.set($event)"
+      (keydown.enter)="validateCode()"
+      maxlength="6"
+    />
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-primary" (click)="validateCode()">Validar Código</button>
+  </div>
+</div>
+
+<!-- NAME STEP (after code validated) -->
+<div class="layout" *ngIf="codeValidated() && !formStarted()">
   <div class="page-header">
     <button class="back-btn" (click)="goBack()">←</button>
     <div class="page-title">
@@ -10,7 +43,7 @@
   </div>
 
   <div class="intro-banner">
-    Antes de iniciar, informe seu nome completo.
+    Olá! Confirme seu nome para continuar.
   </div>
 
   <div class="q-card">

@@ -1,0 +1,91 @@
+@use '../../../styles/shared' as *;
+
+.layout {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  animation: fadeIn .4s ease;
+}
+
+.register-box {
+  background: $blue-pale;
+  border: 2px dashed $blue-mid;
+  border-radius: $radius;
+  padding: 1.5rem;
+
+  h4 {
+    font-size: .9rem; font-weight: 600; color: $blue;
+    margin-bottom: .3rem;
+  }
+
+  .register-desc {
+    font-size: .82rem; color: $muted;
+    margin-bottom: 1rem;
+  }
+
+  .form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+  }
+
+  textarea.field-input {
+    resize: vertical;
+    min-height: 80px;
+  }
+}
+
+.generated-code-box {
+  margin-top: 1.5rem;
+  background: #fff;
+  border: 2px solid $blue;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+
+  .code-label {
+    font-size: .8rem; color: $muted; margin-bottom: .5rem;
+  }
+
+  .code-value {
+    font-family: 'DM Sans', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: $blue;
+    letter-spacing: .15em;
+    cursor: pointer;
+    padding: .8rem 1.5rem;
+    background: $blue-pale;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 1rem;
+
+    .copy-hint {
+      display: block;
+      font-size: .7rem;
+      font-weight: 400;
+      color: $muted;
+      margin-top: .2rem;
+    }
+
+    &:hover { background: #d4e4f5; }
+  }
+
+  .code-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

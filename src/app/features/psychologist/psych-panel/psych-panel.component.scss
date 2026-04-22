@@ -114,3 +114,63 @@
   font-size: .7rem; font-weight: 600;
   padding: .2rem .5rem; border-radius: 20px;
 }
+
+// New patient box
+.new-patient-box {
+  background: $blue-pale;
+  border: 2px dashed $blue-mid;
+  border-radius: $radius;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  h4 {
+    font-size: .9rem; font-weight: 600; color: $blue;
+    margin-bottom: .3rem;
+  }
+
+  .new-patient-desc {
+    font-size: .82rem; color: $muted;
+    margin-bottom: 1rem;
+  }
+
+  .new-patient-form {
+    display: flex; gap: .8rem;
+    .field-input { flex: 1; }
+  }
+}
+
+.patients-section {
+  margin-bottom: 1.5rem;
+
+  h5 {
+    font-size: .85rem; color: $muted;
+    margin-bottom: .8rem; text-transform: uppercase; letter-spacing: .05em;
+  }
+
+  .patient-card {
+    cursor: default;
+    &:hover { transform: none; }
+
+    .patient-info {
+      font-size: .8rem; color: $muted;
+      margin-bottom: .3rem;
+    }
+
+    .patient-code {
+      font-size: .75rem; color: $blue;
+      font-weight: 600;
+    }
+
+    .patient-status {
+      font-size: .7rem; color: $accent;
+      &.used { color: $muted; }
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 50%;
+      right: .8rem;
+      transform: translateY(-50%);
+    }
+  }
+}

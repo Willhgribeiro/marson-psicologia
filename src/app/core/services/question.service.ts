@@ -1,7 +1,6 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { Question } from '../models/models';
-
-const STORAGE_KEY = 'mp_questions';
+import { Firestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from '@angular/fire/firestore';
+import { Question, QuestionType } from '../models/models';
 
 const DEFAULT_QUESTIONS: Question[] = [
   { id: 'q1', type: 'text', text: 'Qual é a sua queixa principal? O que te trouxe até aqui?' },
@@ -45,37 +44,58 @@ const DEFAULT_QUESTIONS: Question[] = [
 
 @Injectable({ providedIn: 'root' })
 export class QuestionService {
-  private _questions = signal<Question[]>(this.loadFromStorage());
+  private _questions = signal<Question[]>([]);
+  private unsubscribe: (() => void) | null = null;
 
   readonly questions = this._questions.asReadonly();
   readonly count = computed(() => this._questions().length);
 
-  private loadFromStorage(): Question[] {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULT_QUESTIONS));
-    } catch {
-      return JSON.parse(JSON.stringify(DEFAULT_QUESTIONS));
+  constructor(private firestore: Firestore) {
+    this.initRealtimeListener();
+  }
+
+  private initRealtimeListener(): void {
+    const questionsRef = collection(this.firestore, 'questions');
+    const questionsQuery = query(questionsRef, orderBy('order', 'asc'));
+    
+    this.unsubscribe = onSnapshot(questionsQuery, (snapshot) => {
+      if (snapshot.empty) {
+        // First time - seed default questions
+        this.seedDefaultQuestions();
+      } else {
+        const questions = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })) as Question[];
+        this._questions.set(questions);
+      }
+    });
+  }
+
+  private async seedDefaultQuestions(): Promise<void> {
+    const questionsRef = collection(this.firestore, 'questions');
+    for (let i = 0; i < DEFAULT_QUESTIONS.length; i++) {
+      await addDoc(questionsRef, {
+        ...DEFAULT_QUESTIONS[i],
+        order: i
+      });
     }
   }
 
-  private persist(): void {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(this._questions()));
+  async addQuestion(question: Omit<Question, 'id'>): Promise<void> {
+    const questionsRef = collection(this.firestore, 'questions');
+    await addDoc(questionsRef, {
+      ...question,
+      order: this._questions().length
+    });
   }
 
-  addQuestion(q: Omit<Question, 'id'>): void {
-    const newQ: Question = { ...q, id: `q_${Date.now()}` };
-    this._questions.update(list => [...list, newQ]);
-    this.persist();
+  async deleteQuestion(id: string): Promise<void> {
+    const docRef = doc(this.firestore, 'questions', id);
+    await deleteDoc(docRef);
   }
 
-  deleteQuestion(id: string): void {
-    this._questions.update(list => list.filter(q => q.id !== id));
-    this.persist();
-  }
-
-  resetToDefaults(): void {
-    this._questions.set(JSON.parse(JSON.stringify(DEFAULT_QUESTIONS)));
-    this.persist();
+  ngOnDestroy(): void {
+    if (this.unsubscribe) this.unsubscribe();
   }
 }

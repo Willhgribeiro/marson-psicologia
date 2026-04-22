@@ -3,21 +3,30 @@
     <div class="lock-icon">🔒</div>
     <h2>Área do Psicólogo</h2>
     <p class="brand-tag">Marson Psicologia</p>
-    <p class="subtitle">Digite a senha para acessar o painel</p>
+    <p class="subtitle">Digite seu email e senha para acessar</p>
+
+    <input
+      type="email"
+      class="field-input"
+      placeholder="Email"
+      [ngModel]="email()"
+      (ngModelChange)="email.set($event)"
+      (keydown.enter)="login()"
+    />
 
     <input
       type="password"
       class="field-input"
-      placeholder="Senha..."
+      placeholder="Senha"
       [ngModel]="password()"
       (ngModelChange)="password.set($event)"
       (keydown.enter)="login()"
     />
 
-    <p class="login-hint">Senha padrão: <strong>psico123</strong></p>
-
     <div class="form-actions">
-      <button class="btn btn-accent" (click)="login()">Entrar</button>
+      <button class="btn btn-accent" (click)="login()" [disabled]="loading()">
+        {{ loading() ? 'Entrando...' : 'Entrar' }}
+      </button>
       <button class="btn btn-ghost" (click)="goHome()">Voltar</button>
     </div>
   </div>

@@ -1,0 +1,113 @@
+<div class="layout">
+  <!-- Header -->
+  <div class="page-header">
+    <button class="back-btn" (click)="goBack()">←</button>
+    <div class="page-title">
+      <span>Psicólogo</span>
+      Cadastro de Paciente
+    </div>
+    <div class="header-logo">Marson Psicologia</div>
+  </div>
+
+  <div class="register-box">
+    <h4>Dados do Paciente</h4>
+    <p class="register-desc">Preencha os dados para gerar o código de acesso.</p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="field-label">Nome completo *</label>
+        <input
+          type="text"
+          class="field-input"
+          placeholder="Nome do paciente"
+          [ngModel]="patientName()"
+          (ngModelChange)="patientName.set($event)"
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="field-label">RG</label>
+          <input
+            type="text"
+            class="field-input"
+            placeholder="RG"
+            [ngModel]="rg()"
+            (ngModelChange)="rg.set($event)"
+          />
+        </div>
+        <div class="form-group">
+          <label class="field-label">CPF</label>
+          <input
+            type="text"
+            class="field-input"
+            placeholder="CPF"
+            [ngModel]="cpf()"
+            (ngModelChange)="cpf.set($event)"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Endereço</label>
+        <input
+          type="text"
+          class="field-input"
+          placeholder="Endereço completo"
+          [ngModel]="address()"
+          (ngModelChange)="address.set($event)"
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="field-label">Nome da mãe</label>
+          <input
+            type="text"
+            class="field-input"
+            placeholder="Nome da mãe"
+            [ngModel]="motherName()"
+            (ngModelChange)="motherName.set($event)"
+          />
+        </div>
+        <div class="form-group">
+          <label class="field-label">Nome do pai</label>
+          <input
+            type="text"
+            class="field-input"
+            placeholder="Nome do pai"
+            [ngModel]="fatherName()"
+            (ngModelChange)="fatherName.set($event)"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Motivo do atendimento *</label>
+        <textarea
+          class="field-input"
+          placeholder="Descreva o motivo pelo qual o paciente busca atendimento..."
+          rows="3"
+          [ngModel]="reason()"
+          (ngModelChange)="reason.set($event)"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" (click)="createPatient()">Cadastrar e Gerar Código</button>
+    </div>
+
+    <!-- Generated code display -->
+    <div class="generated-code-box" *ngIf="generatedCode()">
+      <div class="code-label">Código de acesso do paciente:</div>
+      <div class="code-value" (click)="copyCode(generatedCode()!)">
+        {{ generatedCode() }}
+        <span class="copy-hint">📋 Copiar</span>
+      </div>
+      <div class="code-actions">
+        <button class="btn btn-primary" (click)="goToPatients()">Ver Pacientes</button>
+      </div>
+    </div>
+  </div>
+</div>

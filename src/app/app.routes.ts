@@ -25,5 +25,9 @@ export const routes: Routes = [
     path: 'psych/patient/:id',
     loadComponent: () => import('./features/psychologist/patient-detail/patient-detail.component').then(m => m.PatientDetailComponent)
   },
+  {
+    path: 'psych/register',
+    loadComponent: () => import('./features/psychologist/patient-register/patient-register.component').then(m => m.PatientRegisterComponent)
+  },
   { path: '**', redirectTo: '' }
 ];

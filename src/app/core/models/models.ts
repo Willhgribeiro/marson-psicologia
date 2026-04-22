@@ -16,9 +16,46 @@ export interface Answer {
 }
 
 export interface PatientRecord {
-  id: number;
+  id: string;
   name: string;
   date: string;
   time: string;
   answers: Answer[];
+  createdAt?: string;
+  // Dados do cadastro
+  rg?: string;
+  cpf?: string;
+  address?: string;
+  motherName?: string;
+  fatherName?: string;
+  reason?: string;
+}
+
+export interface PatientInvite {
+  code: string;
+  patientName: string;
+  createdAt: string;
+  used: boolean;
+  usedAt?: string;
+  // Campos opcionais para cadastro completo
+  rg?: string;
+  cpf?: string;
+  address?: string;
+  motherName?: string;
+  fatherName?: string;
+  reason?: string;
+}
+
+export interface PatientFull {
+  code: string;
+  name: string;
+  rg: string;
+  cpf: string;
+  address: string;
+  motherName: string;
+  fatherName: string;
+  reason: string;
+  createdAt: string;
+  used: boolean;
+  usedAt?: string;
 }

@@ -1,31 +1,45 @@
 import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
-
-const PSYCH_PASSWORD = 'psico123';
 
 @Component({
   selector: 'app-psych-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './psych-login.component.html',
   styleUrls: ['./psych-login.component.scss']
 })
 export class PsychLoginComponent {
+  email = signal('');
   password = signal('');
+  loading = signal(false);
 
   constructor(
     private router: Router,
+    private authService: AuthService,
     private toastService: ToastService
   ) {}
 
-  login(): void {
-    if (this.password() === PSYCH_PASSWORD) {
-      this.router.navigate(['/psych/panel']);
-    } else {
-      this.toastService.show('Senha incorreta.', 'error');
-      this.password.set('');
+  async login(): Promise<void> {
+    const email = this.email().trim();
+    const password = this.password();
+
+    if (!email || !password) {
+      this.toastService.show('Preencha email e senha.', 'error');
+      return;
+    }
+
+    this.loading.set(true);
+    try {
+      await this.authService.login(email, password);
+      this.toastService.show('Login realizado com sucesso!', 'success');
+    } catch (error: any) {
+      this.toastService.show(error.message, 'error');
+    } finally {
+      this.loading.set(false);
     }
   }
 
