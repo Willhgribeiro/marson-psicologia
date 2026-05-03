@@ -26,47 +26,50 @@
     <div class="new-patient-box">
       <h4>➕ Novo Paciente</h4>
       <p class="new-patient-desc">Digite o nome para iniciar o cadastro.</p>
-      
+
       <div class="new-patient-form">
-        <input
-          type="text"
-          class="field-input"
-          placeholder="Nome do paciente"
-          [ngModel]="newPatientName()"
-          (ngModelChange)="newPatientName.set($event)"
-          (keyup.enter)="goToRegister()"
-        />
+        <input type="text" class="field-input" placeholder="Nome do paciente" [ngModel]="newPatientName()"
+          (ngModelChange)="newPatientName.set($event)" (keyup.enter)="goToRegister()" />
         <button class="btn btn-primary" (click)="goToRegister()">Continuar →</button>
       </div>
     </div>
 
     <!-- Patients who haven't responded yet -->
-    <div class="patients-section" *ngIf="fullPatients().length > 0">
-      <h5>Pacientes pendentes</h5>
-      <div class="patient-list">
-        <div class="patient-card" *ngFor="let p of fullPatients()">
-          <!-- <div class="patient-initial">{{ p.patientName[0].toUpperCase() }}</div> -->
-           <div class="patient-initial"> {{ p?.patientName ? p.patientName.charAt(0).toUpperCase() : '?' }} </div>
-          <div class="patient-name">{{ p.patientName }}</div>
-          <div class="patient-info">{{ p.reason | slice:0:50 }}...</div>
-          <div class="patient-code">Código: {{ p.code }}</div>
-          <div class="patient-status" [class.used]="p.used">
-            {{ p.used ? 'Usado em ' + p.usedAt : 'Pendente' }}
-          </div>
-          <button class="btn btn-danger btn-sm delete-btn" (click)="deleteFullPatient(p.code)">🗑</button>
-        </div>
+<!-- Patients who haven't responded yet -->
+<div class="patients-section" *ngIf="pendingPatients().length > 0">
+  <h5>Pacientes pendentes</h5>
+  <div class="patient-list">
+    <div class="patient-card"
+      *ngFor="let p of pendingPatients()">
+      <div class="patient-initial"> {{ p.patientName.charAt(0).toUpperCase() }} </div>
+
+      <div class="patient-name">
+        {{ p.patientName }}
       </div>
+
+      <div class="patient-info">
+        {{ p.reason | slice:0:50 }}...
+      </div>
+
+      <div class="patient-code">
+        Código: {{ p.code }}
+      </div>
+
+      <button
+        class="btn btn-danger btn-sm delete-btn"
+        (click)="deleteFullPatient(p.code)"
+      >
+        🗑
+      </button>
     </div>
+  </div>
+</div>
 
     <!-- Patients who responded -->
     <div class="patients-section" *ngIf="patients().length > 0">
       <h5>Pacientes que responderam</h5>
       <div class="patient-list">
-        <div
-          class="patient-card"
-          *ngFor="let p of patients()"
-          (click)="openPatient(p.id)"
-        >
+        <div class="patient-card" *ngFor="let p of patients()" (click)="openPatient(p.id)">
           <div class="patient-initial">{{ p.name[0].toUpperCase() }}</div>
           <div class="patient-name">{{ p.name }}</div>
           <div class="patient-date">{{ p.date }} às {{ p.time }}</div>
@@ -76,12 +79,11 @@
         </div>
       </div>
     </div>
-
-    <div *ngIf="patients().length === 0 && fullPatients().length === 0" class="empty-state">
-      <div class="empty-icon">👥</div>
-      <p>Nenhum paciente ainda. Adicione um nome acima.</p>
-    </div>
-  </div>
+<div *ngIf="patients().length === 0 && pendingPatients().length === 0" class="empty-state">
+  <div class="empty-icon">👥</div>
+  <p>Nenhum paciente ainda. Adicione um nome acima.</p>
+</div>
+</div>
 
   <!-- ── TAB: QUESTIONS ── -->
   <div *ngIf="activeTab() === 'questions'">
@@ -122,36 +124,22 @@
       </div>
 
       <label class="field-label">Texto da pergunta:</label>
-      <textarea
-        class="field-input"
-        placeholder="Digite a pergunta aqui..."
-        rows="2"
-        [ngModel]="newQText()"
-        (ngModelChange)="newQText.set($event)"
-      ></textarea>
+      <textarea class="field-input" placeholder="Digite a pergunta aqui..." rows="2" [ngModel]="newQText()"
+        (ngModelChange)="newQText.set($event)"></textarea>
 
       <!-- MC builder -->
       <div class="mc-builder" *ngIf="newQType() === 'mc'">
         <label class="field-label" style="margin-top:.8rem">Opções de resposta:</label>
         <div class="mc-opt-row" *ngFor="let opt of newQOptions(); let i = index">
-          <input
-            type="text"
-            class="field-input"
-            [placeholder]="'Opção ' + (i + 1)"
-            [value]="opt"
-            (input)="updateOption(i, $any($event.target).value)"
-          />
+          <input type="text" class="field-input" [placeholder]="'Opção ' + (i + 1)" [value]="opt"
+            (input)="updateOption(i, $any($event.target).value)" />
           <button class="btn btn-danger btn-sm" (click)="removeOption(i)">✕</button>
         </div>
         <button class="btn btn-ghost btn-sm" (click)="addOption()" style="margin-top:.4rem">
           + Adicionar opção
         </button>
         <label class="mc-allow-multiple">
-          <input
-            type="checkbox"
-            [checked]="newQMultiple()"
-            (change)="newQMultiple.set($any($event.target).checked)"
-          />
+          <input type="checkbox" [checked]="newQMultiple()" (change)="newQMultiple.set($any($event.target).checked)" />
           Permitir selecionar mais de uma resposta
         </label>
       </div>

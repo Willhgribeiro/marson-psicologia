@@ -15,10 +15,11 @@ import { Answer, Question } from '../../../core/models/models';
   styleUrls: ['./patient-form.component.scss']
 })
 export class PatientFormComponent implements OnInit {
-  patientName = signal('');
   inviteCode = signal('');
-  codeValidated = signal(false);
+  patientName = signal('');
   formStarted = signal(false);
+  codeValidated = signal(false);
+  acceptedTerms = signal(false);
   answers = signal<Record<string, string | string[]>>({});
 
   readonly questions = this.questionService.questions;
@@ -32,35 +33,71 @@ export class PatientFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  validateCode(): void {
-    const code = this.inviteCode().trim().toUpperCase();
-    if (!code) {
-      this.toastService.show('Digite o código de acesso.', 'error');
-      return;
-    }
-    const patient = this.patientService.validateFullCode(code);
-    if (!patient) {
-      this.toastService.show('Código inválido ou já utilizado.', 'error');
-      return;
-    }
-    this.patientName.set(patient.name);
-    this.codeValidated.set(true);
-    this.toastService.show('Código válido! Agora preencha seus dados.', 'success');
+async validateCode(): Promise<void> {
+  const code = this.inviteCode().trim().toUpperCase();
+
+  if (!code) {
+    this.toastService.show(
+      'Digite o código de acesso.',
+      'error'
+    );
+    return;
   }
 
-  startForm(): void {
-    if (!this.patientName().trim()) {
-      this.toastService.show('Digite seu nome para continuar.', 'error');
-      return;
-    }
-    // initialise answers map
-    const init: Record<string, string | string[]> = {};
-    this.questions().forEach(q => {
-      init[q.id] = q.type === 'mc' && q.multiple ? [] : '';
-    });
-    this.answers.set(init);
-    this.formStarted.set(true);
+  const patient = await this.patientService.validateFullCode(code);
+
+  if (!patient) {
+    this.toastService.show(
+      'Código inválido ou já utilizado.',
+      'error'
+    );
+    return;
   }
+
+  // preenche nome automaticamente
+  this.patientName.set(patient.name);
+
+  // mostra tela de confirmação
+  this.codeValidated.set(true);
+
+  // garante que checkbox começa desmarcado
+  this.acceptedTerms.set(false);
+
+  this.toastService.show(
+    'Código válido! Confirme seus dados para continuar.',
+    'success'
+  );
+}
+
+startForm(): void {
+  if (!this.patientName().trim()) {
+    this.toastService.show(
+      'Confirme seu nome para continuar.',
+      'error'
+    );
+    return;
+  }
+
+  if (!this.acceptedTerms()) {
+    this.toastService.show(
+      'Você precisa aceitar os termos para continuar.',
+      'error'
+    );
+    return;
+  }
+
+  const init: Record<string, string | string[]> = {};
+
+  this.questions().forEach(q => {
+    init[q.id] =
+      q.type === 'mc' && q.multiple
+        ? []
+        : '';
+  });
+
+  this.answers.set(init);
+  this.formStarted.set(true);
+}
 
   getTextAnswer(qId: string): string {
     return (this.answers()[qId] as string) ?? '';
@@ -91,36 +128,52 @@ export class PatientFormComponent implements OnInit {
     });
   }
 
-  async submit(): Promise<void> {
-    const ansMap = this.answers();
-    const finalAnswers: Answer[] = this.questions().map(q => ({
-      questionId: q.id,
-      question: q.text,
-      type: q.type,
-      answer: ansMap[q.id] ?? ''
-    }));
+async submit(): Promise<void> {
+  const ansMap = this.answers();
 
-    // Get full patient data if available
-    let fullData = {};
-    if (this.inviteCode()) {
-      const fullPatient = this.patientService.getFullPatientByCode(this.inviteCode().trim().toUpperCase());
-      if (fullPatient) {
-        fullData = {
-          rg: fullPatient.rg,
-          cpf: fullPatient.cpf,
-          address: fullPatient.address,
-          motherName: fullPatient.motherName,
-          fatherName: fullPatient.fatherName,
-          reason: fullPatient.reason
-        };
-        await this.patientService.markFullCodeAsUsed(this.inviteCode().trim().toUpperCase());
-      }
+  const finalAnswers: Answer[] = this.questions().map(q => ({
+    questionId: q.id,
+    question: q.text,
+    type: q.type,
+    answer: ansMap[q.id] ?? ''
+  }));
+
+  let fullData = {};
+
+  if (this.inviteCode()) {
+    const normalizedCode = this.inviteCode().trim().toUpperCase();
+
+    // corrigido: agora getFullPatientByCode é async
+    const fullPatient = await this.patientService.getFullPatientByCode(normalizedCode);
+
+    if (fullPatient) {
+      fullData = {
+        rg: fullPatient.rg,
+        cpf: fullPatient.cpf,
+        address: fullPatient.address,
+        motherName: fullPatient.motherName,
+        fatherName: fullPatient.fatherName,
+        reason: fullPatient.reason
+      };
     }
-
-    await this.patientService.addRecord(this.patientName().trim(), finalAnswers, fullData);
-    
-    this.router.navigate(['/patient/success']);
   }
+
+  // salva respostas primeiro
+  await this.patientService.addRecord(
+    this.patientName().trim(),
+    finalAnswers,
+    fullData
+  );
+
+  // só marca como usado após finalizar tudo
+  if (this.inviteCode()) {
+    const normalizedCode = this.inviteCode().trim().toUpperCase();
+
+    await this.patientService.markFullCodeAsUsed(normalizedCode);
+  }
+
+  this.router.navigate(['/patient/success']);
+}
 
   goBack(): void {
     if (this.formStarted()) {

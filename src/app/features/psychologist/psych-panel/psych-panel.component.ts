@@ -1,11 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { QuestionService } from '../../../core/services/question.service';
 import { PatientService } from '../../../core/services/patient.service';
 import { ToastService } from '../../../core/services/toast.service';
-import { Question, QuestionType } from '../../../core/models/models';
+import { PatientInvite, Question, QuestionType } from '../../../core/models/models';
 
 @Component({
   selector: 'app-psych-panel',
@@ -14,7 +14,7 @@ import { Question, QuestionType } from '../../../core/models/models';
   templateUrl: './psych-panel.component.html',
   styleUrls: ['./psych-panel.component.scss']
 })
-export class PsychPanelComponent {
+export class PsychPanelComponent implements OnInit {
   activeTab = signal<'questions' | 'patients'>('patients');
 
   // new question form state
@@ -36,6 +36,16 @@ export class PsychPanelComponent {
     private patientService: PatientService,
     private toastService: ToastService
   ) {}
+
+  ngOnInit(): void {
+  this.patientService.loadPendingPatients();
+}
+
+pendingPatients(): PatientInvite[] {
+  return this.fullPatients().filter(
+    (p: PatientInvite) => !p.used
+  );
+}
 
   setTab(tab: 'questions' | 'patients'): void {
     this.activeTab.set(tab);

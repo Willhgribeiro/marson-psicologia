@@ -32,34 +32,59 @@
 </div>
 
 <!-- NAME STEP (after code validated) -->
+<!-- NAME STEP (after code validated) -->
 <div class="layout" *ngIf="codeValidated() && !formStarted()">
   <div class="page-header">
     <button class="back-btn" (click)="goBack()">←</button>
+
     <div class="page-title">
       <span>Paciente</span>
       Identificação
     </div>
+
     <div class="header-logo">Marson Psicologia</div>
   </div>
 
   <div class="intro-banner">
-    Olá! Confirme seu nome para continuar.
+    Confirme seus dados antes de iniciar a anamnese.
   </div>
 
   <div class="q-card">
-    <div class="q-text">Qual é o seu nome completo?</div>
+    <div class="q-text">Seu nome completo</div>
+
     <input
       type="text"
       class="field-input"
-      placeholder="Digite seu nome..."
       [ngModel]="patientName()"
       (ngModelChange)="patientName.set($event)"
-      (keydown.enter)="startForm()"
+      readonly
     />
   </div>
 
+  <div class="q-card">
+    <label class="terms-checkbox">
+      <input
+        type="checkbox"
+        [checked]="acceptedTerms()"
+        (change)="acceptedTerms.set($any($event.target).checked)"
+      />
+
+      <span>
+        Declaro que li e concordo com o tratamento dos meus dados pessoais
+        para fins de atendimento psicológico, conforme a política de
+        privacidade.
+      </span>
+    </label>
+  </div>
+
   <div class="form-actions">
-    <button class="btn btn-primary" (click)="startForm()">Iniciar Anamnese →</button>
+<button
+  class="btn btn-primary"
+  (click)="startForm()"
+  [disabled]="!acceptedTerms()"
+>
+  Iniciar Anamnese →
+</button>
   </div>
 </div>
 

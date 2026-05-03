@@ -5,23 +5,19 @@
     <p class="brand-tag">Marson Psicologia</p>
     <p class="subtitle">Digite seu email e senha para acessar</p>
 
-    <input
-      type="email"
-      class="field-input"
-      placeholder="Email"
-      [ngModel]="email()"
-      (ngModelChange)="email.set($event)"
-      (keydown.enter)="login()"
-    />
+    <input type="email" class="field-input" placeholder="Email" [ngModel]="email()" (ngModelChange)="email.set($event)"
+      (keydown.enter)="login()" />
 
-    <input
-      type="password"
-      class="field-input"
-      placeholder="Senha"
-      [ngModel]="password()"
-      (ngModelChange)="password.set($event)"
-      (keydown.enter)="login()"
-    />
+    <input type="password" class="field-input" placeholder="Senha" [ngModel]="password()"
+      (ngModelChange)="password.set($event)" (keydown.enter)="login()" />
+
+    <div *ngIf="showCaptcha()" class="captcha-wrapper">
+      <!-- Cloudflare Turnstile -->
+<ngx-turnstile
+  siteKey="SEU_SITE_KEY"
+  (token)="onCaptchaSuccess($event)">
+</ngx-turnstile>
+    </div>
 
     <div class="form-actions">
       <button class="btn btn-accent" (click)="login()" [disabled]="loading()">

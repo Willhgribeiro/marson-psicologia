@@ -33,20 +33,24 @@ export class AuthService {
     return this.currentUser() !== null;
   }
 
-  private getErrorMessage(code: string): string {
-    switch (code) {
-      case 'auth/invalid-email':
-        return 'Email inválido.';
-      case 'auth/user-disabled':
-        return 'Usuário desabilitado.';
-      case 'auth/user-not-found':
-        return 'Usuário não encontrado.';
-      case 'auth/wrong-password':
-        return 'Senha incorreta.';
-      case 'auth/invalid-credential':
-        return 'Email ou senha incorretos.';
-      default:
-        return 'Erro ao fazer login. Tente novamente.';
-    }
+private getErrorMessage(code: string): string {
+  switch (code) {
+    case 'auth/invalid-email':
+      return 'Credenciais inválidas.';
+      
+    case 'auth/user-disabled':
+      return 'Conta desativada.';
+      
+    case 'auth/user-not-found':
+    case 'auth/wrong-password':
+    case 'auth/invalid-credential':
+      return 'Credenciais inválidas.';
+      
+    case 'auth/too-many-requests':
+      return 'Muitas tentativas de login. Tente novamente mais tarde.';
+      
+    default:
+      return 'Erro ao fazer login. Tente novamente.';
   }
+}
 }
