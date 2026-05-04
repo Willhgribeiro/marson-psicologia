@@ -1,9 +1,9 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, OnDestroy } from '@angular/core';
 import { Firestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, getDoc, setDoc } from '@angular/fire/firestore';
 import { PatientRecord, Answer, PatientInvite, PatientFull } from '../models/models';
 
 @Injectable({ providedIn: 'root' })
-export class PatientService {
+export class PatientService implements OnDestroy {
   private _patients = signal<PatientRecord[]>([]);
   private _invites = signal<PatientInvite[]>([]);
 
@@ -21,85 +21,53 @@ export class PatientService {
 
   private initRealtimeListeners(): void {
     const patientsRef = collection(this.firestore, 'patients');
-    const patientsQuery = query(
-      patientsRef,
-      orderBy('createdAt', 'desc')
-    );
+    const patientsQuery = query(patientsRef, orderBy('createdAt', 'desc'));
 
-    this.patientsUnsubscribe = onSnapshot(
-      patientsQuery,
-      (snapshot) => {
-        const patients = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        })) as PatientRecord[];
-
-        this._patients.set(patients);
-      }
-    );
+    this.patientsUnsubscribe = onSnapshot(patientsQuery, (snapshot) => {
+      const patients = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as PatientRecord[];
+      this._patients.set(patients);
+    });
   }
 
-  // ─────────────────────────────
-  // Psicologo:
-  // ─────────────────────────────
   async loadPendingPatients(): Promise<void> {
     const invitesRef = collection(this.firestore, 'invites');
-    const invitesQuery = query(
-      invitesRef,
-      orderBy('createdAt', 'desc')
-    );
+    const invitesQuery = query(invitesRef, orderBy('createdAt', 'desc'));
 
-    this.invitesUnsubscribe = onSnapshot(
-      invitesQuery,
-      (snapshot) => {
-        const invites = snapshot.docs.map(doc => {
-          const data: any = doc.data();
-
-          return {
-            code: doc.id,
-            ...data,
-            patientName: data.patientName || data.name || 'Paciente'
-          };
-        }) as PatientInvite[];
-
-        this._invites.set(invites);
-      }
-    );
+    this.invitesUnsubscribe = onSnapshot(invitesQuery, (snapshot) => {
+      const invites = snapshot.docs.map(doc => {
+        const data: any = doc.data();
+        return {
+          code: doc.id,
+          ...data,
+          patientName: data.patientName || data.name || 'Paciente'
+        };
+      }) as PatientInvite[];
+      this._invites.set(invites);
+    });
   }
 
-  // ─────────────────────────────
-  // PATIENT RECORDS
-  // ─────────────────────────────
   getById(id: string): PatientRecord | undefined {
     return this._patients().find(p => p.id === id);
   }
 
-  async addRecord(
-    name: string,
-    answers: Answer[],
-    fullData: Partial<PatientRecord> = {}
-  ): Promise<PatientRecord> {
+  async addRecord(name: string, answers: Answer[], fullData: Partial<PatientRecord> = {}): Promise<PatientRecord> {
     const patientsRef = collection(this.firestore, 'patients');
     const now = new Date();
 
     const record: any = {
       name,
       date: now.toLocaleDateString('pt-BR'),
-      time: now.toLocaleTimeString('pt-BR', {
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
+      time: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
       answers,
       createdAt: now.toISOString(),
       ...fullData
     };
 
     const docRef = await addDoc(patientsRef, record);
-
-    return {
-      id: docRef.id,
-      ...record
-    };
+    return { id: docRef.id, ...record };
   }
 
   async deleteRecord(id: string): Promise<void> {
@@ -107,14 +75,8 @@ export class PatientService {
     await deleteDoc(docRef);
   }
 
-  // ─────────────────────────────
-  // FULL PATIENT REGISTRATION
-  // ─────────────────────────────
-  async createPatientFull(
-    data: Omit<PatientFull, 'code' | 'createdAt' | 'used'>
-  ): Promise<string> {
+  async createPatientFull(data: Omit<PatientFull, 'code' | 'createdAt' | 'used'>): Promise<string> {
     const code = this.generateUniqueCode();
-
     const inviteRef = doc(this.firestore, 'invites', code);
 
     await setDoc(inviteRef, {
@@ -130,53 +92,26 @@ export class PatientService {
   private generateUniqueCode(): string {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     let code = '';
-
     do {
       code = '';
-
       for (let i = 0; i < 6; i++) {
-        code += chars.charAt(
-          Math.floor(Math.random() * chars.length)
-        );
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
       }
     } while (this._invites().some(inv => inv.code === code));
-
     return code;
   }
 
-  // ─────────────────────────────
-  // PATIENT SIDE (corrigido)
-  // ─────────────────────────────
-  async validateCode(
-    code: string
-  ): Promise<PatientInvite | undefined> {
+  async validateCode(code: string): Promise<PatientInvite | undefined> {
     const normalizedCode = code.toUpperCase();
-
-    const inviteRef = doc(
-      this.firestore,
-      'invites',
-      normalizedCode
-    );
-
+    const inviteRef = doc(this.firestore, 'invites', normalizedCode);
     const snapshot = await getDoc(inviteRef);
+    if (!snapshot.exists()) return undefined;
 
-    if (!snapshot.exists()) {
-      return undefined;
-    }
-
-    const invite = {
-      code: snapshot.id,
-      ...snapshot.data()
-    } as PatientInvite;
-
-    if (invite.used) {
-      return undefined;
-    }
-
-    return invite;
+    const invite = { code: snapshot.id, ...snapshot.data() } as PatientInvite;
+    return invite.used ? undefined : invite;
   }
 
-  async validateFullCode(
+async validateFullCode(
     code: string
   ): Promise<PatientFull | undefined> {
     const normalizedCode = code.toUpperCase();
@@ -202,14 +137,21 @@ export class PatientService {
       return undefined;
     }
 
+    // Retorno mapeado para a interface PatientFull
     return {
       code: invite.code,
       name: invite.patientName || invite.name || '',
-      rg: invite.rg || '',
-      cpf: invite.cpf || '',
+      education: invite.education || '',
+      birthDate: invite.birthDate || '',
+      isMinor: !!invite.isMinor, // Converte para booleano (garante que não seja undefined)
       address: invite.address || '',
       motherName: invite.motherName || '',
       fatherName: invite.fatherName || '',
+      guardianName: invite.guardianName || '',
+      doctorName: invite.doctorName || '',
+      doctorCrm: invite.doctorCrm || '',
+      doctorSpecialty: invite.doctorSpecialty || '',
+      diagnosticHypothesis: invite.diagnosticHypothesis || '',
       reason: invite.reason || '',
       createdAt: invite.createdAt,
       used: invite.used,
@@ -217,7 +159,7 @@ export class PatientService {
     };
   }
 
-  async getFullPatientByCode(
+async getFullPatientByCode(
     code: string
   ): Promise<PatientFull | undefined> {
     const normalizedCode = code.toUpperCase();
@@ -237,36 +179,33 @@ export class PatientService {
     const invite = {
       code: snapshot.id,
       ...snapshot.data()
-    } as PatientInvite;
+    } as any;
 
     return {
       code: invite.code,
-      name: invite.patientName,
-      rg: invite.rg || '',
-      cpf: invite.cpf || '',
+      name: invite.patientName || invite.name || '',
+      education: invite.education || '',
+      birthDate: invite.birthDate || '',
+      isMinor: !!invite.isMinor, // Adicionado para resolver o erro
       address: invite.address || '',
       motherName: invite.motherName || '',
       fatherName: invite.fatherName || '',
+      guardianName: invite.guardianName || '',
+      doctorName: invite.doctorName || '',
+      doctorCrm: invite.doctorCrm || '',
+      doctorSpecialty: invite.doctorSpecialty || '',
+      diagnosticHypothesis: invite.diagnosticHypothesis || '',
       reason: invite.reason || '',
       createdAt: invite.createdAt,
       used: invite.used,
       usedAt: invite.usedAt
     };
   }
-
+  
   async markFullCodeAsUsed(code: string): Promise<void> {
     const normalizedCode = code.toUpperCase();
-
-    const inviteRef = doc(
-      this.firestore,
-      'invites',
-      normalizedCode
-    );
-
-    await updateDoc(inviteRef, {
-      used: true,
-      usedAt: new Date().toISOString()
-    });
+    const inviteRef = doc(this.firestore, 'invites', normalizedCode);
+    await updateDoc(inviteRef, { used: true, usedAt: new Date().toISOString() });
   }
 
   async deleteFullPatient(code: string): Promise<void> {
@@ -275,17 +214,10 @@ export class PatientService {
 
   async deleteInvite(code: string): Promise<void> {
     const normalizedCode = code.toUpperCase();
-
-    const inviteRef = doc(
-      this.firestore,
-      'invites',
-      normalizedCode
-    );
-
+    const inviteRef = doc(this.firestore, 'invites', normalizedCode);
     await deleteDoc(inviteRef);
   }
 
-  // Legacy methods
   generateInviteCode(patientName: string): string {
     return this.generateUniqueCode();
   }
@@ -295,12 +227,7 @@ export class PatientService {
   }
 
   ngOnDestroy(): void {
-    if (this.patientsUnsubscribe) {
-      this.patientsUnsubscribe();
-    }
-
-    if (this.invitesUnsubscribe) {
-      this.invitesUnsubscribe();
-    }
+    if (this.patientsUnsubscribe) this.patientsUnsubscribe();
+    if (this.invitesUnsubscribe) this.invitesUnsubscribe();
   }
 }

@@ -1,39 +1,115 @@
-@use '../../../styles/shared' as *;
-
 .login-wrapper {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  background: $warm-white;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); // Fundo suave
+  padding: 20px;
 }
 
 .login-card {
-  background: #fff;
-  border-radius: 18px;
-  border: 1px solid #dde4ed;
-  box-shadow: $shadow-hover;
-  padding: 2.5rem 2rem;
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); // Sombra suave
   width: 100%;
-  max-width: 380px;
+  max-width: 400px;
   text-align: center;
-
-  .lock-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-
-  h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.5rem;
-    margin-bottom: .25rem;
-    color: $charcoal;
-  }
-
-  .brand-tag { font-size: .8rem; color: $blue; font-weight: 500; margin-bottom: 1rem; }
-  .subtitle { color: $muted; font-size: .85rem; margin-bottom: 1.2rem; }
 }
 
-.login-hint {
-  font-size: .75rem;
-  color: #bbb;
-  margin-top: .6rem;
+.login-header {
+  margin-bottom: 32px;
+
+  .lock-circle {
+    width: 60px;
+    height: 60px;
+    background: #f0f4f8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 24px;
+  }
+
+  h2 {
+    margin: 0;
+    color: #2d3748;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .brand-tag {
+    color: #4a5568;
+    font-weight: 500;
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+}
+
+.login-body {
+  .subtitle {
+    color: #718096;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; // AQUI RESOLVE O PROBLEMA DE FICAR COLADO
+    text-align: left;
+  }
+
+  .field-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-left: 4px;
+    }
+  }
+}
+
+.captcha-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-actions {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .full-width {
+    width: 100%;
+    padding: 14px;
+    font-weight: 600;
+    transition: transform 0.2s;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  .btn-link {
+    background: none;
+    border: none;
+    color: #718096;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    
+    &:hover {
+      color: #2d3748;
+    }
+  }
 }

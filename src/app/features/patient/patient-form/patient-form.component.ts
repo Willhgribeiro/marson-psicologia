@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { QuestionService } from '../../../core/services/question.service';
 import { PatientService } from '../../../core/services/patient.service';
 import { ToastService } from '../../../core/services/toast.service';
-import { Answer, Question } from '../../../core/models/models';
+import { Answer, Question, PatientFull } from '../../../core/models/models';
 
 @Component({
   selector: 'app-patient-form',
@@ -17,6 +17,21 @@ import { Answer, Question } from '../../../core/models/models';
 export class PatientFormComponent implements OnInit {
   inviteCode = signal('');
   patientName = signal('');
+
+  // Dados obrigatórios e opcionais
+  education = signal('');
+  birthDate = signal('');
+  isMinor = signal(false);
+  motherName = signal('');
+  fatherName = signal('');
+  guardianName = signal('');
+  doctorName = signal('');
+  doctorCrm = signal('');
+  doctorSpecialty = signal('');
+  diagnosticHypothesis = signal('');
+  address = signal('');
+  reason = signal('');
+
   formStarted = signal(false);
   codeValidated = signal(false);
   acceptedTerms = signal(false);
@@ -24,80 +39,79 @@ export class PatientFormComponent implements OnInit {
 
   readonly questions = this.questionService.questions;
 
+  // Lógica de validação do botão
+  isFormInvalid = computed(() => {
+    const basicFields = !this.patientName().trim() || !this.education() || !this.birthDate() || !this.acceptedTerms();
+    const guardianField = this.isMinor() && !this.guardianName().trim();
+    return basicFields || guardianField;
+  });
+
   constructor(
     private questionService: QuestionService,
     private patientService: PatientService,
     private toastService: ToastService,
     public router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-async validateCode(): Promise<void> {
-  const code = this.inviteCode().trim().toUpperCase();
-
-  if (!code) {
-    this.toastService.show(
-      'Digite o código de acesso.',
-      'error'
-    );
-    return;
+  goBack(): void {
+    if (this.formStarted()) {
+      this.formStarted.set(false);
+    } else if (this.codeValidated()) {
+      this.codeValidated.set(false);
+      this.patientName.set('');
+      this.inviteCode.set('');
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
-  const patient = await this.patientService.validateFullCode(code);
+  async validateCode(): Promise<void> {
+    const code = this.inviteCode().trim().toUpperCase();
+    if (!code) {
+      this.toastService.show('Digite o código de acesso.', 'error');
+      return;
+    }
 
-  if (!patient) {
-    this.toastService.show(
-      'Código inválido ou já utilizado.',
-      'error'
-    );
-    return;
+    const patient = await this.patientService.validateFullCode(code);
+    if (!patient) {
+      this.toastService.show('Código inválido ou já utilizado.', 'error');
+      return;
+    }
+
+    // Preenche dados do convite
+    this.patientName.set(patient.name);
+    this.education.set(patient.education || '');
+    this.birthDate.set(patient.birthDate || '');
+    this.isMinor.set(patient.isMinor || false);
+    this.guardianName.set(patient.guardianName || '');
+    this.address.set(patient.address || '');
+    this.motherName.set(patient.motherName || '');
+    this.fatherName.set(patient.fatherName || '');
+    this.reason.set(patient.reason || '');
+
+    this.codeValidated.set(true);
+    this.acceptedTerms.set(false);
+    this.toastService.show('Código válido! Verifique seus dados.', 'success');
   }
 
-  // preenche nome automaticamente
-  this.patientName.set(patient.name);
+  startForm(): void {
+    if (this.isFormInvalid()) {
+      this.toastService.show('Preencha os campos obrigatórios.', 'error');
+      return;
+    }
 
-  // mostra tela de confirmação
-  this.codeValidated.set(true);
+    const init: Record<string, string | string[]> = {};
+    this.questions().forEach(q => {
+      init[q.id] = q.type === 'mc' && q.multiple ? [] : '';
+    });
 
-  // garante que checkbox começa desmarcado
-  this.acceptedTerms.set(false);
-
-  this.toastService.show(
-    'Código válido! Confirme seus dados para continuar.',
-    'success'
-  );
-}
-
-startForm(): void {
-  if (!this.patientName().trim()) {
-    this.toastService.show(
-      'Confirme seu nome para continuar.',
-      'error'
-    );
-    return;
+    this.answers.set(init);
+    this.formStarted.set(true);
   }
 
-  if (!this.acceptedTerms()) {
-    this.toastService.show(
-      'Você precisa aceitar os termos para continuar.',
-      'error'
-    );
-    return;
-  }
-
-  const init: Record<string, string | string[]> = {};
-
-  this.questions().forEach(q => {
-    init[q.id] =
-      q.type === 'mc' && q.multiple
-        ? []
-        : '';
-  });
-
-  this.answers.set(init);
-  this.formStarted.set(true);
-}
+  // --- MÉTODOS AUXILIARES DAS PERGUNTAS (RESTAURADOS) ---
 
   getTextAnswer(qId: string): string {
     return (this.answers()[qId] as string) ?? '';
@@ -128,62 +142,42 @@ startForm(): void {
     });
   }
 
-async submit(): Promise<void> {
-  const ansMap = this.answers();
+  // -----------------------------------------------------
 
-  const finalAnswers: Answer[] = this.questions().map(q => ({
-    questionId: q.id,
-    question: q.text,
-    type: q.type,
-    answer: ansMap[q.id] ?? ''
-  }));
+  async submit(): Promise<void> {
+    const ansMap = this.answers();
+    const finalAnswers: Answer[] = this.questions().map(q => ({
+      questionId: q.id,
+      question: q.text,
+      type: q.type,
+      answer: ansMap[q.id] ?? ''
+    }));
 
-  let fullData = {};
+    const fullData: Partial<PatientFull> = {
+      education: this.education(),
+      birthDate: this.birthDate(),
+      isMinor: this.isMinor(),
+      address: this.address(),
+      motherName: this.motherName(),
+      fatherName: this.fatherName(),
+      guardianName: this.guardianName(),
+      doctorName: this.doctorName(),
+      doctorCrm: this.doctorCrm(),
+      doctorSpecialty: this.doctorSpecialty(),
+      diagnosticHypothesis: this.diagnosticHypothesis(),
+      reason: this.reason()
+    };
 
-  if (this.inviteCode()) {
-    const normalizedCode = this.inviteCode().trim().toUpperCase();
+    await this.patientService.addRecord(
+      this.patientName().trim(),
+      finalAnswers,
+      fullData
+    );
 
-    // corrigido: agora getFullPatientByCode é async
-    const fullPatient = await this.patientService.getFullPatientByCode(normalizedCode);
-
-    if (fullPatient) {
-      fullData = {
-        rg: fullPatient.rg,
-        cpf: fullPatient.cpf,
-        address: fullPatient.address,
-        motherName: fullPatient.motherName,
-        fatherName: fullPatient.fatherName,
-        reason: fullPatient.reason
-      };
+    if (this.inviteCode()) {
+      await this.patientService.markFullCodeAsUsed(this.inviteCode().trim().toUpperCase());
     }
-  }
 
-  // salva respostas primeiro
-  await this.patientService.addRecord(
-    this.patientName().trim(),
-    finalAnswers,
-    fullData
-  );
-
-  // só marca como usado após finalizar tudo
-  if (this.inviteCode()) {
-    const normalizedCode = this.inviteCode().trim().toUpperCase();
-
-    await this.patientService.markFullCodeAsUsed(normalizedCode);
-  }
-
-  this.router.navigate(['/patient/success']);
-}
-
-  goBack(): void {
-    if (this.formStarted()) {
-      this.formStarted.set(false);
-    } else if (this.codeValidated()) {
-      this.codeValidated.set(false);
-      this.patientName.set('');
-      this.inviteCode.set('');
-    } else {
-      this.router.navigate(['/']);
-    }
+    this.router.navigate(['/patient/success']);
   }
 }

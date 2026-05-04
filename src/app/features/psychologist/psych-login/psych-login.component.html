@@ -1,29 +1,44 @@
 <div class="login-wrapper">
   <div class="login-card">
-    <div class="lock-icon">🔒</div>
-    <h2>Área do Psicólogo</h2>
-    <p class="brand-tag">Marson Psicologia</p>
-    <p class="subtitle">Digite seu email e senha para acessar</p>
-
-    <input type="email" class="field-input" placeholder="Email" [ngModel]="email()" (ngModelChange)="email.set($event)"
-      (keydown.enter)="login()" />
-
-    <input type="password" class="field-input" placeholder="Senha" [ngModel]="password()"
-      (ngModelChange)="password.set($event)" (keydown.enter)="login()" />
-
-    <div *ngIf="showCaptcha()" class="captcha-wrapper">
-      <!-- Cloudflare Turnstile -->
-<ngx-turnstile
-  siteKey="SEU_SITE_KEY"
-  (token)="onCaptchaSuccess($event)">
-</ngx-turnstile>
+    <!-- Header da Card -->
+    <div class="login-header">
+      <div class="lock-circle">
+        <span class="icon">🔒</span>
+      </div>
+      <h2>Área do Psicólogo</h2>
+      <p class="brand-tag">Marson Psicologia</p>
     </div>
 
+    <div class="login-body">
+      <p class="subtitle">Acesse sua conta para gerenciar pacientes</p>
+
+      <!-- Grupo de Inputs com espaçamento -->
+      <div class="input-group">
+        <div class="field-wrapper">
+          <label class="field-label">Email</label>
+          <input type="email" class="field-input" placeholder="seu@email.com" 
+            [ngModel]="email()" (ngModelChange)="email.set($event)" (keydown.enter)="login()" />
+        </div>
+
+        <div class="field-wrapper">
+          <label class="field-label">Senha</label>
+          <input type="password" class="field-input" placeholder="••••••••" 
+            [ngModel]="password()" (ngModelChange)="password.set($event)" (keydown.enter)="login()" />
+        </div>
+      </div>
+
+      <!-- Captcha com margem dedicada -->
+      <div *ngIf="showCaptcha()" class="captcha-container">
+        <ngx-turnstile siteKey="SEU_SITE_KEY" (token)="onCaptchaSuccess($event)"></ngx-turnstile>
+      </div>
+    </div>
+
+    <!-- Ações com hierarquia visual clara -->
     <div class="form-actions">
-      <button class="btn btn-accent" (click)="login()" [disabled]="loading()">
-        {{ loading() ? 'Entrando...' : 'Entrar' }}
+      <button class="btn btn-accent full-width" (click)="login()" [disabled]="loading()">
+        {{ loading() ? 'Autenticando...' : 'Entrar no Sistema' }}
       </button>
-      <button class="btn btn-ghost" (click)="goHome()">Voltar</button>
+      <button class="btn btn-link" (click)="goHome()">Voltar para o início</button>
     </div>
   </div>
 </div>

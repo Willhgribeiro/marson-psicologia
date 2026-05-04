@@ -13,12 +13,14 @@ import { ToastService } from '../../../core/services/toast.service';
   styleUrls: ['./patient-register.component.scss']
 })
 export class PatientRegisterComponent {
-  // Pre-filled from previous screen
   patientName = signal('');
-
-  // Full registration form
-  rg = signal('');
-  cpf = signal('');
+  education = signal('');
+  birthDate = signal('');
+  isMinor = signal(false);
+  
+  // Campo adicionado para resolver o erro de propriedade inexistente
+  guardianName = signal(''); 
+  
   address = signal('');
   motherName = signal('');
   fatherName = signal('');
@@ -30,7 +32,6 @@ export class PatientRegisterComponent {
     private toastService: ToastService,
     public router: Router
   ) {
-    // Get name from navigation state
     const nav = this.router.getCurrentNavigation();
     const state = nav?.extras?.state as { name?: string };
     if (state?.name) {
@@ -43,6 +44,22 @@ export class PatientRegisterComponent {
       this.toastService.show('Nome do paciente é obrigatório.', 'error');
       return;
     }
+    
+    if (!this.education()) {
+      this.toastService.show('Selecione a escolaridade.', 'error');
+      return;
+    }
+
+    if (!this.birthDate()) {
+      this.toastService.show('Informe a data de nascimento.', 'error');
+      return;
+    }
+
+    if (this.isMinor() && !this.guardianName().trim()) {
+      this.toastService.show('Informe o nome do responsável legal.', 'error');
+      return;
+    }
+
     if (!this.reason().trim()) {
       this.toastService.show('Informe o motivo do atendimento.', 'error');
       return;
@@ -50,16 +67,18 @@ export class PatientRegisterComponent {
 
     const code = await this.patientService.createPatientFull({
       name: this.patientName().trim(),
-      rg: this.rg().trim(),
-      cpf: this.cpf().trim(),
+      education: this.education(),
+      birthDate: this.birthDate(),
+      isMinor: this.isMinor(),
       address: this.address().trim(),
+      guardianName: this.guardianName().trim(), // Enviando o novo campo para o serviço
       motherName: this.motherName().trim(),
       fatherName: this.fatherName().trim(),
       reason: this.reason().trim()
     });
 
     this.generatedCode.set(code);
-    this.toastService.show('Paciente cadastrado!', 'success');
+    this.toastService.show('Paciente cadastrado com sucesso!', 'success');
   }
 
   copyCode(code: string): void {
