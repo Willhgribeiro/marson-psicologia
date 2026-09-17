@@ -1,20 +1,167 @@
-<div class="home">
-  <div class="brand-area">
-    <h1 class="brand-name">Marson <em>Psicologia</em></h1>
-    <div class="brand-divider"></div>
-    <p class="brand-sub">Sistema de Anamnese Neuropsicológica</p>
-  </div>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="brand" aria-label="Marson Psicologia">
+      <span class="brand-mark">M</span>
+      <div class="brand-copy">
+        <span class="brand-name">Marson Psicologia</span>
+        <small>Atendimento psicológico e neuropsicológico</small>
+      </div>
+    </div>
 
-  <div class="home-cards">
-    <div class="access-card patient" (click)="goPatient()">
-      <span class="card-icon">🧠</span>
-      <div class="card-title">Acesso Paciente</div>
-      <div class="card-desc">Responda o formulário de anamnese</div>
+    <button class="menu-button" type="button" aria-label="Abrir menu de acesso" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="menu-panel" *ngIf="menuOpen">
+      <button type="button" class="menu-item patient" (click)="goPatient()">Paciente</button>
+      <button type="button" class="menu-item psych" (click)="goPsych()">Psicólogo</button>
+      <button type="button" class="menu-item neuro" (click)="goPsych()">Neuropsicólogo</button>
     </div>
-    <div class="access-card psych" (click)="goPsych()">
-      <span class="card-icon">🩺</span>
-      <div class="card-title">Acesso Psicólogo</div>
-      <div class="card-desc">Gerencie perguntas e visualize respostas</div>
+  </header>
+
+  <main class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Neuropsicologia e psicologia</span>
+      <h1>Cuidados neuropsicológicos que acolhem, orientam e transformam.</h1>
+      <p>
+        A Marson Psicologia é um espaço de escuta, cuidado e desenvolvimento emocional,
+        com atenção especial à neuropsicologia, oferecendo suporte psicológico e neuropsicológico
+        com acolhimento, ética e intervenção individualizada.
+      </p>
+
+      <div class="cta-row">
+        <button class="primary-btn" type="button" (click)="openWhatsApp()">Falar no WhatsApp</button>
+        <a class="secondary-btn" href="#especialidades">Conhecer especialidades</a>
+      </div>
     </div>
-  </div>
+
+    <aside class="hero-card">
+      <span class="mini-badge">Especialidade prioritária</span>
+      <h2>Neuropsicologia com cuidado humanizado</h2>
+      <ul>
+        <li>Neuropsicologia clínica</li>
+        <li>Avaliação e apoio neuropsicológico</li>
+        <li>Atendimento psicológico complementar</li>
+        <li>Ambiente acolhedor e seguro</li>
+      </ul>
+    </aside>
+  </main>
+
+  <section class="about" id="sobre">
+    <div class="section-heading">
+      <span>Sobre a clínica</span>
+      <h3>O que é a Marson Psicologia</h3>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          A Marson Psicologia é um espaço de cuidado profissional voltado ao bem-estar emocional
+          e ao desenvolvimento humano, com ênfase em neuropsicologia e avaliação do funcionamento
+          cognitivo, emocional e comportamental.
+        </p>
+        <p>
+          Nossa atuação combina acolhimento psicológico com uma abordagem neuropsicológica moderna,
+          individualizada e segura, com foco em compreender as demandas de cada pessoa e oferecer
+          suporte que favoreça qualidade de vida, autonomia e saúde mental.
+        </p>
+      </div>
+
+      <div class="about-highlights">
+        <div class="highlight-item primary">
+          <strong>Neuropsicologia</strong>
+          <span>Atendimento prioritário focado em funções cognitivas, memória, atenção e desempenho.</span>
+        </div>
+        <div class="highlight-item">
+          <strong>Psicologia</strong>
+          <span>Escuta clínica, acolhimento e apoio emocional complementar.</span>
+        </div>
+        <div class="highlight-item">
+          <strong>Profissionalismo</strong>
+          <span>Abordagem ética, individualizada e segura.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="specialties" id="especialidades">
+    <div class="section-heading">
+      <span>Especialidades</span>
+      <h3>Atendimento pensado para o cuidado integral</h3>
+    </div>
+
+    <div class="cards-grid">
+      <article class="specialty-card accent">
+        <div class="icon">🧠</div>
+        <h4>Neuropsicologia</h4>
+        <p>Investigação e suporte para funções cognitivas, atenção, memória e desempenho.</p>
+      </article>
+
+      <article class="specialty-card">
+        <div class="icon">🩺</div>
+        <h4>Psicologia</h4>
+        <p>Acolhimento emocional para quem busca compreender e transformar desafios pessoais.</p>
+      </article>
+
+      <article class="specialty-card">
+        <div class="icon">🤝</div>
+        <h4>Atendimento individual</h4>
+        <p>Estratégias personalizadas para cada etapa da vida e do processo terapêutico.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="contact" id="contato">
+    <div class="section-heading">
+      <span>Contato</span>
+      <h3>Fale com a Marson Psicologia</h3>
+    </div>
+
+    <div class="contact-grid">
+      <a class="contact-card" href="https://wa.me/5511954953003" target="_blank" rel="noreferrer">
+        <span class="contact-icon whatsapp-icon" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18.8 5.2A9.45 9.45 0 0 0 12.05 2C6.79 2 2.5 6.26 2.5 11.5c0 1.72.46 3.4 1.33 4.87L2.4 21.6l5.4-1.4a9.5 9.5 0 0 0 4.25 1.1h.01c5.26 0 9.54-4.26 9.54-9.5 0-2.55-1-4.96-2.8-6.8Zm-6.75 14.6h-.01a7.82 7.82 0 0 1-3.98-1.08l-.29-.17-3.2.83.85-3.12-.19-.32a7.8 7.8 0 0 1-1.2-4.16c0-4.32 3.52-7.84 7.86-7.84 2.1 0 4.06.82 5.55 2.3a7.75 7.75 0 0 1 2.29 5.54c0 4.33-3.52 7.85-7.86 7.85Zm4.32-5.86c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.17-.52.06-.24-.12-1.02-.37-1.95-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.37.1-.48.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.83.81-.83 1.98 0 1.18.85 2.3.97 2.46.12.16 1.66 2.53 4.02 3.55.56.24.99.39 1.34.5.56.18 1.08.15 1.49.09.46-.07 1.42-.58 1.62-1.13.2-.56.2-1.04.14-1.14-.06-.1-.22-.17-.46-.29Z"/>
+          </svg>
+        </span>
+        <strong>WhatsApp</strong>
+        <small>11 954953003</small>
+      </a>
+
+      <a class="contact-card" href="https://www.instagram.com/marsonpsicologia/" target="_blank" rel="noreferrer">
+        <span class="contact-icon instagram-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <linearGradient id="instagramGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#feda75"/>
+                <stop offset="20%" stop-color="#fa7e1e"/>
+                <stop offset="45%" stop-color="#d62976"/>
+                <stop offset="70%" stop-color="#962fbf"/>
+                <stop offset="100%" stop-color="#4f5bd5"/>
+              </linearGradient>
+            </defs>
+            <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="url(#instagramGradient)" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#instagramGradient)" stroke-width="1.8"/>
+            <circle cx="17.2" cy="6.8" r="1.2" fill="url(#instagramGradient)"/>
+          </svg>
+        </span>
+        <strong>Instagram</strong>
+        <small>&#64;marsonpsicologia</small>
+      </a>
+
+      <a class="contact-card" href="tel:+5511954953003">
+        <span class="contact-icon">📞</span>
+        <strong>Telefone</strong>
+        <small>11 954953003</small>
+      </a>
+
+      <a class="contact-card" href="mailto:diegomarsonpsi@outlook.com">
+        <span class="contact-icon">✉️</span>
+        <strong>E-mail</strong>
+        <small>diegomarsonpsi&#64;outlook.com</small>
+      </a>
+    </div>
+  </section>
 </div>
