@@ -124,7 +124,7 @@ export const ptBR = {
       },
       schedule: {
         label: 'Horários de Atendimento',
-        weekdays: 'Segunda a Sexta: 8h às 20h',
+        weekdays: 'Segunda a Sexta: 8h às 21h',
         saturday: 'Sábados: sob consulta',
         note: 'Consulte disponibilidade pelo WhatsApp'
       }
