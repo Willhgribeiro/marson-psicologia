@@ -5,7 +5,7 @@ import { PatientRecord } from '../models/models';
 export class PdfService {
 
   async export(p: PatientRecord): Promise<void> {
-    const { jsPDF } = (window as any).jspdf;
+    const { jsPDF } = await import('jspdf');
     const doc = new jsPDF({ unit: 'mm', format: 'a4' });
     const W = 210, margin = 18, contentW = W - margin * 2;
     let y = 0;
