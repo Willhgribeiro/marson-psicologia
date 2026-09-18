@@ -1,0 +1,209 @@
+<ng-container [ngSwitch]="name">
+  <!-- WhatsApp -->
+  <svg
+    *ngSwitchCase="'whatsapp'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M18.8 5.2A9.45 9.45 0 0 0 12.05 2C6.79 2 2.5 6.26 2.5 11.5c0 1.72.46 3.4 1.33 4.87L2.4 21.6l5.4-1.4a9.5 9.5 0 0 0 4.25 1.1h.01c5.26 0 9.54-4.26 9.54-9.5 0-2.55-1-4.96-2.8-6.8Zm-6.75 14.6h-.01a7.82 7.82 0 0 1-3.98-1.08l-.29-.17-3.2.83.85-3.12-.19-.32a7.8 7.8 0 0 1-1.2-4.16c0-4.32 3.52-7.84 7.86-7.84 2.1 0 4.06.82 5.55 2.3a7.75 7.75 0 0 1 2.29 5.54c0 4.33-3.52 7.85-7.86 7.85Zm4.32-5.86c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.17-.52.06-.24-.12-1.02-.37-1.95-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.37.1-.48.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.83.81-.83 1.98 0 1.18.85 2.3.97 2.46.12.16 1.66 2.53 4.02 3.55.56.24.99.39 1.34.5.56.18 1.08.15 1.49.09.46-.07 1.42-.58 1.62-1.13.2-.56.2-1.04.14-1.14-.06-.1-.22-.17-.46-.29Z"/>
+  </svg>
+
+  <!-- Brain (Neuro) -->
+  <svg
+    *ngSwitchCase="'brain'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    aria-hidden="true"
+  >
+    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/>
+    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/>
+  </svg>
+
+  <!-- Chat (Therapy) -->
+  <svg
+    *ngSwitchCase="'chat'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    aria-hidden="true"
+  >
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    <path d="M8 10h.01"></path>
+    <path d="M12 10h.01"></path>
+    <path d="M16 10h.01"></path>
+  </svg>
+
+  <!-- Report -->
+  <svg
+    *ngSwitchCase="'report'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    aria-hidden="true"
+  >
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+    <polyline points="14 2 14 8 20 8"></polyline>
+    <line x1="16" y1="13" x2="8" y2="13"></line>
+    <line x1="16" y1="17" x2="8" y2="17"></line>
+    <polyline points="10 9 9 9 8 9"></polyline>
+  </svg>
+
+  <!-- Phone -->
+  <svg
+    *ngSwitchCase="'phone'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    aria-hidden="true"
+  >
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+  </svg>
+
+  <!-- Email -->
+  <svg
+    *ngSwitchCase="'email'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    aria-hidden="true"
+  >
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>
+  </svg>
+
+  <!-- Instagram -->
+  <svg
+    *ngSwitchCase="'instagram'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id="sharedInstagramGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#feda75"/>
+        <stop offset="20%" stop-color="#fa7e1e"/>
+        <stop offset="45%" stop-color="#d62976"/>
+        <stop offset="70%" stop-color="#962fbf"/>
+        <stop offset="100%" stop-color="#4f5bd5"/>
+      </linearGradient>
+    </defs>
+    <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="url(#sharedInstagramGradient)" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#sharedInstagramGradient)" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.2" fill="url(#sharedInstagramGradient)"/>
+  </svg>
+
+  <!-- Lock -->
+  <svg
+    *ngSwitchCase="'lock'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    aria-hidden="true"
+  >
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+  </svg>
+
+  <!-- Chevron -->
+  <svg
+    *ngSwitchCase="'chevron'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    aria-hidden="true"
+  >
+    <polyline points="6 9 12 15 18 9"></polyline>
+  </svg>
+
+  <!-- Arrow -->
+  <svg
+    *ngSwitchCase="'arrow'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    aria-hidden="true"
+  >
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+
+  <!-- Check Circle (Bolinha com check dos trust badges) -->
+  <svg
+    *ngSwitchCase="'check-circle'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+  </svg>
+
+  <!-- Check (Apenas o checkmark sem círculo do card de Diego Marson) -->
+  <svg
+    *ngSwitchCase="'check'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+  </svg>
+
+  <!-- User / Portal -->
+  <svg
+    *ngSwitchCase="'user'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    aria-hidden="true"
+  >
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+    <circle cx="12" cy="7" r="4"></circle>
+  </svg>
+</ng-container>

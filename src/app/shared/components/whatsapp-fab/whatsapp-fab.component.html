@@ -1,0 +1,13 @@
+<aside class="floating-whatsapp-fab" aria-label="Contato rápido no WhatsApp">
+  <button
+    type="button"
+    class="fab-btn"
+    (click)="openWhatsApp()"
+    [attr.aria-label]="'home.floating.aria' | translate"
+    [title]="'home.floating.cta' | translate"
+  >
+    <span class="fab-pulse-ring" aria-hidden="true"></span>
+    <span class="fab-tooltip">{{ 'home.floating.cta' | translate }}</span>
+    <app-icon name="whatsapp" [size]="28" className="fab-icon" />
+  </button>
+</aside>

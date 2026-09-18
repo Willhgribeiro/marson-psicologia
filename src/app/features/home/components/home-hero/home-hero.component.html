@@ -1,0 +1,59 @@
+<main class="hero" id="hero">
+  <div class="hero-copy">
+    <div class="eyebrow-pill">
+      <span class="pulse-dot"></span>
+      <span>{{ 'home.hero.eyebrow' | translate }}</span>
+    </div>
+
+    <h1>{{ 'home.hero.title' | translate }}</h1>
+    <p>{{ 'home.hero.description' | translate }}</p>
+
+    <div class="cta-row">
+      <button class="primary-btn" type="button" (click)="onContact()">
+        <app-icon name="whatsapp" [size]="19" class="btn-whatsapp-icon" />
+        <span>{{ 'home.hero.ctaPrimary' | translate }}</span>
+      </button>
+      <button class="secondary-btn" type="button" (click)="onExplore()">
+        <span>{{ 'home.hero.ctaSecondary' | translate }}</span>
+        <app-icon name="arrow" [size]="15" />
+      </button>
+    </div>
+
+    <!-- Trust Badges com as bolinhas de check verde -->
+    <div class="trust-strip">
+      <div class="trust-item" *ngFor="let badge of t.hero.trustBadges">
+        <app-icon name="check-circle" [size]="17" class="check-svg" />
+        <span>{{ badge }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Clean Clinical Identity Card (Diego Marson com checkmark dourado) -->
+  <aside class="hero-identity-card">
+    <div class="id-card-top">
+      <div class="id-avatar-wrap">
+        <img src="assets/images/diego-marson.jpg" alt="Diego Marson - Psicólogo e Neuropsicólogo" class="id-avatar-img" />
+      </div>
+      <div class="id-title-wrap">
+        <h2>{{ t.hero.card.title }}</h2>
+        <span class="id-role">{{ t.hero.card.role }}</span>
+        <span class="id-crp">{{ t.hero.card.crp }}</span>
+        <span class="id-audience">{{ t.hero.card.audienceTag }}</span>
+      </div>
+    </div>
+
+    <div class="id-card-divider"></div>
+
+    <ul class="id-card-list">
+      <li *ngFor="let item of t.hero.card.items">
+        <app-icon name="check" [size]="17" class="id-check" />
+        <span>{{ item }}</span>
+      </li>
+    </ul>
+
+    <button type="button" class="id-card-btn" (click)="onContact()">
+      <span>Conversar diretamente</span>
+      <app-icon name="arrow" [size]="15" />
+    </button>
+  </aside>
+</main>

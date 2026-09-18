@@ -1,0 +1,218 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.contact {
+  padding-top: 60px;
+}
+
+.section-heading {
+  margin-bottom: 28px;
+
+  &.centered {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 36px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #9c6c28;
+  }
+
+  h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    margin: 0;
+    font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+    color: #0c1d32;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid rgba(12, 29, 50, 0.08);
+  border-radius: 18px;
+  padding: 22px 18px;
+  text-decoration: none;
+  color: #0c1d32;
+  box-shadow: 0 8px 22px rgba(12, 29, 50, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  height: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(12, 29, 50, 0.06);
+
+    .contact-icon {
+      transform: scale(1.08);
+    }
+  }
+
+  .contact-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    background: rgba(45, 95, 138, 0.1);
+    color: #1a3a5c;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+
+    svg, app-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .whatsapp-icon {
+    background: rgba(37, 211, 102, 0.14);
+    color: #1b7a44;
+  }
+
+  .instagram-icon {
+    background: rgba(214, 41, 118, 0.1);
+  }
+
+  .phone-icon {
+    background: rgba(45, 95, 138, 0.12);
+    color: #1a3a5c;
+  }
+
+  .email-icon {
+    background: rgba(211, 167, 93, 0.14);
+    color: #9c6c28;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    strong {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 3px;
+      color: #0c1d32;
+    }
+
+    .contact-desc {
+      font-size: 0.76rem;
+      color: #6b7f96;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .contact-highlight {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #1a3a5c;
+      margin-top: auto;
+      word-break: break-all;
+    }
+  }
+
+  /* Oculto no Desktop para garantir o alinhamento e formato idêntico ao original */
+  .contact-arrow, app-icon.contact-arrow {
+    display: none;
+  }
+
+  &.whatsapp-card:hover {
+    border-color: rgba(37, 211, 102, 0.4);
+  }
+
+  &.instagram-card:hover {
+    border-color: rgba(214, 41, 118, 0.4);
+  }
+}
+
+@media (max-width: 980px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .contact-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 16px;
+
+    .contact-icon {
+      margin-bottom: 0;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border-radius: 12px;
+    }
+
+    .contact-info {
+      strong {
+        font-size: 0.95rem;
+        margin-bottom: 1px;
+      }
+
+      .contact-desc {
+        font-size: 0.76rem;
+        margin-bottom: 2px;
+        line-height: 1.35;
+      }
+
+      .contact-highlight {
+        font-size: 0.82rem;
+        font-weight: 600;
+        margin-top: 0;
+      }
+    }
+
+    .contact-arrow, app-icon.contact-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      color: #94a3b8;
+      margin-left: auto;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    &:hover,
+    &:active {
+      .contact-arrow, app-icon.contact-arrow {
+        transform: translateX(3px);
+        color: #0c1d32;
+      }
+    }
+  }
+}

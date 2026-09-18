@@ -1,0 +1,70 @@
+<section class="contact" id="contato">
+  <div class="section-heading centered">
+    <span class="section-tag">{{ 'home.contact.eyebrow' | translate }}</span>
+    <h3>{{ 'home.contact.title' | translate }}</h3>
+  </div>
+
+  <div class="contact-grid">
+    <!-- WhatsApp Card -->
+    <a
+      class="contact-card whatsapp-card"
+      [href]="contactService.getWhatsAppUrl()"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div class="contact-icon whatsapp-icon" [attr.aria-label]="'home.contact.whatsapp' | translate">
+        <app-icon name="whatsapp" [size]="20" />
+      </div>
+      <div class="contact-info">
+        <strong>{{ 'home.contact.whatsapp' | translate }}</strong>
+        <span class="contact-desc">{{ 'home.contact.whatsappDesc' | translate }}</span>
+        <small class="contact-highlight">{{ contactService.displayPhoneNumber }}</small>
+      </div>
+      <app-icon name="arrow" [size]="18" [strokeWidth]="2.5" class="contact-arrow" />
+    </a>
+
+    <!-- Instagram Card -->
+    <a
+      class="contact-card instagram-card"
+      [href]="contactService.instagramUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div class="contact-icon instagram-icon" [attr.aria-label]="'home.contact.instagram' | translate">
+        <app-icon name="instagram" [size]="20" />
+      </div>
+      <div class="contact-info">
+        <strong>{{ 'home.contact.instagram' | translate }}</strong>
+        <span class="contact-desc">{{ 'home.contact.instagramDesc' | translate }}</span>
+        <small class="contact-highlight">{{ contactService.instagramHandle }}</small>
+      </div>
+      <app-icon name="arrow" [size]="18" [strokeWidth]="2.5" class="contact-arrow" />
+    </a>
+
+    <!-- Telefone Card -->
+    <a class="contact-card" [href]="contactService.getTelUrl()">
+      <div class="contact-icon phone-icon">
+        <app-icon name="phone" [size]="20" />
+      </div>
+      <div class="contact-info">
+        <strong>{{ 'home.contact.phone' | translate }}</strong>
+        <span class="contact-desc">{{ 'home.contact.phoneDesc' | translate }}</span>
+        <small class="contact-highlight">{{ contactService.displayPhoneNumber }}</small>
+      </div>
+      <app-icon name="arrow" [size]="18" [strokeWidth]="2.5" class="contact-arrow" />
+    </a>
+
+    <!-- E-mail Card -->
+    <a class="contact-card" [href]="contactService.getMailtoUrl()">
+      <div class="contact-icon email-icon">
+        <app-icon name="email" [size]="20" />
+      </div>
+      <div class="contact-info">
+        <strong>{{ 'home.contact.email' | translate }}</strong>
+        <span class="contact-desc">{{ 'home.contact.emailDesc' | translate }}</span>
+        <small class="contact-highlight">{{ contactService.emailAddress }}</small>
+      </div>
+      <app-icon name="arrow" [size]="18" [strokeWidth]="2.5" class="contact-arrow" />
+    </a>
+  </div>
+</section>
