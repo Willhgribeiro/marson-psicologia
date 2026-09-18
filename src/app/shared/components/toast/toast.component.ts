@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-toast',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-toast',
+    imports: [CommonModule],
+    template: `
     <div
       class="toast"
       [class.show]="!!toastService.toast()"
@@ -17,7 +16,7 @@ import { ToastService } from '../../../core/services/toast.service';
       {{ t.message }}
     </div>
   `,
-  styles: [`
+    styles: [`
     .toast {
       position: fixed; bottom: 2rem; right: 2rem;
       background: #1e1e2e; color: #fff;

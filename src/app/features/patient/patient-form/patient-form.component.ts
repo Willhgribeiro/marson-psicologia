@@ -8,11 +8,10 @@ import { ToastService } from '../../../core/services/toast.service';
 import { Answer, Question, PatientFull } from '../../../core/models/models';
 
 @Component({
-  selector: 'app-patient-form',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './patient-form.component.html',
-  styleUrls: ['./patient-form.component.scss']
+    selector: 'app-patient-form',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './patient-form.component.html',
+    styleUrls: ['./patient-form.component.scss']
 })
 export class PatientFormComponent implements OnInit {
   inviteCode = signal('');

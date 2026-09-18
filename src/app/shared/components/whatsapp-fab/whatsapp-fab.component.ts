@@ -5,12 +5,11 @@ import { IconComponent } from '../icon/icon.component';
 import { TranslatePipe } from '../../../core/i18n/translate.pipe';
 
 @Component({
-  selector: 'app-whatsapp-fab',
-  standalone: true,
-  imports: [CommonModule, IconComponent, TranslatePipe],
-  templateUrl: './whatsapp-fab.component.html',
-  styleUrls: ['./whatsapp-fab.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-whatsapp-fab',
+    imports: [CommonModule, IconComponent, TranslatePipe],
+    templateUrl: './whatsapp-fab.component.html',
+    styleUrls: ['./whatsapp-fab.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WhatsappFabComponent {
   constructor(private contactService: ContactService) {}

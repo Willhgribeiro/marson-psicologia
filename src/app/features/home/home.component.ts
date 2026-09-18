@@ -12,23 +12,22 @@ import { WhatsappFabComponent } from '../../shared/components/whatsapp-fab/whats
 import { WhatsappStickyMobileComponent } from '../../shared/components/whatsapp-sticky-mobile/whatsapp-sticky-mobile.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    CommonModule,
-    HomeNavbarComponent,
-    HomeHeroComponent,
-    HomeSpecialtiesComponent,
-    HomeFaqComponent,
-    HomeContactComponent,
-    HomeLocationComponent,
-    HomeFooterComponent,
-    WhatsappFabComponent,
-    WhatsappStickyMobileComponent
-  ],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-home',
+    imports: [
+        CommonModule,
+        HomeNavbarComponent,
+        HomeHeroComponent,
+        HomeSpecialtiesComponent,
+        HomeFaqComponent,
+        HomeContactComponent,
+        HomeLocationComponent,
+        HomeFooterComponent,
+        WhatsappFabComponent,
+        WhatsappStickyMobileComponent
+    ],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
   constructor(private contactService: ContactService) {}

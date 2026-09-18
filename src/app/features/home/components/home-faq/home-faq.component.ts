@@ -6,12 +6,11 @@ import { IconComponent } from '../../../../shared/components/icon/icon.component
 import { FaqItem } from '../../../../core/models/home.model';
 
 @Component({
-  selector: 'app-home-faq',
-  standalone: true,
-  imports: [CommonModule, TranslatePipe, IconComponent],
-  templateUrl: './home-faq.component.html',
-  styleUrls: ['./home-faq.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-home-faq',
+    imports: [CommonModule, TranslatePipe, IconComponent],
+    templateUrl: './home-faq.component.html',
+    styleUrls: ['./home-faq.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeFaqComponent {
   t = ptBR.home;

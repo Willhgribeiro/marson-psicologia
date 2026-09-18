@@ -6,11 +6,10 @@ import { PatientService } from '../../../core/services/patient.service';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-patient-register',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './patient-register.component.html',
-  styleUrls: ['./patient-register.component.scss']
+    selector: 'app-patient-register',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './patient-register.component.html',
+    styleUrls: ['./patient-register.component.scss']
 })
 export class PatientRegisterComponent {
   patientName = signal('');

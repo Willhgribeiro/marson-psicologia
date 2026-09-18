@@ -3,12 +3,11 @@ import { ContactService } from '../../../core/services/contact.service';
 import { IconComponent } from '../icon/icon.component';
 
 @Component({
-  selector: 'app-whatsapp-sticky-mobile',
-  standalone: true,
-  imports: [IconComponent],
-  templateUrl: './whatsapp-sticky-mobile.component.html',
-  styleUrls: ['./whatsapp-sticky-mobile.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-whatsapp-sticky-mobile',
+    imports: [IconComponent],
+    templateUrl: './whatsapp-sticky-mobile.component.html',
+    styleUrls: ['./whatsapp-sticky-mobile.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WhatsappStickyMobileComponent {
   constructor(readonly contactService: ContactService) {}

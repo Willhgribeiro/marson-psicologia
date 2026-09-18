@@ -6,12 +6,11 @@ import { IconComponent } from '../../../../shared/components/icon/icon.component
 import { SpecialtyItem } from '../../../../core/models/home.model';
 
 @Component({
-  selector: 'app-home-specialties',
-  standalone: true,
-  imports: [CommonModule, TranslatePipe, IconComponent],
-  templateUrl: './home-specialties.component.html',
-  styleUrls: ['./home-specialties.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-home-specialties',
+    imports: [CommonModule, TranslatePipe, IconComponent],
+    templateUrl: './home-specialties.component.html',
+    styleUrls: ['./home-specialties.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeSpecialtiesComponent {
   @Output() itemClick = new EventEmitter<SpecialtyItem | null>();

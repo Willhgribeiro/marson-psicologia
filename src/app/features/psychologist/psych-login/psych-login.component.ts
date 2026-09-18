@@ -7,11 +7,10 @@ import { AuthService } from '../../../core/services/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-psych-login',
-  standalone: true,
-  imports: [FormsModule, CommonModule, NgxTurnstileModule],
-  templateUrl: './psych-login.component.html',
-  styleUrls: ['./psych-login.component.scss']
+    selector: 'app-psych-login',
+    imports: [FormsModule, CommonModule, NgxTurnstileModule],
+    templateUrl: './psych-login.component.html',
+    styleUrls: ['./psych-login.component.scss']
 })
 export class PsychLoginComponent {
   email = signal('');

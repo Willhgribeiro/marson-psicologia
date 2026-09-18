@@ -7,12 +7,11 @@ import { TranslatePipe } from '../../../../core/i18n/translate.pipe';
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
 
 @Component({
-  selector: 'app-home-navbar',
-  standalone: true,
-  imports: [CommonModule, ClickOutsideDirective, TranslatePipe, IconComponent],
-  templateUrl: './home-navbar.component.html',
-  styleUrls: ['./home-navbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-home-navbar',
+    imports: [CommonModule, ClickOutsideDirective, TranslatePipe, IconComponent],
+    templateUrl: './home-navbar.component.html',
+    styleUrls: ['./home-navbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeNavbarComponent {
   @Output() sectionSelected = new EventEmitter<string>();
