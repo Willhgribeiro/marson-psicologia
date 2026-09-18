@@ -20,11 +20,27 @@
             "outputPath": "dist/marson-psicologia",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/favicon.svg", "src/assets"],
-            "styles": ["src/styles.scss"],
-            "scripts": []
+            "assets": [
+              "src/favicon.ico",
+              "src/favicon.svg",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "security": {
+              "allowedHosts": []
+            },
+            "ssr": {
+              "entry": "src/server.ts"
+            }
           },
           "configurations": {
             "production": {
