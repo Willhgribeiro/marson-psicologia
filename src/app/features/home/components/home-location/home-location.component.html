@@ -1,0 +1,79 @@
+<section class="location" id="localizacao">
+  <div class="section-heading centered">
+    <span class="section-tag">{{ t.eyebrow }}</span>
+    <h3>{{ t.title }}</h3>
+    <p class="location-subtitle">{{ t.subtitle }}</p>
+  </div>
+
+  <!-- Dois blocos principais: Presencial + Online -->
+  <div class="coverage-grid">
+
+    <!-- Bloco Presencial -->
+    <div class="coverage-card presencial-card">
+      <div class="coverage-header">
+        <div class="coverage-icon presencial-icon">
+          <app-icon name="location" [size]="22" />
+        </div>
+        <div>
+          <strong class="coverage-label">{{ t.presencial.label }}</strong>
+          <span class="coverage-region">{{ t.presencial.region }}</span>
+        </div>
+      </div>
+
+      <div class="city-pills">
+        <span class="city-pill" *ngFor="let city of t.presencial.cities">{{ city }}</span>
+      </div>
+
+      <p class="coverage-note">
+        <app-icon name="check-circle" [size]="14" class="note-icon" />
+        {{ t.presencial.note }}
+      </p>
+    </div>
+
+    <!-- Bloco Online -->
+    <div class="coverage-card online-card">
+      <div class="coverage-header">
+        <div class="coverage-icon online-icon">
+          <app-icon name="chat" [size]="22" />
+        </div>
+        <div>
+          <strong class="coverage-label">{{ t.online.label }}</strong>
+          <span class="coverage-region">{{ t.online.coverage }}</span>
+        </div>
+      </div>
+
+      <div class="online-badge">
+        <span class="brazil-pill">🇧🇷 Todo o Brasil</span>
+      </div>
+
+      <p class="coverage-note">
+        <app-icon name="check-circle" [size]="14" class="note-icon" />
+        {{ t.online.note }}
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Horários -->
+  <div class="schedule-card">
+    <div class="schedule-icon">
+      <app-icon name="clock" [size]="20" />
+    </div>
+    <div class="schedule-info">
+      <strong>{{ t.schedule.label }}</strong>
+      <div class="schedule-times">
+        <span>{{ t.schedule.weekdays }}</span>
+        <span>•</span>
+        <span>{{ t.schedule.saturday }}</span>
+      </div>
+      <small>{{ t.schedule.note }}</small>
+    </div>
+  </div>
+
+  <div class="location-cta">
+    <button type="button" class="location-cta-btn" (click)="openWhatsApp()">
+      <app-icon name="whatsapp" [size]="20" />
+      <span>{{ t.cta }}</span>
+    </button>
+  </div>
+</section>

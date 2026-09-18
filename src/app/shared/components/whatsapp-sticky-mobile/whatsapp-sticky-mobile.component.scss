@@ -1,0 +1,57 @@
+:host {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  :host {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 16px;
+    z-index: 900;
+    animation: slideInRight 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.5s both;
+  }
+}
+
+.sticky-bar {
+  pointer-events: all;
+}
+
+.sticky-whatsapp-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #1b7a44 0%, #25d366 100%);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4),
+              0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+
+  app-icon {
+    color: #ffffff;
+    flex-shrink: 0;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(120px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+

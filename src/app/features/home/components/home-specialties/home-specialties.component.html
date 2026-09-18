@@ -1,0 +1,28 @@
+<section class="specialties" id="especialidades">
+  <div class="section-heading centered">
+    <span class="section-tag">{{ 'home.specialties.eyebrow' | translate }}</span>
+    <h3>{{ 'home.specialties.title' | translate }}</h3>
+  </div>
+
+  <div class="cards-grid">
+    <article class="specialty-card" *ngFor="let card of specialties">
+      <div class="card-badge-row">
+        <span class="specialty-tag">{{ card.badge }}</span>
+      </div>
+
+      <div class="specialty-icon-container">
+        <app-icon [name]="card.icon" [size]="28" [strokeWidth]="1.8" className="specialty-svg" />
+      </div>
+
+      <h4>{{ card.title }}</h4>
+      <p>{{ card.text }}</p>
+
+      <div class="card-footer-action">
+        <button type="button" class="card-link-btn" (click)="onSelect(card)">
+          <span>Saber mais</span>
+          <app-icon name="arrow" [size]="18" />
+        </button>
+      </div>
+    </article>
+  </div>
+</section>
