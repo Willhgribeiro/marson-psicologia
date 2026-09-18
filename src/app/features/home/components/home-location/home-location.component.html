@@ -5,19 +5,56 @@
     <p class="location-subtitle">{{ t.subtitle }}</p>
   </div>
 
-  <div class="city-grid">
-    <div class="city-card" *ngFor="let loc of t.cities">
-      <div class="city-icon">
-        <app-icon [name]="loc.city === 'Online' ? 'chat' : 'location'" [size]="22" />
+  <!-- Dois blocos principais: Presencial + Online -->
+  <div class="coverage-grid">
+
+    <!-- Bloco Presencial -->
+    <div class="coverage-card presencial-card">
+      <div class="coverage-header">
+        <div class="coverage-icon presencial-icon">
+          <app-icon name="location" [size]="22" />
+        </div>
+        <div>
+          <strong class="coverage-label">{{ t.presencial.label }}</strong>
+          <span class="coverage-region">{{ t.presencial.region }}</span>
+        </div>
       </div>
-      <div class="city-info">
-        <strong>{{ loc.city }}</strong>
-        <span>{{ loc.state }}</span>
-        <small>{{ loc.note }}</small>
+
+      <div class="city-pills">
+        <span class="city-pill" *ngFor="let city of t.presencial.cities">{{ city }}</span>
       </div>
+
+      <p class="coverage-note">
+        <app-icon name="check-circle" [size]="14" class="note-icon" />
+        {{ t.presencial.note }}
+      </p>
     </div>
+
+    <!-- Bloco Online -->
+    <div class="coverage-card online-card">
+      <div class="coverage-header">
+        <div class="coverage-icon online-icon">
+          <app-icon name="chat" [size]="22" />
+        </div>
+        <div>
+          <strong class="coverage-label">{{ t.online.label }}</strong>
+          <span class="coverage-region">{{ t.online.coverage }}</span>
+        </div>
+      </div>
+
+      <div class="online-badge">
+        <span class="brazil-pill">🇧🇷 Todo o Brasil</span>
+      </div>
+
+      <p class="coverage-note">
+        <app-icon name="check-circle" [size]="14" class="note-icon" />
+        {{ t.online.note }}
+      </p>
+    </div>
+
   </div>
 
+  <!-- Horários -->
   <div class="schedule-card">
     <div class="schedule-icon">
       <app-icon name="clock" [size]="20" />
