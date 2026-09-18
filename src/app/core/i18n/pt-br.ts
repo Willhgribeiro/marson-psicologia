@@ -2,80 +2,115 @@ export const ptBR = {
   home: {
     brand: {
       name: 'Marson Psicologia',
-      subtitle: 'Atendimento psicológico e neuropsicológico'
+      subtitle: 'Psicologia Clínica & Neuropsicologia'
+    },
+    nav: {
+      specialties: 'Especialidades',
+      faq: 'Dúvidas',
+      contact: 'Contato',
+      patientPortal: 'Anamnese do Paciente',
+      psychPortal: 'Área do Psicólogo',
+      cta: 'Agendar Consulta'
     },
     menu: {
-      aria: 'Abrir menu de acesso',
-      patient: 'Paciente',
-      psych: 'Psicólogo',
-      neuro: 'Neuropsicólogo'
+      aria: 'Abrir menu de navegação',
+      patient: 'Anamnese do Paciente',
+      psych: 'Área do Psicólogo'
     },
     hero: {
-      eyebrow: 'Neuropsicologia e psicologia clínica',
-      title: 'Atendimento psicológico e neuropsicológico com acolhimento, clareza e excelência.',
+      eyebrow: 'Alphaville • Osasco • Carapicuíba • Atendimento Online',
+      title: 'Atendimento psicológico e avaliação neuropsicológica.',
       description:
-        'A Marson Psicologia oferece suporte profissional para pessoas que buscam bem-estar emocional, compreensão de si mesmas e estratégias personalizadas para o desenvolvimento de uma vida mais equilibrada, consciente e saudável.',
-      ctaPrimary: 'Falar no WhatsApp',
-      ctaSecondary: 'Conhecer especialidades',
-      cardBadge: 'Especialidade prioritária',
-      cardTitle: 'Neuropsicologia com cuidado humanizado',
-      list: [
-        'Avaliação neuropsicológica',
-        'Suporte para atenção, memória e cognição',
-        'Atendimento psicológico complementar',
-        'Ambiente acolhedor, ético e seguro'
-      ]
+        'Suporte clínico especializado e diagnóstico cognitivo para crianças, adolescentes e adultos. Consultórios presenciais na região oeste de SP e atendimento online para todo o Brasil.',
+      ctaPrimary: 'Agendar via WhatsApp',
+      ctaSecondary: 'Ver Especialidades',
+      trustBadges: [
+        'Crianças, Adolescentes e Adultos',
+        'Alphaville • Osasco • Carapicuíba',
+        'Registro CRP Ativo'
+      ],
+      card: {
+        title: 'Diego Marson',
+        role: 'Psicólogo Clínico & Neuropsicólogo',
+        crp: 'CRP 06 • Ativo no Conselho Federal de Psicologia',
+        audienceTag: 'Crianças • Adolescentes • Adultos',
+        items: [
+          'Avaliação neuropsicológica diagnóstica completa',
+          'Psicoterapia para crianças, adolescentes e adultos',
+          'Consultórios em Alphaville, Osasco e Carapicuíba (e Online)'
+        ]
+      }
     },
-    about: {
-      eyebrow: 'Sobre a clínica',
-      title: 'O que é a Marson Psicologia',
-      paragraph1:
-        'A Marson Psicologia é um espaço de cuidado profissional voltado ao bem-estar emocional, ao desenvolvimento humano e à promoção de qualidade de vida. Nossa atuação combina escuta clínica sensível com uma abordagem neuropsicológica moderna, individualizada e segura.',
-      paragraph2:
-        'Acreditamos que cada pessoa possui uma história, um ritmo e uma forma específica de viver, aprender e se relacionar. Por isso, nosso trabalho busca compreender cada demanda com ética, rigor técnico e acolhimento, oferecendo suporte que favoreça autonomia, saúde mental e bem-estar.',
-      highlights: [
+    specialties: {
+      eyebrow: 'Áreas de Atuação',
+      title: 'Cuidado focado nas suas necessidades',
+      cards: [
         {
-          title: 'Neuropsicologia',
-          text: 'Investimento em funções cognitivas, memória, atenção, linguagem e desempenho emocional.'
+          title: 'Avaliação Neuropsicológica',
+          badge: 'Investigação Cognitiva',
+          text: 'Mapeamento de memória, atenção, raciocínio e funções executivas. Apoio no diagnóstico de TDAH, dificuldades de aprendizagem e outras condições.'
         },
         {
-          title: 'Psicologia',
-          text: 'Escuta clínica, acolhimento e apoio emocional para desafios pessoais e cotidianos.'
+          title: 'Psicoterapia Clínica',
+          badge: 'Acolhimento & Terapia',
+          text: 'Espaço seguro e confidencial para crianças, adolescentes e adultos lidarem com ansiedade, estresse e autoconhecimento.'
         },
         {
-          title: 'Profissionalismo',
-          text: 'Abordagem ética, técnica e personalizada com foco em cuidado genuíno.'
+          title: 'Laudos & Orientações',
+          badge: 'Devolutiva Técnica',
+          text: 'Relatório técnico estruturado e detalhado com orientações práticas para o paciente, familiares, escolas e encaminhamentos médicos.'
         }
       ]
     },
-    specialties: {
-      eyebrow: 'Especialidades',
-      title: 'Atendimento pensado para o cuidado integral',
-      cards: [
+    faq: {
+      eyebrow: 'Perguntas Frequentes',
+      title: 'Dúvidas comuns sobre o atendimento',
+      items: [
         {
-          title: 'Neuropsicologia',
-          text: 'Assessoria clínica para funções cognitivas, atenção, memória, linguagem e desempenho geral.'
+          q: 'Quais faixas etárias são atendidas na clínica?',
+          a: 'Atendemos crianças, adolescentes e adultos. Os processos terapêuticos e de avaliação neuropsicológica são adaptados especificamente para a fase de vida e a queixa de cada paciente.'
         },
         {
-          title: 'Psicologia',
-          text: 'Acolhimento emocional e suporte terapêutico para compreender e transformar desafios pessoais.'
+          q: 'Onde ficam os consultórios presenciais?',
+          a: 'Os atendimentos presenciais são realizados em consultórios em Alphaville, Osasco e Carapicuíba, com fácil acesso na região oeste de São Paulo. Também oferecemos a modalidade online para todo o Brasil.'
         },
         {
-          title: 'Atendimento individualizado',
-          text: 'Estratégias personalizadas para cada fase da vida, do processo terapêutico e das necessidades do paciente.'
+          q: 'Como funciona a Avaliação Neuropsicológica?',
+          a: 'É uma investigação clínica detalhada para mapear funções cerebrais como memória, atenção, linguagem e funções executivas. O processo compreende entrevista inicial, aplicação de baterias de testes validados e entrega de laudo técnico detalhado.'
+        },
+        {
+          q: 'Vocês aceitam planos de saúde ou convênios?',
+          a: 'Os atendimentos são particulares. Fornecemos recibo e nota fiscal detalhados para que você solicite o reembolso junto ao seu plano de saúde.'
+        },
+        {
+          q: 'Como faço para agendar uma primeira sessão?',
+          a: 'Basta entrar em contato pelo WhatsApp. Alinharemos horários disponíveis, valores e esclareceremos qualquer dúvida diretamente.'
         }
       ]
     },
     contact: {
-      eyebrow: 'Contato',
-      title: 'Fale com a Marson Psicologia',
+      eyebrow: 'Canais de Contato & Localização',
+      title: 'Agendamentos em Alphaville, Osasco, Carapicuíba ou Online',
       whatsapp: 'WhatsApp',
+      whatsappDesc: 'Mensagens diretas e agendamentos',
       instagram: 'Instagram',
-      phone: 'Telefone',
-      email: 'E-mail',
-      phoneNumber: '11 954953003',
+      instagramDesc: 'Acompanhe conteúdos e novidades',
+      phone: 'Telefone Direto',
+      phoneDesc: 'Atendimento telefônico profissional',
+      email: 'E-mail Oficial',
+      emailDesc: 'Dúvidas e encaminhamentos',
+      phoneNumber: '(11) 95495-3003',
       emailAddress: 'diegomarsonpsi@outlook.com',
       instagramHandle: '@marsonpsicologia'
+    },
+    footer: {
+      locations: 'Consultórios: Alphaville • Osasco • Carapicuíba | Telepsicologia para todo o Brasil',
+      ethicalNotice: 'Atendimento pautado no Código de Ética Profissional do Psicólogo (CFP). Em caso de urgência emocional, disque 188 (CVV).',
+      copyright: '© 2026 Marson Psicologia. Todos os direitos reservados.'
+    },
+    floating: {
+      cta: 'Agendar Consulta',
+      aria: 'Falar diretamente com Diego Marson no WhatsApp'
     }
   }
 };

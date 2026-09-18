@@ -22,15 +22,15 @@
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": ["src/favicon.ico", "src/favicon.svg", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "budgets": [
-                { "type": "initial", "maximumWarning": "500kb", "maximumError": "1mb" },
-                { "type": "anyComponentStyle", "maximumWarning": "4kb", "maximumError": "8kb" }
+                { "type": "initial", "maximumWarning": "600kb", "maximumError": "1mb" },
+                { "type": "anyComponentStyle", "maximumWarning": "30kb", "maximumError": "45kb" }
               ],
               "outputHashing": "all"
             },
