@@ -21,7 +21,9 @@
       </div>
 
       <div class="city-pills">
-        <span class="city-pill" *ngFor="let city of t.presencial.cities">{{ city }}</span>
+        @for (city of t.presencial.cities; track city) {
+          <span class="city-pill">{{ city }}</span>
+        }
       </div>
 
       <p class="coverage-note">

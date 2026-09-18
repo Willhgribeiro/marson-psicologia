@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { ptBR } from '../../../../core/i18n/pt-br';
 import { TranslatePipe } from '../../../../core/i18n/translate.pipe';
@@ -6,12 +6,11 @@ import { IconComponent } from '../../../../shared/components/icon/icon.component
 import { SpecialtyItem } from '../../../../core/models/home.model';
 
 @Component({
-  selector: 'app-home-specialties',
-  standalone: true,
-  imports: [CommonModule, TranslatePipe, IconComponent],
-  templateUrl: './home-specialties.component.html',
-  styleUrls: ['./home-specialties.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-home-specialties',
+    imports: [TranslatePipe, IconComponent],
+    templateUrl: './home-specialties.component.html',
+    styleUrls: ['./home-specialties.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeSpecialtiesComponent {
   @Output() itemClick = new EventEmitter<SpecialtyItem | null>();

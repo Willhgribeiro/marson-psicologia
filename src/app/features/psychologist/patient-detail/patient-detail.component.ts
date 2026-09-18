@@ -1,17 +1,16 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { PatientService } from '../../../core/services/patient.service';
 import { PdfService } from '../../../core/services/pdf.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { PatientRecord } from '../../../core/models/models';
 
 @Component({
-  selector: 'app-patient-detail',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './patient-detail.component.html',
-  styleUrls: ['./patient-detail.component.scss']
+    selector: 'app-patient-detail',
+    imports: [],
+    templateUrl: './patient-detail.component.html',
+    styleUrls: ['./patient-detail.component.scss']
 })
 export class PatientDetailComponent implements OnInit {
   patient = signal<PatientRecord | null>(null);

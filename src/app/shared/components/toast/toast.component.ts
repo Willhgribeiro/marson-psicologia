@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-toast',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
-    <div
-      class="toast"
-      [class.show]="!!toastService.toast()"
-      [class.success]="toastService.toast()?.type === 'success'"
-      [class.error]="toastService.toast()?.type === 'error'"
-      *ngIf="toastService.toast() as t"
-    >
-      {{ t.message }}
-    </div>
-  `,
-  styles: [`
+    selector: 'app-toast',
+    imports: [],
+    template: `
+    @if (toastService.toast(); as t) {
+      <div
+        class="toast"
+        [class.show]="!!toastService.toast()"
+        [class.success]="toastService.toast()?.type === 'success'"
+        [class.error]="toastService.toast()?.type === 'error'"
+        >
+        {{ t.message }}
+      </div>
+    }
+    `,
+    styles: [`
     .toast {
       position: fixed; bottom: 2rem; right: 2rem;
       background: #1e1e2e; color: #fff;

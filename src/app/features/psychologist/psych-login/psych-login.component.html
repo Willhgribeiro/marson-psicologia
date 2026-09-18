@@ -16,21 +16,23 @@
       <div class="input-group">
         <div class="field-wrapper">
           <label class="field-label">Email</label>
-          <input type="email" class="field-input" placeholder="seu@email.com" 
+          <input type="email" class="field-input" placeholder="seu@email.com"
             [ngModel]="email()" (ngModelChange)="email.set($event)" (keydown.enter)="login()" />
         </div>
 
         <div class="field-wrapper">
           <label class="field-label">Senha</label>
-          <input type="password" class="field-input" placeholder="••••••" 
+          <input type="password" class="field-input" placeholder="••••••"
             [ngModel]="password()" (ngModelChange)="password.set($event)" (keydown.enter)="login()" />
         </div>
       </div>
 
       <!-- Captcha com margem dedicada -->
-      <div *ngIf="showCaptcha()" class="captcha-container">
-        <ngx-turnstile siteKey="SEU_SITE_KEY" (token)="onCaptchaSuccess($event)"></ngx-turnstile>
-      </div>
+      @if (showCaptcha()) {
+        <div class="captcha-container">
+          <ngx-turnstile siteKey="SEU_SITE_KEY" (token)="onCaptchaSuccess($event)"></ngx-turnstile>
+        </div>
+      }
     </div>
 
     <!-- Ações com hierarquia visual clara -->

@@ -21,7 +21,7 @@
           class="field-input"
           placeholder="Nome do paciente"
           [(ngModel)]="patientName"
-        />
+          />
       </div>
 
       <div class="form-row">
@@ -43,7 +43,7 @@
             type="date"
             class="field-input"
             [(ngModel)]="birthDate"
-          />
+            />
         </div>
       </div>
 
@@ -51,29 +51,31 @@
       <div class="form-group">
         <label class="field-label">O paciente requer um Responsável Legal? *</label>
         <div style="display: flex; gap: 10px; margin-top: 5px;">
-          <button 
+          <button
             type="button"
-            class="btn" 
-            [class.btn-primary]="isMinor()" 
-            (click)="isMinor.set(true)">Sim (Menor / PCD / Tutor)</button>
-          <button 
+            class="btn"
+            [class.btn-primary]="isMinor()"
+          (click)="isMinor.set(true)">Sim (Menor / PCD / Tutor)</button>
+          <button
             type="button"
-            class="btn" 
-            [class.btn-primary]="!isMinor()" 
-            (click)="isMinor.set(false)">Não (Autônomo)</button>
+            class="btn"
+            [class.btn-primary]="!isMinor()"
+          (click)="isMinor.set(false)">Não (Autônomo)</button>
         </div>
       </div>
 
       <!-- Campo Dinâmico: Só aparece se precisar de responsável -->
-      <div class="form-group" *ngIf="isMinor()">
-        <label class="field-label">Nome do Responsável Legal *</label>
-        <input
-          type="text"
-          class="field-input"
-          placeholder="Nome completo do tutor, pai ou mãe"
-          [(ngModel)]="guardianName"
-        />
-      </div>
+      @if (isMinor()) {
+        <div class="form-group">
+          <label class="field-label">Nome do Responsável Legal *</label>
+          <input
+            type="text"
+            class="field-input"
+            placeholder="Nome completo do tutor, pai ou mãe"
+            [(ngModel)]="guardianName"
+            />
+        </div>
+      }
 
       <div class="form-group">
         <label class="field-label">Endereço</label>
@@ -82,7 +84,7 @@
           class="field-input"
           placeholder="Endereço completo (Opcional)"
           [(ngModel)]="address"
-        />
+          />
       </div>
 
       <!-- Motivo: Obrigatório -->
@@ -99,25 +101,27 @@
 
     <!-- Botão com Validação: Fica cinza se faltar algo obrigatório -->
     <div class="form-actions">
-      <button 
-        class="btn btn-primary" 
+      <button
+        class="btn btn-primary"
         (click)="createPatient()"
         [disabled]="!patientName() || !education() || !birthDate() || !reason() || (isMinor() && !guardianName())"
-      >
+        >
         Cadastrar e Gerar Código
       </button>
     </div>
 
     <!-- Display de código gerado -->
-    <div class="generated-code-box" *ngIf="generatedCode()">
-      <div class="code-label">Código de acesso do paciente:</div>
-      <div class="code-value" (click)="copyCode(generatedCode()!)">
-        {{ generatedCode() }}
-        <span class="copy-hint">📋 Copiar</span>
+    @if (generatedCode()) {
+      <div class="generated-code-box">
+        <div class="code-label">Código de acesso do paciente:</div>
+        <div class="code-value" (click)="copyCode(generatedCode()!)">
+          {{ generatedCode() }}
+          <span class="copy-hint">📋 Copiar</span>
+        </div>
+        <div class="code-actions">
+          <button class="btn btn-primary" (click)="goToPatients()">Ver Pacientes</button>
+        </div>
       </div>
-      <div class="code-actions">
-        <button class="btn btn-primary" (click)="goToPatients()">Ver Pacientes</button>
-      </div>
-    </div>
+    }
   </div>
 </div>

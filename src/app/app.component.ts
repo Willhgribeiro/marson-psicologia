@@ -3,10 +3,9 @@ import { RouterOutlet } from '@angular/router';
 import { ToastComponent } from './shared/components/toast/toast.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, ToastComponent],
-  template: `
+    selector: 'app-root',
+    imports: [RouterOutlet, ToastComponent],
+    template: `
     <router-outlet />
     <app-toast />
   `

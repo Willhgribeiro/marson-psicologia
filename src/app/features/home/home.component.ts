@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContactService } from '../../core/services/contact.service';
 import { HomeNavbarComponent } from './components/home-navbar/home-navbar.component';
@@ -12,10 +12,8 @@ import { WhatsappFabComponent } from '../../shared/components/whatsapp-fab/whats
 import { WhatsappStickyMobileComponent } from '../../shared/components/whatsapp-sticky-mobile/whatsapp-sticky-mobile.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: 'app-home',
+    imports: [
     HomeNavbarComponent,
     HomeHeroComponent,
     HomeSpecialtiesComponent,
@@ -25,10 +23,10 @@ import { WhatsappStickyMobileComponent } from '../../shared/components/whatsapp-
     HomeFooterComponent,
     WhatsappFabComponent,
     WhatsappStickyMobileComponent
-  ],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
   constructor(private contactService: ContactService) {}

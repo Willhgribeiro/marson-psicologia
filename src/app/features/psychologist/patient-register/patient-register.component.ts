@@ -1,16 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { PatientService } from '../../../core/services/patient.service';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-patient-register',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './patient-register.component.html',
-  styleUrls: ['./patient-register.component.scss']
+    selector: 'app-patient-register',
+    imports: [FormsModule],
+    templateUrl: './patient-register.component.html',
+    styleUrls: ['./patient-register.component.scss']
 })
 export class PatientRegisterComponent {
   patientName = signal('');
@@ -32,7 +31,7 @@ export class PatientRegisterComponent {
     private toastService: ToastService,
     public router: Router
   ) {
-    const nav = this.router.getCurrentNavigation();
+    const nav = this.router.currentNavigation();
     const state = nav?.extras?.state as { name?: string };
     if (state?.name) {
       this.patientName.set(state.name);

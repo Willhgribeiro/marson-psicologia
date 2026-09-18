@@ -1,6 +1,6 @@
 import { Component, signal, computed, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { QuestionService } from '../../../core/services/question.service';
 import { PatientService } from '../../../core/services/patient.service';
@@ -8,11 +8,10 @@ import { ToastService } from '../../../core/services/toast.service';
 import { Answer, Question, PatientFull } from '../../../core/models/models';
 
 @Component({
-  selector: 'app-patient-form',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './patient-form.component.html',
-  styleUrls: ['./patient-form.component.scss']
+    selector: 'app-patient-form',
+    imports: [FormsModule],
+    templateUrl: './patient-form.component.html',
+    styleUrls: ['./patient-form.component.scss']
 })
 export class PatientFormComponent implements OnInit {
   inviteCode = signal('');

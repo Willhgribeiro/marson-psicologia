@@ -1,17 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { NgxTurnstileModule } from 'ngx-turnstile';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
-  selector: 'app-psych-login',
-  standalone: true,
-  imports: [FormsModule, CommonModule, NgxTurnstileModule],
-  templateUrl: './psych-login.component.html',
-  styleUrls: ['./psych-login.component.scss']
+    selector: 'app-psych-login',
+    imports: [FormsModule, NgxTurnstileModule],
+    templateUrl: './psych-login.component.html',
+    styleUrls: ['./psych-login.component.scss']
 })
 export class PsychLoginComponent {
   email = signal('');

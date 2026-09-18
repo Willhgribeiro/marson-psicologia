@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 export type IconName =
@@ -19,12 +19,11 @@ export type IconName =
   | 'clock';
 
 @Component({
-  selector: 'app-icon',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-icon',
+    imports: [],
+    templateUrl: './icon.component.html',
+    styleUrls: ['./icon.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconComponent {
   @Input({ required: true }) name!: IconName;

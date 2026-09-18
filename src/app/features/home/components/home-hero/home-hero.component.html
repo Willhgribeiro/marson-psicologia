@@ -24,10 +24,12 @@
 
     <!-- Trust Badges com as bolinhas de check verde -->
     <div class="trust-strip">
-      <div class="trust-item" *ngFor="let badge of t.hero.trustBadges">
-        <app-icon name="check-circle" [size]="17" class="check-svg" />
-        <span>{{ badge }}</span>
-      </div>
+      @for (badge of t.hero.trustBadges; track badge) {
+        <div class="trust-item">
+          <app-icon name="check-circle" [size]="17" class="check-svg" />
+          <span>{{ badge }}</span>
+        </div>
+      }
     </div>
   </div>
 
@@ -48,10 +50,12 @@
     <div class="id-card-divider"></div>
 
     <ul class="id-card-list">
-      <li *ngFor="let item of t.hero.card.items">
-        <app-icon name="check" [size]="17" class="id-check" />
-        <span>{{ item }}</span>
-      </li>
+      @for (item of t.hero.card.items; track item) {
+        <li>
+          <app-icon name="check" [size]="17" class="id-check" />
+          <span>{{ item }}</span>
+        </li>
+      }
     </ul>
 
     <button type="button" class="id-card-btn" (click)="onContact()">

@@ -8,11 +8,10 @@ import { ToastService } from '../../../core/services/toast.service';
 import { PatientInvite, Question, QuestionType } from '../../../core/models/models';
 
 @Component({
-  selector: 'app-psych-panel',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './psych-panel.component.html',
-  styleUrls: ['./psych-panel.component.scss']
+    selector: 'app-psych-panel',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './psych-panel.component.html',
+    styleUrls: ['./psych-panel.component.scss']
 })
 export class PsychPanelComponent implements OnInit {
   activeTab = signal<'questions' | 'patients'>('patients');
