@@ -9,10 +9,15 @@ export class ContactService {
   readonly instagramHandle = '@marsonpsicologia';
   readonly instagramUrl = 'https://www.instagram.com/marsonpsicologia/';
   readonly emailAddress = 'diegomarsonpsi@outlook.com';
-  readonly defaultMessage = 'Olá! Gostaria de obter informações sobre atendimento psicológico e avaliação neuropsicológica.';
+  readonly defaultMessage = 'Olá! Acessei o seu site e gostaria de obter informações sobre atendimento psicológico e avaliação neuropsicológica.';
 
   getWhatsAppUrl(customMessage?: string): string {
-    const text = encodeURIComponent(customMessage || this.defaultMessage);
+    let message = customMessage?.trim() || this.defaultMessage;
+    // Rastreabilidade de canal: assegura que a mensagem sinalize que o lead conheceu o profissional através do site
+    if (!message.toLowerCase().includes('site')) {
+      message = `Olá! Acessei o seu site. ${message}`;
+    }
+    const text = encodeURIComponent(message);
     return `https://wa.me/${this.phoneNumber}?text=${text}`;
   }
 

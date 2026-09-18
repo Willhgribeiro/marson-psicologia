@@ -30,8 +30,9 @@
 
       <div
         class="faq-answer"
-        *ngIf="openFaqIndex === idx"
+        [class.open]="openFaqIndex === idx"
         [id]="'faq-ans-' + idx"
+        [attr.aria-hidden]="openFaqIndex !== idx"
       >
         <p>{{ item.answer }}</p>
       </div>

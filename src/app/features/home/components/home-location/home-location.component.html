@@ -1,0 +1,42 @@
+<section class="location" id="localizacao">
+  <div class="section-heading centered">
+    <span class="section-tag">{{ t.eyebrow }}</span>
+    <h3>{{ t.title }}</h3>
+    <p class="location-subtitle">{{ t.subtitle }}</p>
+  </div>
+
+  <div class="city-grid">
+    <div class="city-card" *ngFor="let loc of t.cities">
+      <div class="city-icon">
+        <app-icon [name]="loc.city === 'Online' ? 'chat' : 'location'" [size]="22" />
+      </div>
+      <div class="city-info">
+        <strong>{{ loc.city }}</strong>
+        <span>{{ loc.state }}</span>
+        <small>{{ loc.note }}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="schedule-card">
+    <div class="schedule-icon">
+      <app-icon name="clock" [size]="20" />
+    </div>
+    <div class="schedule-info">
+      <strong>{{ t.schedule.label }}</strong>
+      <div class="schedule-times">
+        <span>{{ t.schedule.weekdays }}</span>
+        <span>•</span>
+        <span>{{ t.schedule.saturday }}</span>
+      </div>
+      <small>{{ t.schedule.note }}</small>
+    </div>
+  </div>
+
+  <div class="location-cta">
+    <button type="button" class="location-cta-btn" (click)="openWhatsApp()">
+      <app-icon name="whatsapp" [size]="20" />
+      <span>{{ t.cta }}</span>
+    </button>
+  </div>
+</section>

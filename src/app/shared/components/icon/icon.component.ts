@@ -14,7 +14,9 @@ export type IconName =
   | 'check'
   | 'check-circle'
   | 'arrow'
-  | 'user';
+  | 'user'
+  | 'location'
+  | 'clock';
 
 @Component({
   selector: 'app-icon',

@@ -1,0 +1,245 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.location {
+  padding: 64px 0 36px;
+}
+
+.section-heading {
+  margin-bottom: 38px;
+
+  &.centered {
+    text-align: center;
+  }
+
+  .section-tag {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: rgba(211, 167, 93, 0.12);
+    border: 1px solid rgba(211, 167, 93, 0.32);
+    color: #9c6c28;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+    color: #0c1d32;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+
+  .location-subtitle {
+    margin-top: 12px;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.96rem;
+    line-height: 1.7;
+    color: #4b6079;
+  }
+}
+
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.city-card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(12, 29, 50, 0.08);
+  box-shadow: 0 4px 20px rgba(12, 29, 50, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(12, 29, 50, 0.08);
+    border-color: rgba(211, 167, 93, 0.45);
+
+    .city-icon {
+      background: rgba(211, 167, 93, 0.18);
+      color: #9c6c28;
+    }
+  }
+}
+
+.city-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(12, 29, 50, 0.05);
+  color: #0c1d32;
+  margin-bottom: 16px;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.city-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  strong {
+    font-size: 1.08rem;
+    color: #0c1d32;
+    font-weight: 700;
+  }
+
+  span {
+    font-size: 0.84rem;
+    color: #617792;
+    font-weight: 500;
+  }
+
+  small {
+    margin-top: 6px;
+    font-size: 0.76rem;
+    color: #9c6c28;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+}
+
+.schedule-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  border-radius: 16px;
+  background: rgba(12, 29, 50, 0.03);
+  border: 1px dashed rgba(211, 167, 93, 0.45);
+  margin-bottom: 28px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .schedule-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(211, 167, 93, 0.16);
+    color: #9c6c28;
+    flex-shrink: 0;
+  }
+
+  .schedule-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    strong {
+      color: #0c1d32;
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .schedule-times {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      color: #4b6079;
+      flex-wrap: wrap;
+    }
+
+    small {
+      font-size: 0.76rem;
+      color: #7b8e9f;
+    }
+  }
+}
+
+.location-cta {
+  display: flex;
+  justify-content: center;
+}
+
+.location-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #165633 0%, #25d366 100%);
+  color: #ffffff;
+  font-size: 0.96rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(37, 211, 102, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  app-icon {
+    color: #ffffff;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(37, 211, 102, 0.38);
+  }
+}
+
+@media (max-width: 980px) {
+  .city-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .location {
+    padding: 44px 0 20px;
+  }
+
+  .city-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .schedule-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px;
+    gap: 12px;
+
+    .schedule-info {
+      align-items: center;
+
+      .schedule-times {
+        justify-content: center;
+        flex-direction: column;
+        gap: 2px;
+
+        span:nth-child(2) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .location-cta-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.94rem;
+  }
+}

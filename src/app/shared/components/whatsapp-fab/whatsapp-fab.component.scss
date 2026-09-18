@@ -97,23 +97,13 @@
   pointer-events: none;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  :host {
+    display: none !important;
+  }
+
   .floating-whatsapp-fab {
-    bottom: 20px;
-    right: 20px;
-  }
-
-  .fab-btn {
-    width: 52px;
-    height: 52px;
-
-    .fab-icon {
-      width: 25px;
-      height: 25px;
-    }
-  }
-
-  .fab-tooltip {
-    display: none;
+    display: none !important;
   }
 }
+

@@ -1,24 +1,26 @@
 :host {
   display: block;
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .topbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: relative;
+  z-index: 100; /* Garante que topbar (e menu-panel dentro dele) fique acima do menu-backdrop (z-index: 95) */
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 14px 26px;
-  background: rgba(12, 29, 50, 0.95);
+  background: rgba(12, 29, 50, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-top: none;
   border-radius: 0 0 20px 20px;
-  box-shadow: 0 14px 35px rgba(12, 29, 50, 0.16);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 14px 35px rgba(12, 29, 50, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .brand {
@@ -118,10 +120,55 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-left: 28px;
-  padding-left: 26px;
+  margin-left: 24px;
+  padding-left: 22px;
   border-left: 1px solid rgba(255, 255, 255, 0.18);
   flex-shrink: 0;
+}
+
+/* Social Quick Group (WhatsApp & Instagram) */
+.header-social-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .header-social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.whatsapp-social {
+      color: #25d366;
+
+      &:hover {
+        background: rgba(37, 211, 102, 0.18);
+        border-color: rgba(37, 211, 102, 0.4);
+        transform: translateY(-1px);
+      }
+    }
+
+    &.instagram-social {
+      color: #e1306c;
+
+      &:hover {
+        background: rgba(225, 48, 108, 0.18);
+        border-color: rgba(225, 48, 108, 0.45);
+        color: #f77737;
+        transform: translateY(-1px);
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
 }
 
 .portal-wrapper {
@@ -282,14 +329,50 @@
   }
 }
 
+/* Mobile Quick Action & Hamburger Group */
+.mobile-actions-wrapper {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-quick-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.18s ease;
+
+  &.mobile-whatsapp-btn {
+    color: #25d366;
+    background: rgba(37, 211, 102, 0.12);
+    border-color: rgba(37, 211, 102, 0.35);
+  }
+
+  &.mobile-instagram-btn {
+    color: #e1306c;
+    background: rgba(225, 48, 108, 0.12);
+    border-color: rgba(225, 48, 108, 0.35);
+  }
+
+  &:active {
+    transform: scale(0.94);
+  }
+}
+
 /* Mobile Hamburger Button */
 .menu-button {
   display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border: 1px solid rgba(211, 167, 93, 0.4);
   border-radius: 10px;
   background: rgba(211, 167, 93, 0.08);
@@ -413,20 +496,35 @@
   }
 }
 
+.mobile-drawer-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .mobile-cta-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, #1b7a44 0%, #25d366 100%);
-  color: #ffffff;
   border: none;
   border-radius: 12px;
-  padding: 14px;
+  padding: 13px;
   font-weight: 700;
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.3);
+
+  &.whatsapp-cta {
+    background: linear-gradient(135deg, #1b7a44 0%, #25d366 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 22px rgba(37, 211, 102, 0.3);
+  }
+
+  &.instagram-cta {
+    background: rgba(214, 41, 118, 0.14);
+    border: 1px solid rgba(214, 41, 118, 0.35);
+    color: #f9c0d6;
+  }
 }
 
 .menu-backdrop {
@@ -445,6 +543,7 @@
     display: none;
   }
 
+  .mobile-actions-wrapper,
   .menu-button {
     display: inline-flex;
   }
@@ -483,9 +582,14 @@
       }
     }
 
+    .mobile-quick-btn {
+      width: 36px;
+      height: 36px;
+    }
+
     .menu-button {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border-radius: 10px;
     }
   }

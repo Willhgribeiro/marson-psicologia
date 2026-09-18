@@ -1,7 +1,7 @@
 :host {
   display: block;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: radial-gradient(circle at 85% 10%, rgba(211, 167, 93, 0.07) 0%, transparent 40%),
               radial-gradient(circle at 10% 30%, rgba(45, 95, 138, 0.06) 0%, transparent 45%),
               linear-gradient(180deg, #f5f8fc 0%, #fafbfc 100%);
@@ -14,5 +14,5 @@
   width: min(100%, 1240px);
   margin: 0 auto;
   padding: 0 20px 40px;
-  overflow-x: hidden;
+  overflow-x: clip;
 }

@@ -6,8 +6,10 @@ import { HomeHeroComponent } from './components/home-hero/home-hero.component';
 import { HomeSpecialtiesComponent } from './components/home-specialties/home-specialties.component';
 import { HomeFaqComponent } from './components/home-faq/home-faq.component';
 import { HomeContactComponent } from './components/home-contact/home-contact.component';
+import { HomeLocationComponent } from './components/home-location/home-location.component';
 import { HomeFooterComponent } from './components/home-footer/home-footer.component';
 import { WhatsappFabComponent } from '../../shared/components/whatsapp-fab/whatsapp-fab.component';
+import { WhatsappStickyMobileComponent } from '../../shared/components/whatsapp-sticky-mobile/whatsapp-sticky-mobile.component';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +21,10 @@ import { WhatsappFabComponent } from '../../shared/components/whatsapp-fab/whats
     HomeSpecialtiesComponent,
     HomeFaqComponent,
     HomeContactComponent,
+    HomeLocationComponent,
     HomeFooterComponent,
-    WhatsappFabComponent
+    WhatsappFabComponent,
+    WhatsappStickyMobileComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],

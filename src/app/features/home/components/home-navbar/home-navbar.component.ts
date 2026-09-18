@@ -61,4 +61,8 @@ export class HomeNavbarComponent {
   openWhatsApp(): void {
     this.contactService.openWhatsApp();
   }
+
+  openInstagram(): void {
+    this.contactService.openInstagram();
+  }
 }

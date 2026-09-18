@@ -19,7 +19,9 @@ export const ptBR = {
     },
     hero: {
       eyebrow: 'Alphaville • Osasco • Carapicuíba • Atendimento Online',
-      title: 'Atendimento psicológico e avaliação neuropsicológica.',
+      title: 'Atendimento psicológico e avaliação neuropsicológica',
+      titlePrefix: 'Atendimento psicológico e',
+      titleHighlight: 'avaliação neuropsicológica',
       description:
         'Suporte clínico especializado e diagnóstico cognitivo para crianças, adolescentes e adultos. Consultórios presenciais na região oeste de SP e atendimento online para todo o Brasil.',
       ctaPrimary: 'Agendar via WhatsApp',
@@ -102,6 +104,41 @@ export const ptBR = {
       phoneNumber: '(11) 95495-3003',
       emailAddress: 'diegomarsonpsi@outlook.com',
       instagramHandle: '@marsonpsicologia'
+    },
+    location: {
+      eyebrow: 'Onde Atendemos',
+      title: 'Consultórios na Região Oeste de SP e Online',
+      subtitle: 'Atendimentos presenciais em consultórios parceiros na região oeste de São Paulo e telepsicologia para qualquer cidade do Brasil.',
+      cta: 'Verificar disponibilidade no WhatsApp',
+      ctaMessage: 'Olá! Acessei o seu site e gostaria de saber disponibilidade de horários e localização dos consultórios.',
+      cities: [
+        {
+          city: 'Alphaville',
+          state: 'Barueri — SP',
+          note: 'Região central de Alphaville'
+        },
+        {
+          city: 'Osasco',
+          state: 'Osasco — SP',
+          note: 'Centro e região'
+        },
+        {
+          city: 'Carapicuíba',
+          state: 'Carapicuíba — SP',
+          note: 'Região centro-oeste'
+        },
+        {
+          city: 'Online',
+          state: 'Todo o Brasil',
+          note: 'Telepsicologia via plataforma segura'
+        }
+      ],
+      schedule: {
+        label: 'Horários de Atendimento',
+        weekdays: 'Segunda a Sexta: 8h às 20h',
+        saturday: 'Sábados: sob consulta',
+        note: 'Consulte disponibilidade pelo WhatsApp'
+      }
     },
     footer: {
       locations: 'Consultórios: Alphaville • Osasco • Carapicuíba | Telepsicologia para todo o Brasil',

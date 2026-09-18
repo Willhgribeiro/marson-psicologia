@@ -103,20 +103,16 @@
     [attr.height]="size"
     [class]="className"
     viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth || 1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
     aria-hidden="true"
   >
-    <defs>
-      <linearGradient id="sharedInstagramGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#feda75"/>
-        <stop offset="20%" stop-color="#fa7e1e"/>
-        <stop offset="45%" stop-color="#d62976"/>
-        <stop offset="70%" stop-color="#962fbf"/>
-        <stop offset="100%" stop-color="#4f5bd5"/>
-      </linearGradient>
-    </defs>
-    <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="url(#sharedInstagramGradient)" stroke-width="1.8"/>
-    <circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#sharedInstagramGradient)" stroke-width="1.8"/>
-    <circle cx="17.2" cy="6.8" r="1.2" fill="url(#sharedInstagramGradient)"/>
+    <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+    <circle cx="12" cy="12" r="4"></circle>
+    <circle cx="17.2" cy="6.8" r="1" fill="currentColor"></circle>
   </svg>
 
   <!-- Lock -->
@@ -205,5 +201,41 @@
   >
     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
     <circle cx="12" cy="7" r="4"></circle>
+  </svg>
+
+  <!-- Location (Pin de mapa) -->
+  <svg
+    *ngSwitchCase="'location'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+    <circle cx="12" cy="10" r="3"></circle>
+  </svg>
+
+  <!-- Clock (Relógio) -->
+  <svg
+    *ngSwitchCase="'clock'"
+    [attr.width]="size"
+    [attr.height]="size"
+    [class]="className"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    [attr.stroke-width]="strokeWidth"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="10"></circle>
+    <polyline points="12 6 12 12 16 14"></polyline>
   </svg>
 </ng-container>
