@@ -17,17 +17,38 @@
   </div>
 
   <!-- Registration data -->
-  <div class="registration-data" *ngIf="p.rg || p.cpf || p.address || p.motherName || p.fatherName || p.reason">
+  <div class="registration-data">
     <h4>Dados do Cadastro</h4>
     <div class="data-grid">
-      <div class="data-item" *ngIf="p.rg">
-        <span class="data-label">RG</span>
-        <span class="data-value">{{ p.rg }}</span>
+      <!-- NOVOS CAMPOS OBRIGATÓRIOS -->
+      <div class="data-item">
+        <span class="data-label">Escolaridade</span>
+        <span class="data-value">{{ p.education || '-' }}</span>
       </div>
-      <div class="data-item" *ngIf="p.cpf">
-        <span class="data-label">CPF</span>
-        <span class="data-value">{{ p.cpf }}</span>
+      <div class="data-item">
+        <span class="data-label">Data de Nascimento</span>
+        <span class="data-value">{{ p.birthDate || '-' }}</span>
       </div>
+
+      <!-- DADOS MÉDICOS -->
+      <div class="data-item">
+        <span class="data-label">Médico Encaminhador</span>
+        <span class="data-value">{{ p.doctorName || '-' }}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">CRM</span>
+        <span class="data-value">{{ p.doctorCrm || '-' }}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Especialização</span>
+        <span class="data-value">{{ p.doctorSpecialty || '-' }}</span>
+      </div>
+      <div class="data-item full">
+        <span class="data-label">Hipótese Diagnóstica</span>
+        <span class="data-value">{{ p.diagnosticHypothesis || '-' }}</span>
+      </div>
+
+      <!-- ENDEREÇO E RESPONSÁVEIS -->
       <div class="data-item full" *ngIf="p.address">
         <span class="data-label">Endereço</span>
         <span class="data-value">{{ p.address }}</span>
@@ -40,6 +61,11 @@
         <span class="data-label">Nome do pai</span>
         <span class="data-value">{{ p.fatherName }}</span>
       </div>
+      <div class="data-item" *ngIf="p.guardianName">
+        <span class="data-label">Outro Responsável</span>
+        <span class="data-value">{{ p.guardianName }}</span>
+      </div>
+      
       <div class="data-item full" *ngIf="p.reason">
         <span class="data-label">Motivo do atendimento</span>
         <span class="data-value">{{ p.reason }}</span>
@@ -65,22 +91,12 @@
     </div>
     <div class="response-q-text">{{ a.question }}</div>
 
-    <!-- Array answer (MC) -->
     <div *ngIf="isArray(a.answer) && a.answer.length > 0">
       <span class="mc-answer-chip" *ngFor="let chip of a.answer">{{ chip }}</span>
     </div>
 
-    <!-- Text answer -->
-    <div
-      *ngIf="!isArray(a.answer)"
-      class="response-a"
-      [class.empty]="!a.answer"
-    >{{ a.answer || 'Não respondida' }}</div>
-
-    <!-- Empty MC -->
-    <div
-      *ngIf="isArray(a.answer) && a.answer.length === 0"
-      class="response-a empty"
-    >Não respondida</div>
+    <div *ngIf="!isArray(a.answer)" class="response-a" [class.empty]="!a.answer">
+      {{ a.answer || 'Não respondida' }}
+    </div>
   </div>
 </div>

@@ -11,51 +11,68 @@ export interface Question {
 export interface Answer {
   questionId: string;
   question: string;
-  type: QuestionType;
+  type: 'mc' | 'text';
   answer: string | string[];
 }
 
 export interface PatientRecord {
   id: string;
   name: string;
+  education: string;           // Obrigatório
+  birthDate: string;           // Obrigatório
+  isMinor: boolean;            // Define se requer responsável
+  guardianName?: string;       // Nome do Responsável/Tutor
+  address: string;
+  motherName?: string;         // Opcional (legado)
+  fatherName?: string;         // Opcional (legado)
+  reason: string;
+  answers: Answer[];
   date: string;
   time: string;
-  answers: Answer[];
-  createdAt?: string;
-  // Dados do cadastro
-  rg?: string;
-  cpf?: string;
-  address?: string;
-  motherName?: string;
-  fatherName?: string;
-  reason?: string;
+  createdAt: string;
+  doctorName?: string;         // Dados médicos opcionais
+  doctorCrm?: string;
+  doctorSpecialty?: string;
+  diagnosticHypothesis?: string;
 }
 
 export interface PatientInvite {
   code: string;
   patientName: string;
-  createdAt: string;
-  used: boolean;
-  usedAt?: string;
-  // Campos opcionais para cadastro completo
-  rg?: string;
-  cpf?: string;
-  address?: string;
+  education: string;
+  birthDate: string;
+  isMinor: boolean;
+  guardianName?: string;
+  address: string;
   motherName?: string;
   fatherName?: string;
-  reason?: string;
-}
-
-export interface PatientFull {
-  code: string;
-  name: string;
-  rg: string;
-  cpf: string;
-  address: string;
-  motherName: string;
-  fatherName: string;
   reason: string;
   createdAt: string;
   used: boolean;
   usedAt?: string;
+}
+
+
+export interface PatientFull {
+  code: string;
+  name: string;
+  education: string;           // Adicionado (Obrigatório)
+  birthDate: string;           // Adicionado (Obrigatório)
+  isMinor: boolean;            // Adicionado
+  address: string;
+  motherName: string;
+  fatherName: string;
+  guardianName?: string;       // Adicionado
+  doctorName?: string;         // Adicionado
+  doctorCrm?: string;          // Adicionado
+  doctorSpecialty?: string;    // Adicionado
+  diagnosticHypothesis?: string; // Adicionado
+  reason: string;
+  createdAt: string;
+  used: boolean;
+  usedAt?: string;
+}
+
+export interface PatientFull extends Omit<PatientInvite, 'patientName'> {
+  name: string; 
 }

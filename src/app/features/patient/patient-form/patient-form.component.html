@@ -1,4 +1,4 @@
-<!-- CODE VALIDATION STEP -->
+<!-- STEP 1: VALIDATION -->
 <div class="layout" *ngIf="!codeValidated()">
   <div class="page-header">
     <button class="back-btn" (click)="goBack()">←</button>
@@ -31,64 +31,134 @@
   </div>
 </div>
 
-<!-- NAME STEP (after code validated) -->
-<!-- NAME STEP (after code validated) -->
+<!-- STEP 2: IDENTIFICAÇÃO E DADOS COMPLEMENTARES -->
 <div class="layout" *ngIf="codeValidated() && !formStarted()">
   <div class="page-header">
     <button class="back-btn" (click)="goBack()">←</button>
-
-    <div class="page-title">
-      <span>Paciente</span>
-      Identificação
-    </div>
-
+    <div class="page-title"><span>Paciente</span>Identificação</div>
     <div class="header-logo">Marson Psicologia</div>
   </div>
 
-  <div class="intro-banner">
-    Confirme seus dados antes de iniciar a anamnese.
-  </div>
+  <div class="intro-banner">Confirme e complete seus dados abaixo.</div>
 
+  <!-- Dados Obrigatórios -->
   <div class="q-card">
-    <div class="q-text">Seu nome completo</div>
-
-    <input
-      type="text"
-      class="field-input"
-      [ngModel]="patientName()"
-      (ngModelChange)="patientName.set($event)"
-      readonly
+    <div class="q-text">Nome completo *</div>
+    <input 
+      type="text" 
+      class="field-input" 
+      [ngModel]="patientName()" 
+      (ngModelChange)="patientName.set($event)" 
     />
   </div>
 
   <div class="q-card">
-    <label class="terms-checkbox">
-      <input
-        type="checkbox"
-        [checked]="acceptedTerms()"
-        (change)="acceptedTerms.set($any($event.target).checked)"
-      />
+    <div class="q-text">Escolaridade *</div>
+    <select 
+      class="field-input" 
+      [ngModel]="education()" 
+      (ngModelChange)="education.set($event)"
+    >
+      <option value="">Selecione...</option>
+      <option value="Fundamental">Fundamental</option>
+      <option value="Médio">Médio</option>
+      <option value="Superior">Superior</option>
+      <option value="Pós-graduação">Pós-graduação</option>
+    </select>
+  </div>
 
+  <div class="q-card">
+    <div class="q-text">Data de Nascimento *</div>
+    <input 
+      type="date" 
+      class="field-input" 
+      [ngModel]="birthDate()" 
+      (ngModelChange)="birthDate.set($event)" 
+    />
+  </div>
+
+  <!-- Seção de Responsável Legal -->
+  <div class="q-card">
+    <div class="q-text">Você requer um Responsável Legal?</div>
+    <div class="form-actions" style="justify-content: flex-start; gap: 10px; margin-top: 10px;">
+      <button type="button" class="btn" [class.btn-primary]="isMinor()" (click)="isMinor.set(true)">Sim</button>
+      <button type="button" class="btn" [class.btn-primary]="!isMinor()" (click)="isMinor.set(false)">Não</button>
+    </div>
+  </div>
+
+  <!-- Campo condicional para Responsável -->
+  <div *ngIf="isMinor()">
+    <div class="q-card">
+      <div class="q-text">Nome do Responsável Legal *</div>
+      <input 
+        type="text" 
+        class="field-input" 
+        [ngModel]="guardianName()" 
+        (ngModelChange)="guardianName.set($event)" 
+        placeholder="Nome do pai, mãe ou tutor"
+      />
+    </div>
+  </div>
+
+  <!-- Dados Médicos (Opcionais) -->
+  <div class="q-card">
+    <div class="q-text">Dados do Médico Encaminhador (Opcional)</div>
+    <input 
+      type="text" 
+      class="field-input" 
+      placeholder="Nome do Médico" 
+      [ngModel]="doctorName()" 
+      (ngModelChange)="doctorName.set($event)" 
+      style="margin-bottom: 8px;"
+    />
+    <input 
+      type="text" 
+      class="field-input" 
+      placeholder="CRM" 
+      [ngModel]="doctorCrm()" 
+      (ngModelChange)="doctorCrm.set($event)" 
+      style="margin-bottom: 8px;"
+    />
+    <input 
+      type="text" 
+      class="field-input" 
+      placeholder="Especialidade" 
+      [ngModel]="doctorSpecialty()" 
+      (ngModelChange)="doctorSpecialty.set($event)" 
+    />
+  </div>
+
+  <div class="q-card">
+    <div class="q-text">Hipótese Diagnóstica</div>
+    <textarea 
+      class="field-input" 
+      [ngModel]="diagnosticHypothesis()" 
+      (ngModelChange)="diagnosticHypothesis.set($event)"
+    ></textarea>
+  </div>
+
+  <!-- Termos -->
+  <div class="q-card">
+    <label class="terms-checkbox">
+      <input 
+        type="checkbox" 
+        [checked]="acceptedTerms()" 
+        (change)="acceptedTerms.set($any($event.target).checked)" 
+      />
       <span>
-        Declaro que li e concordo com o tratamento dos meus dados pessoais
-        para fins de atendimento psicológico, conforme a política de
-        privacidade.
+        {{ isMinor() ? 'Eu, na qualidade de responsável legal, declaro que li e concordo com o tratamento dos dados pessoais.' : 'Declaro que li e concordo com o tratamento dos meus dados pessoais conforme a política de privacidade.' }}
       </span>
     </label>
   </div>
 
   <div class="form-actions">
-<button
-  class="btn btn-primary"
-  (click)="startForm()"
-  [disabled]="!acceptedTerms()"
->
-  Iniciar Anamnese →
-</button>
+    <button class="btn btn-primary" (click)="startForm()" [disabled]="isFormInvalid()">
+      Iniciar Anamnese →
+    </button>
   </div>
 </div>
 
-<!-- FORM STEP -->
+<!-- STEP 3: FORMULÁRIO DE PERGUNTAS -->
 <div class="layout" *ngIf="formStarted()">
   <div class="page-header">
     <button class="back-btn" (click)="goBack()">←</button>
@@ -103,10 +173,7 @@
     Responda com calma. Não há respostas certas ou erradas.
   </div>
 
-  <div
-    class="q-card"
-    *ngFor="let q of questions(); let i = index"
-  >
+  <div class="q-card" *ngFor="let q of questions(); let i = index">
     <div class="q-label">
       Pergunta {{ i + 1 }}
       <span class="badge" [class.badge-mc]="q.type === 'mc'" [class.badge-text]="q.type === 'text'">
@@ -115,7 +182,7 @@
     </div>
     <div class="q-text">{{ q.text }}</div>
 
-    <!-- Text answer -->
+    <!-- Resposta de Texto -->
     <textarea
       *ngIf="q.type === 'text'"
       class="field-input"
@@ -124,7 +191,7 @@
       (input)="setTextAnswer(q.id, $any($event.target).value)"
     ></textarea>
 
-    <!-- MC answer -->
+    <!-- Resposta de Múltipla Escolha -->
     <div class="mc-options" *ngIf="q.type === 'mc'">
       <div
         class="mc-option"

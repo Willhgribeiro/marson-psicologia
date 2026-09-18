@@ -36,11 +36,6 @@ export class PatientDetailComponent implements OnInit {
     return Array.isArray(val);
   }
 
-  hasAnswer(answer: string | string[]): boolean {
-    if (Array.isArray(answer)) return answer.length > 0;
-    return !!answer;
-  }
-
   async exportPdf(): Promise<void> {
     const p = this.patient();
     if (!p) return;
