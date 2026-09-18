@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClickOutsideDirective } from '../../../../core/directives/click-outside.directive';
@@ -8,7 +8,7 @@ import { IconComponent } from '../../../../shared/components/icon/icon.component
 
 @Component({
     selector: 'app-home-navbar',
-    imports: [CommonModule, ClickOutsideDirective, TranslatePipe, IconComponent],
+    imports: [ClickOutsideDirective, TranslatePipe, IconComponent],
     templateUrl: './home-navbar.component.html',
     styleUrls: ['./home-navbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -5,37 +5,37 @@
   </div>
 
   <div class="faq-accordion">
-    <div
-      class="faq-item"
-      *ngFor="let item of faqItems; let idx = index"
-      [class.active]="openFaqIndex === idx"
-    >
-      <button
-        type="button"
-        class="faq-question"
-        (click)="toggleFaq(idx)"
-        [attr.aria-expanded]="openFaqIndex === idx"
-        [attr.aria-controls]="'faq-ans-' + idx"
-      >
-        <span class="faq-title">{{ item.question }}</span>
-        <span class="faq-icon-wrap">
-          <app-icon
-            name="chevron"
-            [size]="18"
-            [strokeWidth]="2.5"
-            [className]="openFaqIndex === idx ? 'faq-chevron open' : 'faq-chevron'"
-          />
-        </span>
-      </button>
-
+    @for (item of faqItems; track item; let idx = $index) {
       <div
-        class="faq-answer"
-        [class.open]="openFaqIndex === idx"
-        [id]="'faq-ans-' + idx"
-        [attr.aria-hidden]="openFaqIndex !== idx"
-      >
-        <p>{{ item.answer }}</p>
+        class="faq-item"
+        [class.active]="openFaqIndex === idx"
+        >
+        <button
+          type="button"
+          class="faq-question"
+          (click)="toggleFaq(idx)"
+          [attr.aria-expanded]="openFaqIndex === idx"
+          [attr.aria-controls]="'faq-ans-' + idx"
+          >
+          <span class="faq-title">{{ item.question }}</span>
+          <span class="faq-icon-wrap">
+            <app-icon
+              name="chevron"
+              [size]="18"
+              [strokeWidth]="2.5"
+              [className]="openFaqIndex === idx ? 'faq-chevron open' : 'faq-chevron'"
+              />
+          </span>
+        </button>
+        <div
+          class="faq-answer"
+          [class.open]="openFaqIndex === idx"
+          [id]="'faq-ans-' + idx"
+          [attr.aria-hidden]="openFaqIndex !== idx"
+          >
+          <p>{{ item.answer }}</p>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </section>

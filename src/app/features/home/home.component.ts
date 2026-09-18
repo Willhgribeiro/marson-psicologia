@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContactService } from '../../core/services/contact.service';
 import { HomeNavbarComponent } from './components/home-navbar/home-navbar.component';
@@ -14,17 +14,16 @@ import { WhatsappStickyMobileComponent } from '../../shared/components/whatsapp-
 @Component({
     selector: 'app-home',
     imports: [
-        CommonModule,
-        HomeNavbarComponent,
-        HomeHeroComponent,
-        HomeSpecialtiesComponent,
-        HomeFaqComponent,
-        HomeContactComponent,
-        HomeLocationComponent,
-        HomeFooterComponent,
-        WhatsappFabComponent,
-        WhatsappStickyMobileComponent
-    ],
+    HomeNavbarComponent,
+    HomeHeroComponent,
+    HomeSpecialtiesComponent,
+    HomeFaqComponent,
+    HomeContactComponent,
+    HomeLocationComponent,
+    HomeFooterComponent,
+    WhatsappFabComponent,
+    WhatsappStickyMobileComponent
+],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

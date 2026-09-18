@@ -1,6 +1,6 @@
 import { Component, signal, computed, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { QuestionService } from '../../../core/services/question.service';
 import { PatientService } from '../../../core/services/patient.service';
@@ -9,7 +9,7 @@ import { Answer, Question, PatientFull } from '../../../core/models/models';
 
 @Component({
     selector: 'app-patient-form',
-    imports: [CommonModule, FormsModule],
+    imports: [FormsModule],
     templateUrl: './patient-form.component.html',
     styleUrls: ['./patient-form.component.scss']
 })

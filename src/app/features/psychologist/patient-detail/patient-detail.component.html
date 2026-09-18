@@ -1,102 +1,113 @@
-<div class="layout" *ngIf="patient() as p">
-  <!-- Header -->
-  <div class="page-header">
-    <button class="back-btn" (click)="router.navigate(['/psych/panel'])">←</button>
-    <div class="page-title">
-      <span>Respostas do paciente</span>
-      {{ p.name }}
+@if (patient(); as p) {
+  <div class="layout">
+    <!-- Header -->
+    <div class="page-header">
+      <button class="back-btn" (click)="router.navigate(['/psych/panel'])">←</button>
+      <div class="page-title">
+        <span>Respostas do paciente</span>
+        {{ p.name }}
+      </div>
+      <div class="header-logo">Marson Psicologia</div>
     </div>
-    <div class="header-logo">Marson Psicologia</div>
-  </div>
-
-  <!-- Patient meta banner -->
-  <div class="detail-meta">
-    <div class="clinic">Marson Psicologia · Anamnese Neuropsicológica</div>
-    <div class="pname">{{ p.name }}</div>
-    <div class="pdate">Respondido em {{ p.date }} às {{ p.time }}</div>
-  </div>
-
-  <!-- Registration data -->
-  <div class="registration-data">
-    <h4>Dados do Cadastro</h4>
-    <div class="data-grid">
-      <!-- NOVOS CAMPOS OBRIGATÓRIOS -->
-      <div class="data-item">
-        <span class="data-label">Escolaridade</span>
-        <span class="data-value">{{ p.education || '-' }}</span>
-      </div>
-      <div class="data-item">
-        <span class="data-label">Data de Nascimento</span>
-        <span class="data-value">{{ p.birthDate || '-' }}</span>
-      </div>
-
-      <!-- DADOS MÉDICOS -->
-      <div class="data-item">
-        <span class="data-label">Médico Encaminhador</span>
-        <span class="data-value">{{ p.doctorName || '-' }}</span>
-      </div>
-      <div class="data-item">
-        <span class="data-label">CRM</span>
-        <span class="data-value">{{ p.doctorCrm || '-' }}</span>
-      </div>
-      <div class="data-item">
-        <span class="data-label">Especialização</span>
-        <span class="data-value">{{ p.doctorSpecialty || '-' }}</span>
-      </div>
-      <div class="data-item full">
-        <span class="data-label">Hipótese Diagnóstica</span>
-        <span class="data-value">{{ p.diagnosticHypothesis || '-' }}</span>
-      </div>
-
-      <!-- ENDEREÇO E RESPONSÁVEIS -->
-      <div class="data-item full" *ngIf="p.address">
-        <span class="data-label">Endereço</span>
-        <span class="data-value">{{ p.address }}</span>
-      </div>
-      <div class="data-item" *ngIf="p.motherName">
-        <span class="data-label">Nome da mãe</span>
-        <span class="data-value">{{ p.motherName }}</span>
-      </div>
-      <div class="data-item" *ngIf="p.fatherName">
-        <span class="data-label">Nome do pai</span>
-        <span class="data-value">{{ p.fatherName }}</span>
-      </div>
-      <div class="data-item" *ngIf="p.guardianName">
-        <span class="data-label">Outro Responsável</span>
-        <span class="data-value">{{ p.guardianName }}</span>
-      </div>
-      
-      <div class="data-item full" *ngIf="p.reason">
-        <span class="data-label">Motivo do atendimento</span>
-        <span class="data-value">{{ p.reason }}</span>
+    <!-- Patient meta banner -->
+    <div class="detail-meta">
+      <div class="clinic">Marson Psicologia · Anamnese Neuropsicológica</div>
+      <div class="pname">{{ p.name }}</div>
+      <div class="pdate">Respondido em {{ p.date }} às {{ p.time }}</div>
+    </div>
+    <!-- Registration data -->
+    <div class="registration-data">
+      <h4>Dados do Cadastro</h4>
+      <div class="data-grid">
+        <!-- NOVOS CAMPOS OBRIGATÓRIOS -->
+        <div class="data-item">
+          <span class="data-label">Escolaridade</span>
+          <span class="data-value">{{ p.education || '-' }}</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">Data de Nascimento</span>
+          <span class="data-value">{{ p.birthDate || '-' }}</span>
+        </div>
+        <!-- DADOS MÉDICOS -->
+        <div class="data-item">
+          <span class="data-label">Médico Encaminhador</span>
+          <span class="data-value">{{ p.doctorName || '-' }}</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">CRM</span>
+          <span class="data-value">{{ p.doctorCrm || '-' }}</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">Especialização</span>
+          <span class="data-value">{{ p.doctorSpecialty || '-' }}</span>
+        </div>
+        <div class="data-item full">
+          <span class="data-label">Hipótese Diagnóstica</span>
+          <span class="data-value">{{ p.diagnosticHypothesis || '-' }}</span>
+        </div>
+        <!-- ENDEREÇO E RESPONSÁVEIS -->
+        @if (p.address) {
+          <div class="data-item full">
+            <span class="data-label">Endereço</span>
+            <span class="data-value">{{ p.address }}</span>
+          </div>
+        }
+        @if (p.motherName) {
+          <div class="data-item">
+            <span class="data-label">Nome da mãe</span>
+            <span class="data-value">{{ p.motherName }}</span>
+          </div>
+        }
+        @if (p.fatherName) {
+          <div class="data-item">
+            <span class="data-label">Nome do pai</span>
+            <span class="data-value">{{ p.fatherName }}</span>
+          </div>
+        }
+        @if (p.guardianName) {
+          <div class="data-item">
+            <span class="data-label">Outro Responsável</span>
+            <span class="data-value">{{ p.guardianName }}</span>
+          </div>
+        }
+        @if (p.reason) {
+          <div class="data-item full">
+            <span class="data-label">Motivo do atendimento</span>
+            <span class="data-value">{{ p.reason }}</span>
+          </div>
+        }
       </div>
     </div>
-  </div>
-
-  <!-- Actions -->
-  <div class="form-actions" style="margin-bottom:1.5rem">
-    <button class="btn btn-pdf" (click)="exportPdf()" [disabled]="exporting()">
-      {{ exporting() ? 'Gerando...' : '⬇ Baixar PDF' }}
-    </button>
-    <button class="btn btn-danger" (click)="deletePatient()">🗑 Excluir registro</button>
-  </div>
-
-  <!-- Answers -->
-  <div class="response-card" *ngFor="let a of p.answers; let i = index">
-    <div class="response-q-num">
-      Pergunta {{ i + 1 }}
-      <span class="badge" [class.badge-mc]="a.type === 'mc'" [class.badge-text]="a.type === 'text'">
-        {{ a.type === 'mc' ? 'Múltipla escolha' : 'Texto livre' }}
-      </span>
+    <!-- Actions -->
+    <div class="form-actions" style="margin-bottom:1.5rem">
+      <button class="btn btn-pdf" (click)="exportPdf()" [disabled]="exporting()">
+        {{ exporting() ? 'Gerando...' : '⬇ Baixar PDF' }}
+      </button>
+      <button class="btn btn-danger" (click)="deletePatient()">🗑 Excluir registro</button>
     </div>
-    <div class="response-q-text">{{ a.question }}</div>
-
-    <div *ngIf="isArray(a.answer) && a.answer.length > 0">
-      <span class="mc-answer-chip" *ngFor="let chip of a.answer">{{ chip }}</span>
-    </div>
-
-    <div *ngIf="!isArray(a.answer)" class="response-a" [class.empty]="!a.answer">
-      {{ a.answer || 'Não respondida' }}
-    </div>
+    <!-- Answers -->
+    @for (a of p.answers; track a; let i = $index) {
+      <div class="response-card">
+        <div class="response-q-num">
+          Pergunta {{ i + 1 }}
+          <span class="badge" [class.badge-mc]="a.type === 'mc'" [class.badge-text]="a.type === 'text'">
+            {{ a.type === 'mc' ? 'Múltipla escolha' : 'Texto livre' }}
+          </span>
+        </div>
+        <div class="response-q-text">{{ a.question }}</div>
+        @if (isArray(a.answer) && a.answer.length > 0) {
+          <div>
+            @for (chip of a.answer; track chip) {
+              <span class="mc-answer-chip">{{ chip }}</span>
+            }
+          </div>
+        }
+        @if (!isArray(a.answer)) {
+          <div class="response-a" [class.empty]="!a.answer">
+            {{ a.answer || 'Não respondida' }}
+          </div>
+        }
+      </div>
+    }
   </div>
-</div>
+}

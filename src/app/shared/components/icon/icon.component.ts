@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 export type IconName =
@@ -20,7 +20,7 @@ export type IconName =
 
 @Component({
     selector: 'app-icon',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './icon.component.html',
     styleUrls: ['./icon.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

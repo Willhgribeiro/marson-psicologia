@@ -1,14 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { NgxTurnstileModule } from 'ngx-turnstile';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
     selector: 'app-psych-login',
-    imports: [FormsModule, CommonModule, NgxTurnstileModule],
+    imports: [FormsModule, NgxTurnstileModule],
     templateUrl: './psych-login.component.html',
     styleUrls: ['./psych-login.component.scss']
 })

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { ptBR } from '../../../../core/i18n/pt-br';
 import { TranslatePipe } from '../../../../core/i18n/translate.pipe';
@@ -7,7 +7,7 @@ import { SpecialtyItem } from '../../../../core/models/home.model';
 
 @Component({
     selector: 'app-home-specialties',
-    imports: [CommonModule, TranslatePipe, IconComponent],
+    imports: [TranslatePipe, IconComponent],
     templateUrl: './home-specialties.component.html',
     styleUrls: ['./home-specialties.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

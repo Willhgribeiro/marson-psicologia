@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { PatientService } from '../../../core/services/patient.service';
 import { PdfService } from '../../../core/services/pdf.service';
 import { ToastService } from '../../../core/services/toast.service';
@@ -8,7 +8,7 @@ import { PatientRecord } from '../../../core/models/models';
 
 @Component({
     selector: 'app-patient-detail',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './patient-detail.component.html',
     styleUrls: ['./patient-detail.component.scss']
 })
