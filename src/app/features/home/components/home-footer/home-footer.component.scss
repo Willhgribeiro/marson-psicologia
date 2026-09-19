@@ -27,6 +27,13 @@
     color: #6a7e96;
     margin: 4px 0 0;
     font-weight: 500;
+    pointer-events: none;
+
+    a {
+      color: inherit !important;
+      text-decoration: none !important;
+      pointer-events: none !important;
+    }
   }
 
   .footer-locations {

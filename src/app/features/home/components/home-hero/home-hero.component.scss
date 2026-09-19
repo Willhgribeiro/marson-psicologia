@@ -229,6 +229,16 @@
     color: rgba(255, 255, 255, 0.65);
     font-size: 0.74rem;
     margin-top: 3px;
+    pointer-events: none;
+    user-select: text;
+    -webkit-user-select: text;
+
+    a {
+      color: inherit !important;
+      text-decoration: none !important;
+      pointer-events: none !important;
+      cursor: default !important;
+    }
   }
 
   .id-audience {
@@ -447,6 +457,7 @@
         .id-crp {
           font-size: 0.73rem;
           text-align: center;
+          pointer-events: none;
         }
 
         .id-audience {
