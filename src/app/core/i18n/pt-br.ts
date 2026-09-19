@@ -34,7 +34,7 @@ export const ptBR = {
       card: {
         title: 'Diego Marson',
         role: 'Psicólogo Clínico & Neuropsicólogo',
-        crp: 'CRP 06/133458 • Ativo no Conselho Federal de Psicologia',
+        crp: 'CRP 06/\u200B133458 • Ativo no Conselho Federal de Psicologia',
         audienceTag: 'Crianças • Adolescentes • Adultos',
         items: [
           'Avaliação neuropsicológica diagnóstica completa',

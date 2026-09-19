@@ -2,6 +2,18 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+// Previne auto-detecção de discador telefônico móvel no CRP em qualquer navegador
+a[href*="133458"],
+a[href^="tel:06"],
+.id-crp,
+.footer-crp {
+  color: inherit !important;
+  text-decoration: none !important;
+  pointer-events: none !important;
+  cursor: text !important;
+  -webkit-touch-callout: none;
+}
+
 html, body {
   height: 100%;
   font-family: 'DM Sans', sans-serif;
