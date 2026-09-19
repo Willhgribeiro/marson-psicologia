@@ -41,18 +41,6 @@
       <app-icon name="arrow" [size]="18" [strokeWidth]="2.5" class="contact-arrow" />
     </a>
 
-    <!-- Telefone Card -->
-    <a class="contact-card" [href]="contactService.getTelUrl()">
-      <div class="contact-icon phone-icon">
-        <app-icon name="phone" [size]="20" />
-      </div>
-      <div class="contact-info">
-        <strong>{{ 'home.contact.phone' | translate }}</strong>
-        <span class="contact-desc">{{ 'home.contact.phoneDesc' | translate }}</span>
-        <small class="contact-highlight">{{ contactService.displayPhoneNumber }}</small>
-      </div>
-      <app-icon name="arrow" [size]="18" [strokeWidth]="2.5" class="contact-arrow" />
-    </a>
 
     <!-- E-mail Card -->
     <a class="contact-card" [href]="contactService.getMailtoUrl()">

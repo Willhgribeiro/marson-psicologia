@@ -31,13 +31,6 @@ export class HomeSpecialtiesComponent {
       badge: this.t.specialties.cards[1].badge,
       text: this.t.specialties.cards[1].text,
       icon: 'chat'
-    },
-    {
-      id: 'report',
-      title: this.t.specialties.cards[2].title,
-      badge: this.t.specialties.cards[2].badge,
-      text: this.t.specialties.cards[2].text,
-      icon: 'report'
     }
   ];
 

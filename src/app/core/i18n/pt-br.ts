@@ -34,7 +34,7 @@ export const ptBR = {
       card: {
         title: 'Diego Marson',
         role: 'Psicólogo Clínico & Neuropsicólogo',
-        crp: 'CRP 06 • Ativo no Conselho Federal de Psicologia',
+        crp: 'CRP 06/133458 • Ativo no Conselho Federal de Psicologia',
         audienceTag: 'Crianças • Adolescentes • Adultos',
         items: [
           'Avaliação neuropsicológica diagnóstica completa',
@@ -48,19 +48,14 @@ export const ptBR = {
       title: 'Cuidado focado nas suas necessidades',
       cards: [
         {
-          title: 'Avaliação Neuropsicológica',
-          badge: 'Investigação Cognitiva',
-          text: 'Mapeamento de memória, atenção, raciocínio e funções executivas. Apoio no diagnóstico de TDAH, dificuldades de aprendizagem e outras condições.'
+          title: 'Avaliação Neuropsicológica & Laudos',
+          badge: 'Investigação Cognitiva & Devolutiva',
+          text: 'Mapeamento aprofundado de memória, atenção, raciocínio e funções executivas (apoio em TDAH, aprendizagem e TEA), com emissão de laudo técnico estruturado e orientações práticas para o paciente, família e médicos.'
         },
         {
           title: 'Psicoterapia Clínica',
           badge: 'Acolhimento & Terapia',
-          text: 'Espaço seguro e confidencial para crianças, adolescentes e adultos lidarem com ansiedade, estresse e autoconhecimento.'
-        },
-        {
-          title: 'Laudos & Orientações',
-          badge: 'Devolutiva Técnica',
-          text: 'Relatório técnico estruturado e detalhado com orientações práticas para o paciente, familiares, escolas e encaminhamentos médicos.'
+          text: 'Espaço seguro e confidencial para crianças, adolescentes e adultos lidarem com ansiedade, estresse, regulação emocional e autoconhecimento.'
         }
       ]
     },
