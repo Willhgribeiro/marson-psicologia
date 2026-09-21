@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
-import { provideAppFirebase } from '../../core/firebase/firebase.providers';
 
 export const PATIENT_ROUTES: Routes = [
   {
     path: '',
-    providers: [provideAppFirebase()],
     children: [
       {
         path: '',
@@ -17,3 +15,4 @@ export const PATIENT_ROUTES: Routes = [
     ]
   }
 ];
+

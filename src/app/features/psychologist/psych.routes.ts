@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
-import { provideAppFirebase } from '../../core/firebase/firebase.providers';
 
 export const PSYCH_ROUTES: Routes = [
   {
     path: '',
-    providers: [provideAppFirebase()],
     children: [
       {
         path: 'login',
@@ -21,7 +19,13 @@ export const PSYCH_ROUTES: Routes = [
       {
         path: 'register',
         loadComponent: () => import('./patient-register/patient-register.component').then(m => m.PatientRegisterComponent)
+      },
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
       }
     ]
   }
 ];
+

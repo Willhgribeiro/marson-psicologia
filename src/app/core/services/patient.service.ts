@@ -20,33 +20,53 @@ export class PatientService implements OnDestroy {
   }
 
   private initRealtimeListeners(): void {
-    const patientsRef = collection(this.firestore, 'patients');
-    const patientsQuery = query(patientsRef, orderBy('createdAt', 'desc'));
+    try {
+      const patientsRef = collection(this.firestore, 'patients');
+      const patientsQuery = query(patientsRef, orderBy('createdAt', 'desc'));
 
-    this.patientsUnsubscribe = onSnapshot(patientsQuery, (snapshot) => {
-      const patients = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as PatientRecord[];
-      this._patients.set(patients);
-    });
+      this.patientsUnsubscribe = onSnapshot(
+        patientsQuery,
+        (snapshot) => {
+          const patients = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          })) as PatientRecord[];
+          this._patients.set(patients);
+        },
+        (error) => {
+          console.warn('Realtime listener de pacientes aguardando autenticação:', error.message);
+        }
+      );
+    } catch (err: any) {
+      console.warn('Erro ao inicializar listener de pacientes:', err.message);
+    }
   }
 
   async loadPendingPatients(): Promise<void> {
-    const invitesRef = collection(this.firestore, 'invites');
-    const invitesQuery = query(invitesRef, orderBy('createdAt', 'desc'));
+    try {
+      const invitesRef = collection(this.firestore, 'invites');
+      const invitesQuery = query(invitesRef, orderBy('createdAt', 'desc'));
 
-    this.invitesUnsubscribe = onSnapshot(invitesQuery, (snapshot) => {
-      const invites = snapshot.docs.map(doc => {
-        const data: any = doc.data();
-        return {
-          code: doc.id,
-          ...data,
-          patientName: data.patientName || data.name || 'Paciente'
-        };
-      }) as PatientInvite[];
-      this._invites.set(invites);
-    });
+      this.invitesUnsubscribe = onSnapshot(
+        invitesQuery,
+        (snapshot) => {
+          const invites = snapshot.docs.map(doc => {
+            const data: any = doc.data();
+            return {
+              code: doc.id,
+              ...data,
+              patientName: data.patientName || data.name || 'Paciente'
+            };
+          }) as PatientInvite[];
+          this._invites.set(invites);
+        },
+        (error) => {
+          console.warn('Realtime invites listener aguardando autenticação:', error.message);
+        }
+      );
+    } catch (err: any) {
+      console.warn('Erro ao carregar pacientes pendentes:', err.message);
+    }
   }
 
   getById(id: string): PatientRecord | undefined {

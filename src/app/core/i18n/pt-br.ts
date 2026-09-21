@@ -23,7 +23,7 @@ export const ptBR = {
       titlePrefix: 'Atendimento psicológico e',
       titleHighlight: 'avaliação neuropsicológica',
       description:
-        'Suporte clínico especializado e diagnóstico cognitivo para crianças, adolescentes e adultos. Consultórios em Alphaville, Osasco e Carapicuíba (Grande SP) e atendimento online para todo o Brasil.',
+        'Suporte psicoterapêutico especializado e diagnóstico neuropsicológico para crianças, adolescentes e adultos. Consultórios em Alphaville, Osasco e Carapicuíba (Grande SP) e atendimento online para todo o Brasil.',
       ctaPrimary: 'Agendar via WhatsApp',
       ctaSecondary: 'Ver Especialidades',
       trustBadges: [
@@ -50,7 +50,7 @@ export const ptBR = {
         {
           title: 'Avaliação Neuropsicológica & Laudos',
           badge: 'Investigação Cognitiva & Devolutiva',
-          text: 'Mapeamento aprofundado de memória, atenção, raciocínio e funções executivas (apoio em TDAH, aprendizagem e TEA), com emissão de laudo técnico estruturado e orientações práticas para o paciente, família e médicos.'
+          text: 'Mapeamento aprofundado de memória, atenção, raciocínio e outras funções cognitivas (investigação para TDAH, aprendizagem, demencias e TEA), com emissão de laudo técnico estruturado e orientações práticas para o paciente, família e médicos.'
         },
         {
           title: 'Psicoterapia Clínica',
@@ -119,7 +119,7 @@ export const ptBR = {
       },
       schedule: {
         label: 'Horários de Atendimento',
-        weekdays: 'Segunda a Sexta: 8h às 21h',
+        weekdays: 'Segunda a Sexta: 8h às 19h',
         saturday: 'Sábados: sob consulta',
         note: 'Consulte disponibilidade pelo WhatsApp'
       }
