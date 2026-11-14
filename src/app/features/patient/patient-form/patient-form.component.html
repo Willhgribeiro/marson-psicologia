@@ -130,8 +130,12 @@
         (ngModelChange)="diagnosticHypothesis.set($event)"
       ></textarea>
     </div>
-    <!-- Termos -->
+    <!-- Termos (LGPD) -->
     <div class="q-card">
+      <p class="privacy-notice">
+        🔒 Seus dados serão usados exclusivamente para a avaliação e o atendimento psicológico, sob sigilo
+        profissional (Código de Ética do CFP) e em conformidade com a LGPD.
+      </p>
       <label class="terms-checkbox">
         <input
           type="checkbox"
@@ -139,7 +143,8 @@
           (change)="acceptedTerms.set($any($event.target).checked)"
           />
         <span>
-          {{ isMinor() ? 'Eu, na qualidade de responsável legal, declaro que li e concordo com o tratamento dos dados pessoais.' : 'Declaro que li e concordo com o tratamento dos meus dados pessoais conforme a política de privacidade.' }}
+          {{ isMinor() ? 'Eu, na qualidade de responsável legal, declaro que li e concordo com o tratamento dos dados pessoais conforme a' : 'Declaro que li e concordo com o tratamento dos meus dados pessoais conforme a' }}
+          <a [routerLink]="privacyRoute" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>.
         </span>
       </label>
     </div>

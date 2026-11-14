@@ -105,7 +105,7 @@ export const ptBR = {
       title: 'Atendimento Presencial e Online',
       subtitle: 'Consultórios parceiros em Alphaville, Osasco e Carapicuíba (Grande SP) e atendimento online para qualquer cidade do Brasil.',
       cta: 'Confirmar disponibilidade pelo WhatsApp',
-      ctaMessage: 'Olá! Acessei o seu site e gostaria de saber disponibilidade de horários e localização dos consultórios.',
+      ctaMessage: 'Olá! Acessei o seu site e gostaria de obter informações sobre atendimento psicológico e avaliação neuropsicológica.',
       presencial: {
         label: 'Atendimento Presencial',
         region: 'Grande São Paulo — Região Metropolitana',
@@ -127,6 +127,9 @@ export const ptBR = {
     footer: {
       locations: 'Consultórios: Alphaville • Osasco • Carapicuíba | Atendimento Online para todo o Brasil',
       ethicalNotice: 'Atendimento pautado no Código de Ética Profissional do Psicólogo (CFP). Em caso de urgência emocional, disque 188 (CVV).',
+      privacyPolicy: 'Política de Privacidade',
+      privacyContact: 'Privacidade e LGPD',
+      lgpdNotice: 'Seus dados são tratados sob sigilo profissional e em conformidade com a LGPD (Lei nº 13.709/2018).',
       copyright: '© 2026 Marson Psicologia. Todos os direitos reservados.'
     },
     floating: {

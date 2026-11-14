@@ -2,10 +2,16 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <span class="brand-name">Marson Psicologia</span>
-      <p class="footer-crp">Diego Marson • Psicólogo & Neuropsicólogo • CRP 06/&#8203;133458</p>
+      <p class="footer-crp">Diego Marson • Psicólogo &amp; Neuropsicólogo • CRP 06/&#8203;133458</p>
       <p class="footer-locations">{{ 'home.footer.locations' | translate }}</p>
     </div>
     <p class="footer-ethical">{{ 'home.footer.ethicalNotice' | translate }}</p>
+    <p class="footer-ethical">{{ 'home.footer.lgpdNotice' | translate }}</p>
+    <nav class="footer-legal" aria-label="Links legais">
+      <a [routerLink]="privacyRoute">{{ 'home.footer.privacyPolicy' | translate }}</a>
+      <span class="divider" aria-hidden="true">•</span>
+      <a [routerLink]="privacyRoute" fragment="direitos">{{ 'home.footer.privacyContact' | translate }}</a>
+    </nav>
     <small class="footer-copy">{{ 'home.footer.copyright' | translate }}</small>
   </div>
 </footer>

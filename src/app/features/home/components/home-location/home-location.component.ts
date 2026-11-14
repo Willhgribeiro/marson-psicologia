@@ -17,6 +17,6 @@ export class HomeLocationComponent {
   constructor(readonly contactService: ContactService) {}
 
   openWhatsApp(): void {
-    this.contactService.openWhatsApp(this.t.ctaMessage);
+    this.contactService.openWhatsApp();
   }
 }

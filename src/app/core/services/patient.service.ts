@@ -142,7 +142,14 @@ async validateFullCode(
       normalizedCode
     );
 
-    const snapshot = await getDoc(inviteRef);
+    // Com as regras de segurança, código inexistente ou já usado retorna
+    // 'permission-denied'. Para o paciente, os dois casos são "código inválido".
+    let snapshot;
+    try {
+      snapshot = await getDoc(inviteRef);
+    } catch {
+      return undefined;
+    }
 
     if (!snapshot.exists()) {
       return undefined;
@@ -190,7 +197,14 @@ async getFullPatientByCode(
       normalizedCode
     );
 
-    const snapshot = await getDoc(inviteRef);
+    // Com as regras de segurança, código inexistente ou já usado retorna
+    // 'permission-denied'. Para o paciente, os dois casos são "código inválido".
+    let snapshot;
+    try {
+      snapshot = await getDoc(inviteRef);
+    } catch {
+      return undefined;
+    }
 
     if (!snapshot.exists()) {
       return undefined;

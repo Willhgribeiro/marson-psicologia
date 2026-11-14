@@ -1,0 +1,130 @@
+<main class="policy">
+  <a routerLink="/" class="back-link">← Voltar para o início</a>
+
+  <header class="policy-header">
+    <h1>Política de Privacidade</h1>
+    <p class="meta">Versão {{ version }} • Atualizada em {{ updatedAt }}</p>
+  </header>
+
+  <section>
+    <h2>1. Quem é o controlador dos seus dados</h2>
+    <p>
+      O responsável pelo tratamento dos seus dados pessoais é <strong>{{ controller.name }}</strong>,
+      psicólogo e neuropsicólogo, {{ controller.professionalId }}, que também atua como encarregado
+      pelo tratamento de dados pessoais (LGPD, Art. 41).
+    </p>
+    <p>Contato para assuntos de privacidade: envie um e-mail para <strong class="email">{{ controller.privacyEmail }}</strong>.</p>
+  </section>
+
+  <section>
+    <h2>2. Quais dados coletamos e por quê</h2>
+    <table>
+      <thead>
+        <tr><th>Situação</th><th>Dados</th><th>Finalidade</th><th>Base legal (LGPD)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Navegação no site</td>
+          <td>Nenhum dado pessoal é coletado ou armazenado em cookies próprios.</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Contato (WhatsApp, telefone, e-mail)</td>
+          <td>Nome, telefone, e-mail e o conteúdo da mensagem que você enviar.</td>
+          <td>Responder dúvidas e agendar atendimentos.</td>
+          <td>Procedimentos preliminares a contrato, a pedido do titular (Art. 7º, V).</td>
+        </tr>
+        <tr>
+          <td>Formulário de anamnese</td>
+          <td>
+            Dados de identificação, escolaridade, data de nascimento, endereço, dados do responsável legal,
+            dados do médico encaminhador, hipótese diagnóstica e respostas clínicas.
+          </td>
+          <td>Avaliação neuropsicológica e atendimento psicológico.</td>
+          <td>
+            Tutela da saúde, em procedimento realizado por profissional de saúde (Art. 11, II, "f"), e
+            cumprimento de obrigação regulatória de manter registro documental (Art. 11, II, "a").
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Os dados de saúde são <strong>dados pessoais sensíveis</strong> e são tratados sob o sigilo profissional
+      previsto no Código de Ética Profissional do Psicólogo (CFP).
+    </p>
+  </section>
+
+  <section>
+    <h2>3. Crianças e adolescentes</h2>
+    <p>
+      O tratamento de dados de menores de idade é feito no seu melhor interesse (LGPD, Art. 14). O formulário
+      é preenchido ou autorizado pelo responsável legal, e o nome dele fica registrado junto ao aceite.
+    </p>
+  </section>
+
+  <section>
+    <h2>4. Com quem compartilhamos</h2>
+    <ul>
+      <li>
+        <strong>Google Firebase (Google LLC)</strong>: armazena os dados do formulário com criptografia em trânsito e em
+        repouso. Os servidores podem estar fora do Brasil (transferência internacional, Art. 33), com as garantias
+        contratuais oferecidas pelo fornecedor.
+      </li>
+      <li>
+        <strong>WhatsApp (Meta)</strong>: só quando você escolhe nos contatar por esse canal. A conversa segue a política
+        de privacidade do próprio WhatsApp.
+      </li>
+    </ul>
+    <p>Seus dados <strong>nunca</strong> são vendidos nem compartilhados para fins de publicidade.</p>
+  </section>
+
+  <section>
+    <h2>5. Por quanto tempo guardamos</h2>
+    <p>
+      Os registros de atendimento são guardados pelo prazo mínimo de <strong>5 anos</strong>, como exigem as
+      resoluções do Conselho Federal de Psicologia. Depois desse prazo, os dados são eliminados ou anonimizados,
+      salvo obrigação legal em contrário.
+    </p>
+  </section>
+
+  <section>
+    <h2>6. Como protegemos</h2>
+    <p>
+      Acesso restrito ao profissional responsável, com autenticação. Comunicação criptografada (HTTPS) e regras de
+      segurança que impedem a leitura dos dados por terceiros (LGPD, Art. 46).
+    </p>
+  </section>
+
+  <section id="direitos">
+    <h2>7. Seus direitos</h2>
+    <p>Conforme o Art. 18 da LGPD, você pode solicitar a qualquer momento:</p>
+    <ul>
+      <li>confirmação de que tratamos seus dados e acesso a eles;</li>
+      <li>correção de dados incompletos, inexatos ou desatualizados;</li>
+      <li>informações sobre com quem seus dados foram compartilhados;</li>
+      <li>portabilidade, quando aplicável;</li>
+      <li>eliminação dos dados, respeitados os prazos legais de guarda do prontuário.</li>
+    </ul>
+    <p>
+      Para exercer seus direitos, envie um e-mail para <strong class="email">{{ controller.privacyEmail }}</strong>,
+      informando seu nome completo e o que deseja solicitar.
+      Você também pode apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).
+    </p>
+  </section>
+
+  <section>
+    <h2>8. Cookies</h2>
+    <p>
+      Hoje o site não utiliza cookies de análise ou de publicidade. Se isso mudar, você será informado e poderá
+      aceitar ou recusar antes de qualquer coleta.
+    </p>
+  </section>
+
+  <section>
+    <h2>9. Alterações nesta política</h2>
+    <p>
+      Esta política pode ser atualizada. A versão e a data de atualização ficam sempre indicadas no topo da página.
+    </p>
+  </section>
+</main>

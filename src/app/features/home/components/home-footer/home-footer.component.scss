@@ -51,6 +51,25 @@
     margin: 6px 0 0;
   }
 
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.8rem;
+
+    a {
+      color: #9c6c28;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover,
+      &:focus-visible { text-decoration: underline; }
+    }
+
+    .divider { color: #c3ccd6; }
+  }
+
   .footer-copy {
     font-size: 0.76rem;
     color: #9aa8b8;

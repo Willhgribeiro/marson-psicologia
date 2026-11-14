@@ -1,0 +1,66 @@
+rules_version = '2';
+
+// =============================================================================
+// Firestore Security Rules: Marson Psicologia (LGPD, Art. 46)
+//
+// Princípio: negar tudo por padrão e liberar só o mínimo de cada fluxo.
+//
+//  - Psicólogo (login e-mail/senha): acesso total a patients e invites.
+//  - Paciente (sem login): pode
+//      * LER um convite específico pelo código (get, nunca list),
+//      * CRIAR o próprio registro de anamnese, desde que traga o aceite LGPD,
+//      * MARCAR o convite como usado (só used/usedAt, só false -> true).
+//
+// ⚠️ ANTES DE PUBLICAR: troque o UID abaixo pelo UID real do psicólogo
+//    (Firebase Console > Authentication > Users > "User UID").
+//    Enquanto o placeholder estiver aí, NINGUÉM consegue ler os dados (falha segura).
+// =============================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isPsychologist() {
+      return request.auth != null
+        && request.auth.uid in ['SUBSTITUA_PELO_UID_DO_PSICOLOGO'];
+    }
+
+    // Aceite da política: obrigatório em todo registro novo.
+    function hasValidConsent(data) {
+      return data.keys().hasAll(['consent'])
+        && data.consent.policyVersion is string
+        && data.consent.acceptedAt is string
+        && data.consent.acceptedBy in ['patient', 'guardian']
+        && (data.consent.acceptedBy == 'patient'
+            || (data.consent.guardianName is string && data.consent.guardianName.size() > 0));
+    }
+
+    // ----------------------------------------------------------------- patients
+    match /patients/{patientId} {
+      allow read, update, delete: if isPsychologist();
+
+      allow create: if isPsychologist()
+        || (hasValidConsent(request.resource.data)
+            && request.resource.data.name is string
+            && request.resource.data.name.size() > 0
+            && request.resource.data.answers is list);
+    }
+
+    // ------------------------------------------------------------------ invites
+    match /invites/{code} {
+      allow list, create, delete: if isPsychologist();
+
+      // O código de 6 caracteres funciona como segredo: só dá para ler conhecendo o código.
+      allow get: if isPsychologist() || resource.data.used == false;
+
+      allow update: if isPsychologist()
+        || (resource.data.used == false
+            && request.resource.data.used == true
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['used', 'usedAt']));
+    }
+
+    // Qualquer outra coleção fica fechada.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

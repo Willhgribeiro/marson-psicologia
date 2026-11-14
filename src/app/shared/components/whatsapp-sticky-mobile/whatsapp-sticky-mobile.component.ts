@@ -13,7 +13,7 @@ export class WhatsappStickyMobileComponent {
   constructor(readonly contactService: ContactService) {}
 
   openWhatsApp(): void {
-    this.contactService.openWhatsApp('Olá! Acessei o seu site e gostaria de agendar uma consulta.');
+    this.contactService.openWhatsApp();
   }
 }
 

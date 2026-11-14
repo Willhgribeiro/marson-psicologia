@@ -1,15 +1,16 @@
 import { Component, signal, computed, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 import { QuestionService } from '../../../core/services/question.service';
 import { PatientService } from '../../../core/services/patient.service';
 import { ToastService } from '../../../core/services/toast.service';
-import { Answer, Question, PatientFull } from '../../../core/models/models';
+import { Answer, Question, PatientRecord, ConsentRecord } from '../../../core/models/models';
+import { PRIVACY_POLICY_ROUTE, PRIVACY_POLICY_VERSION } from '../../../core/legal/legal.constants';
 
 @Component({
     selector: 'app-patient-form',
-    imports: [FormsModule],
+    imports: [FormsModule, RouterLink],
     templateUrl: './patient-form.component.html',
     styleUrls: ['./patient-form.component.scss']
 })
@@ -37,6 +38,7 @@ export class PatientFormComponent implements OnInit {
   answers = signal<Record<string, string | string[]>>({});
 
   readonly questions = this.questionService.questions;
+  protected readonly privacyRoute = PRIVACY_POLICY_ROUTE;
 
   // Lógica de validação do botão
   isFormInvalid = computed(() => {
@@ -152,7 +154,7 @@ export class PatientFormComponent implements OnInit {
       answer: ansMap[q.id] ?? ''
     }));
 
-    const fullData: Partial<PatientFull> = {
+    const fullData: Partial<PatientRecord> = {
       education: this.education(),
       birthDate: this.birthDate(),
       isMinor: this.isMinor(),
@@ -164,7 +166,8 @@ export class PatientFormComponent implements OnInit {
       doctorCrm: this.doctorCrm(),
       doctorSpecialty: this.doctorSpecialty(),
       diagnosticHypothesis: this.diagnosticHypothesis(),
-      reason: this.reason()
+      reason: this.reason(),
+      consent: this.buildConsentRecord()
     };
 
     await this.patientService.addRecord(
@@ -178,5 +181,19 @@ export class PatientFormComponent implements OnInit {
     }
 
     this.router.navigate(['/patient/success']);
+  }
+
+  /**
+   * Monta o registro de aceite no momento do envio.
+   * Se o paciente for menor, quem aceita é o responsável legal (LGPD, Art. 14, §1º).
+   */
+  private buildConsentRecord(): ConsentRecord {
+    const byGuardian = this.isMinor();
+    return {
+      policyVersion: PRIVACY_POLICY_VERSION,
+      acceptedAt: new Date().toISOString(),
+      acceptedBy: byGuardian ? 'guardian' : 'patient',
+      ...(byGuardian && { guardianName: this.guardianName().trim() })
+    };
   }
 }

@@ -15,6 +15,18 @@ export interface Answer {
   answer: string | string[];
 }
 
+/**
+ * Registro do aceite da Política de Privacidade (LGPD, Art. 8º, §2º e Art. 14, §1º).
+ * Fica gravado junto com o registro do paciente, permitindo provar quem aceitou,
+ * quando e qual versão do texto foi aceita.
+ */
+export interface ConsentRecord {
+  policyVersion: string;
+  acceptedAt: string;               // ISO-8601
+  acceptedBy: 'patient' | 'guardian';
+  guardianName?: string;
+}
+
 export interface PatientRecord {
   id: string;
   name: string;
@@ -34,6 +46,7 @@ export interface PatientRecord {
   doctorCrm?: string;
   doctorSpecialty?: string;
   diagnosticHypothesis?: string;
+  consent?: ConsentRecord;     // Opcional apenas para registros legados (anteriores à v1.0)
 }
 
 export interface PatientInvite {

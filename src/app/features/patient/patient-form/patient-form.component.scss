@@ -61,3 +61,21 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+// LGPD: aviso de finalidade e link da política no aceite
+.privacy-notice {
+  font-size: .85rem;
+  line-height: 1.55;
+  color: #4a5d72;
+  background: #f4f7fb;
+  border-left: 3px solid $blue-mid;
+  padding: .7rem .9rem;
+  margin: 0 0 1rem;
+  border-radius: 4px;
+}
+
+.terms-checkbox a {
+  color: $blue-mid;
+  font-weight: 600;
+  text-decoration: underline;
+}
